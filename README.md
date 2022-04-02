@@ -1,6 +1,6 @@
 # Aurora
 
-It's just a start...
+It's just a start for the next iteration...
 
 ## License
 
