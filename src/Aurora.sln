@@ -11,17 +11,20 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1E1B0E8A-9AE4-44EE-AFDB-70C9C819CA4F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{11B408B8-C495-48D5-A31D-086478667173}"
+	ProjectSection(SolutionItems) = preProject
+		..\docs\element-properties.md = ..\docs\element-properties.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "projects", "projects", "{5EF8BD68-FF97-471B-8731-290B92E3CF87}"
 	ProjectSection(SolutionItems) = preProject
 		..\docs\projects\data.md = ..\docs\projects\data.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurora.Engine.Data", "Aurora.Engine.Data\Aurora.Engine.Data.csproj", "{C8500904-2381-4E00-86E7-6CA8E132A1A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Data", "Aurora.Engine.Data\Aurora.Engine.Data.csproj", "{C8500904-2381-4E00-86E7-6CA8E132A1A5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{76463876-BF0B-413B-9A10-51C20E109E23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurora.Engine.Data.Tests", "Aurora.Engine.Data.Tests\Aurora.Engine.Data.Tests.csproj", "{96A4BCC3-CBE2-4051-A102-CC096056F2B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Data.Tests", "Aurora.Engine.Data.Tests\Aurora.Engine.Data.Tests.csproj", "{96A4BCC3-CBE2-4051-A102-CC096056F2B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
