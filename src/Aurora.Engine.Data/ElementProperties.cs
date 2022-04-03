@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Aurora.Engine.Data
+﻿namespace Aurora.Engine.Data
 {
     public class ElementProperties : Dictionary<string , object>
     {

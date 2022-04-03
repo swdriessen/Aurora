@@ -1,4 +1,4 @@
-using Aurora.Engine.Data.Constants;
+using Aurora.Engine.Data.Strings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -13,8 +13,8 @@ namespace Aurora.Engine.Data.Tests
         public void EquipmentProperties_ShouldReturnCostValue_WhenPopulatedWithElementProperties()
         {
             // arrange
-            properties.Add(PropertyNames.Equipment.Cost.Value, 15);
-
+            properties.Add(ElementStrings.Properties.Item.Cost.Value, 15);
+            
             // act
             var equipmentProperties = new EquipmentProperties(properties);
 
@@ -32,7 +32,7 @@ namespace Aurora.Engine.Data.Tests
             var equipmentProperties = new EquipmentProperties(properties);
 
             // assert
-            Assert.IsFalse(properties.ContainsProperty(PropertyNames.Equipment.Cost.Value));
+            Assert.IsFalse(properties.ContainsProperty(ElementStrings.Properties.Item.Cost.Value));
             Assert.AreEqual(0, equipmentProperties.GetEquipmentCostValue());
         }
 
@@ -40,7 +40,7 @@ namespace Aurora.Engine.Data.Tests
         public void EquipmentProperties_ShouldReturnCostCurrency_WhenValueProvided()
         {
             // arrange
-            properties.Add(PropertyNames.Equipment.Cost.Currency, "gp");
+            properties.Add(ElementStrings.Properties.Item.Cost.Currency, "gp");
 
             // act
             var equipmentProperties = new EquipmentProperties(properties);
@@ -53,7 +53,7 @@ namespace Aurora.Engine.Data.Tests
         public void EquipmentProperties_ShouldReturnTrimmedCostCurrency_WhenValueWithTrailingSpacesProvided()
         {
             // arrange
-            properties.Add(PropertyNames.Equipment.Cost.Currency, " gp ");
+            properties.Add(ElementStrings.Properties.Item.Cost.Currency, " gp ");
 
             // act
             var equipmentProperties = new EquipmentProperties(properties);
@@ -66,8 +66,8 @@ namespace Aurora.Engine.Data.Tests
         public void EquipmentProperties_ShouldReturnDisplayCost_WhenPopulatedWithElementProperties()
         {
             // arrange
-            properties.Add(PropertyNames.Equipment.Cost.Value, 100);
-            properties.Add(PropertyNames.Equipment.Cost.Currency, "cp");
+            properties.Add(ElementStrings.Properties.Item.Cost.Value, 100);
+            properties.Add(ElementStrings.Properties.Item.Cost.Currency, "cp");
 
             // act
             var equipmentProperties = new EquipmentProperties(properties);
@@ -80,9 +80,9 @@ namespace Aurora.Engine.Data.Tests
         public void EquipmentProperties_ShouldReturnDisplayCost_WhenProvidingACustomDisplayFormat()
         {
             // arrange
-            properties.Add(PropertyNames.Equipment.Cost.Value, 1);
-            properties.Add(PropertyNames.Equipment.Cost.Currency, "gp");
-            properties.Add(PropertyNames.Equipment.Cost.DisplayFormat, "{{equipment.cost.value}} {{equipment.cost.currency}} for a 10 pack");
+            properties.Add(ElementStrings.Properties.Item.Cost.Value, 1);
+            properties.Add(ElementStrings.Properties.Item.Cost.Currency, "gp");
+            properties.Add(ElementStrings.Properties.Item.Cost.DisplayFormat, "{{item.cost.value}} {{item.cost.currency}} for a 10 pack");
 
             // act
             var equipmentProperties = new EquipmentProperties(properties);
@@ -95,9 +95,9 @@ namespace Aurora.Engine.Data.Tests
         public void EquipmentProperties_ShouldThrowException_WhenUnknownDisplayFormatConstantsAreProvided()
         {
             // arrange
-            properties.Add(PropertyNames.Equipment.Cost.Value, 1);
-            properties.Add(PropertyNames.Equipment.Cost.Currency, "gp");
-            properties.Add(PropertyNames.Equipment.Cost.DisplayFormat, "{{equipment.cost.unknown}} format");
+            properties.Add(ElementStrings.Properties.Item.Cost.Value, 1);
+            properties.Add(ElementStrings.Properties.Item.Cost.Currency, "gp");
+            properties.Add(ElementStrings.Properties.Item.Cost.DisplayFormat, "{{item.cost.unknown}} format");
 
             // act
             var equipmentProperties = new EquipmentProperties(properties);

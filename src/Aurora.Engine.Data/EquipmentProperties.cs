@@ -1,17 +1,8 @@
-﻿using Aurora.Engine.Data.Constants;
+﻿using Aurora.Engine.Data.Strings;
+using Aurora.Engine.Utilities;
 
 namespace Aurora.Engine.Data
 {
-    public abstract class PropertiesBase
-    {
-        public PropertiesBase(ElementProperties properties)
-        {
-            Properties = properties;
-        }
-
-        protected ElementProperties Properties { get; }
-    }
-
     public class EquipmentProperties
     {
         private readonly ElementProperties properties;
@@ -23,18 +14,18 @@ namespace Aurora.Engine.Data
 
         public int GetEquipmentCostValue()
         {
-            return properties.GetPropertyAsInteger(PropertyNames.Equipment.Cost.Value);
+            return properties.GetPropertyAsInteger(ElementStrings.Properties.Item.Cost.Value);
         }
 
         public string GetEquipmentCostCurrency()
         {
-            return properties.GetPropertyAsString(PropertyNames.Equipment.Cost.Currency)?.Trim() ?? string.Empty;
+            return properties.GetPropertyAsString(ElementStrings.Properties.Item.Cost.Currency)?.Trim() ?? string.Empty;
         }
 
         public string GetDisplayCost()
         {
             // when a format is provided, use it instead of the default one
-            if (properties.ContainsProperty(PropertyNames.Equipment.Cost.DisplayFormat))
+            if (properties.ContainsProperty(ElementStrings.Properties.Item.Cost.DisplayFormat))
             {
                 return GetFormattedDisplayCost();
             }
@@ -44,18 +35,25 @@ namespace Aurora.Engine.Data
 
         private string GetFormattedDisplayCost()
         {
-            var displayFormat = properties.GetPropertyAsString(PropertyNames.Equipment.Cost.DisplayFormat) ?? PropertyNames.Equipment.Cost.DisplayFormatDefault;
+            var displayFormat = properties.GetPropertyAsString(ElementStrings.Properties.Item.Cost.DisplayFormat) ?? ElementStrings.Properties.Item.Cost.DisplayFormatDefault;
 
-            // extract to replace utilities to auto replace properties with the string variant of that key
-            displayFormat = displayFormat.Replace($"{{{{{PropertyNames.Equipment.Cost.Value}}}}}", GetEquipmentCostValue().ToString());
-            displayFormat = displayFormat.Replace($"{{{{{PropertyNames.Equipment.Cost.Currency}}}}}", GetEquipmentCostCurrency());
+            displayFormat = displayFormat.ReplaceInline(GetReplacementDictionary());
 
             if (displayFormat.Contains("{{") || displayFormat.Contains("}}"))
             {
-                throw new InvalidOperationException($"The {PropertyNames.Equipment.Cost.DisplayFormat} contains an unknown property that cannot be replaced.");
+                throw new InvalidOperationException($"The {ElementStrings.Properties.Item.Cost.DisplayFormat} contains an unknown property that cannot be replaced.");
             }
 
             return displayFormat.Trim();
+        }
+
+        private Dictionary<string, object> GetReplacementDictionary()
+        {
+            return new Dictionary<string, object>
+            {
+                { ElementStrings.Properties.Item.Cost.Value, GetEquipmentCostValue() },
+                { ElementStrings.Properties.Item.Cost.Currency, GetEquipmentCostCurrency() }
+            };
         }
     }
 }

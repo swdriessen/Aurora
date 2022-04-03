@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Aurora.Engine.Utilities\Aurora.Engine.Utilities.csproj" />
-  </ItemGroup>
-
 </Project>
