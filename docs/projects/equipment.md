@@ -44,3 +44,25 @@ Additional idea's and features the inventory might support.
 - Allow an element to give equipment _e.g. starting gold and equipment based on class, background, feat_
 - Allow hiding details about cursed items by default
 - Stack or group non-stackable non-equipped items _e.g. 5 daggers_
+
+## Required Test Items
+
+The first tests should include some straightforward items variations.
+
+- Adorning (Weapon)
+    - Longsword (Weapon) `Longsword`
+    - Silvered Weapon (Mundane) `Silvered Longsword`
+    - Weapon of Fire (Magic) `Silvered Longsword of Fire`
+    - Magic Weapon, +1 (Magic) `Silvered Longsword of Fire, +1`
+- Adorning (Armor)
+    - Leather Armor (Armor) `Leather Armor`
+    - Embroidered Armor (Mundane) `Embroidered Leather Armor`
+    - Armor of Fire Resistance (Magic) `Embroidered Leather Armor of Fire Resistance`
+    - Magic Armor, +2 (Magic) `Embroidered Leather Armor of Fire Resistance, +2`
+- Adorner (Mundane)
+    - Spyglass (Mundane) `Spyglass`
+    - Item of True Sight (Magic) `Spyglass of True Sight`
+- Containers / Weight Override
+    - Bag of Holding (Container, Weightless)
+- Extracting
+    - Item Pack ('readonly' Container)
