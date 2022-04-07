@@ -14,4 +14,4 @@ You can build the project and run the tests as follows:
 
 ## License
 
-This project is licensed under the [MIT license](LICENSE.txt).
+This project is provided as-is under the [MIT license](LICENSE.txt).

@@ -205,3 +205,20 @@ A weapon can be versatile, e.g. wielded with one or two hands. It can add damage
     <property key="versatile.damage.type">slashing</property>
 </properties>
 ```
+
+### Sorting Properties
+
+When making selections, some elements are better left in order of creation. You should be able to sort a select set of elements to keep the desired sorting order intact.
+
+A good example is a selection of abilities e.g. maintain the order of a _Strength, Dexterity, Charisma, Intelligence, Wisdom, and Charisma_ selection
+
+```xml
+<properties>
+    <!-- sort on group (optional) and then sort on the order -->
+    <property key="sort.group">1</property>
+    <property key="sort.order">1</property>
+</properties>
+
+<!-- have a flag on the selection rule to enable sorting? -->
+<selection sort="true" />
+```
