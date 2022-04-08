@@ -11,22 +11,19 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1E1B0E8A-9AE4-44EE-AFDB-70C9C819CA4F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{11B408B8-C495-48D5-A31D-086478667173}"
-	ProjectSection(SolutionItems) = preProject
-		..\docs\element-properties.md = ..\docs\element-properties.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "projects", "projects", "{5EF8BD68-FF97-471B-8731-290B92E3CF87}"
 	ProjectSection(SolutionItems) = preProject
-		..\docs\projects\data.md = ..\docs\projects\data.md
+		..\docs\projects\equipment.md = ..\docs\projects\equipment.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Data", "Aurora.Engine.Data\Aurora.Engine.Data.csproj", "{C8500904-2381-4E00-86E7-6CA8E132A1A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Data", "data\Aurora.Engine.Data\Aurora.Engine.Data.csproj", "{C8500904-2381-4E00-86E7-6CA8E132A1A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Data.Tests", "Aurora.Engine.Data.Tests\Aurora.Engine.Data.Tests.csproj", "{96A4BCC3-CBE2-4051-A102-CC096056F2B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Data.Tests", "data\Aurora.Engine.Data.Tests\Aurora.Engine.Data.Tests.csproj", "{96A4BCC3-CBE2-4051-A102-CC096056F2B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurora.Engine.Utilities", "Aurora.Engine.Utilities\Aurora.Engine.Utilities.csproj", "{698A74AE-2D80-4FEB-B075-F3DB9EA596E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Utilities", "engine\Aurora.Engine.Utilities\Aurora.Engine.Utilities.csproj", "{698A74AE-2D80-4FEB-B075-F3DB9EA596E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurora.Engine.Utilities.Tests", "Aurora.Engine.Utilities.Tests\Aurora.Engine.Utilities.Tests.csproj", "{0EE1E536-03E0-4239-A527-94DC3D32442E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Utilities.Tests", "engine\Aurora.Engine.Utilities.Tests\Aurora.Engine.Utilities.Tests.csproj", "{0EE1E536-03E0-4239-A527-94DC3D32442E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "engine", "engine", "{F8EF4E25-E57C-4FA8-85AE-23D023BE9378}"
 EndProject
@@ -37,6 +34,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1C293F12-3B01-404C-81BC-C99DC2A2E271}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "elements", "elements", "{9ABE6238-9138-4D95-9CEE-90C824746330}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Equipment", "engine\Aurora.Engine.Equipment\Aurora.Engine.Equipment.csproj", "{9EC04762-ECBF-4E4B-B2C0-197FD95137F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurora.Engine.Equipment.Tests", "engine\Aurora.Engine.Equipment.Tests\Aurora.Engine.Equipment.Tests.csproj", "{C0CEB689-BCE7-4F97-BBED-23E7123C3992}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +61,14 @@ Global
 		{0EE1E536-03E0-4239-A527-94DC3D32442E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EE1E536-03E0-4239-A527-94DC3D32442E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EE1E536-03E0-4239-A527-94DC3D32442E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EC04762-ECBF-4E4B-B2C0-197FD95137F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EC04762-ECBF-4E4B-B2C0-197FD95137F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EC04762-ECBF-4E4B-B2C0-197FD95137F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EC04762-ECBF-4E4B-B2C0-197FD95137F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0CEB689-BCE7-4F97-BBED-23E7123C3992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0CEB689-BCE7-4F97-BBED-23E7123C3992}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0CEB689-BCE7-4F97-BBED-23E7123C3992}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0CEB689-BCE7-4F97-BBED-23E7123C3992}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +84,8 @@ Global
 		{A4FF0ECD-1DCC-4317-891E-65D8E385B141} = {4E88187E-CED9-4118-8828-9D7AB6E09456}
 		{1C293F12-3B01-404C-81BC-C99DC2A2E271} = {F8EF4E25-E57C-4FA8-85AE-23D023BE9378}
 		{9ABE6238-9138-4D95-9CEE-90C824746330} = {11B408B8-C495-48D5-A31D-086478667173}
+		{9EC04762-ECBF-4E4B-B2C0-197FD95137F4} = {F8EF4E25-E57C-4FA8-85AE-23D023BE9378}
+		{C0CEB689-BCE7-4F97-BBED-23E7123C3992} = {1C293F12-3B01-404C-81BC-C99DC2A2E271}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {824A3E82-B8C3-4B1C-8724-0C35E0F34900}

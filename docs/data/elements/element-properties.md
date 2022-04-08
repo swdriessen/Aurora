@@ -31,6 +31,23 @@ The category the item can be sorted on when displaying in for example an equipme
 </properties>
 ```
 
+### Name Formatting
+
+The name of an item may be altered by for example magic items; _e.g. Longsword of Fire_. When you don't provide a name format the name of the magic item will be used instead; _e.g. Flametongue_.
+
+You should surround your replacement property like so; `{{replacement}}`. You can use the following properties in the name formatting:
+
+- `parent` this will take the name of the parent item, including the formatted name of the item if you apply multiple magic items.
+- ...
+
+```xml
+<properties>
+    <property key="item.nameformat">Silvered {{parent}}</property>
+</properties>
+```
+
+Note: at first it will support the basics; _e.g. a __Longsword__ with a __Weapon of Fire__ and a __Weapon of Ice__ will likely result in __Longsword of Fire of Ice___
+
 ### Cost
 
 The cost of the item.
