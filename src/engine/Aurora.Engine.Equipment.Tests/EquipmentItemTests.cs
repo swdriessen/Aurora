@@ -1,4 +1,6 @@
-﻿using Aurora.Engine.Data.Models;
+﻿using Aurora.Engine.Data.Extensions;
+using Aurora.Engine.Data.Models;
+using Aurora.Engine.Data.Strings;
 using Aurora.Engine.Equipment.Components;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -36,7 +38,7 @@ namespace Aurora.Engine.Equipment.Tests
             var component = new EquipmentComponent(weaponElement.Object);
             var equipmentItem = new EquipmentItem(component);
             var decorator = new Mock<ElementModel>();
-            decorator.Object.Properties.Add("item.nameformat", "Silvered {{parent}}");
+            decorator.Object.Properties.AddItemNameFormattingProperty("Silvered {{parent}}");
 
             // act
             equipmentItem.Decorate(decorator.Object);
@@ -53,8 +55,9 @@ namespace Aurora.Engine.Equipment.Tests
             var equipmentItem = new EquipmentItem(component);
             var decorator1 = new Mock<ElementModel>();
             var decorator2 = new Mock<ElementModel>();
-            decorator1.Object.Properties.Add("item.nameformat", "Silvered {{parent}}");
-            decorator2.Object.Properties.Add("item.nameformat", "{{parent}} of Fire");
+
+            decorator1.Object.Properties.AddItemNameFormattingProperty("Silvered {{parent}}");
+            decorator2.Object.Properties.AddItemNameFormattingProperty("{{parent}} of Fire");
 
             // act
             equipmentItem.Decorate(decorator1.Object);

@@ -9,6 +9,7 @@
                 public const string Category = $"item.category";
                 public const string Type = $"item.type";
                 public const string Stackable = $"item.stackable";
+                public const string NameFormatting = $"item.nameformat";
 
                 public static class Cost
                 {
