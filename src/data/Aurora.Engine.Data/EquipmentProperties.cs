@@ -11,7 +11,13 @@ namespace Aurora.Engine.Data
         public EquipmentProperties(ElementPropertiesModel properties)
         {
             this.properties = properties;
+
+            ItemProperties = new ItemProperties(properties);
+            EnhancementProperties = new EnhancementProperties(properties);
         }
+
+        public ItemProperties ItemProperties { get; }
+        public EnhancementProperties EnhancementProperties { get; }
 
         public int GetEquipmentCostValue()
         {

@@ -1,4 +1,5 @@
-﻿using Aurora.Engine.Data.Models;
+﻿using Aurora.Engine.Data;
+using Aurora.Engine.Data.Models;
 using Aurora.Engine.Equipment.Components;
 
 namespace Aurora.Engine.Equipment
@@ -9,6 +10,7 @@ namespace Aurora.Engine.Equipment
     public class EquipmentItem : InventoryItem
     {
         private readonly AggregatedEquipmentComponent aggregatedComponent;
+        private readonly EquipmentProperties equipmentProperties;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EquipmentItem"/> class with an <see cref="EquipmentComponent"/> .
@@ -16,6 +18,9 @@ namespace Aurora.Engine.Equipment
         public EquipmentItem(EquipmentComponent equipmentComponent)
         {
             aggregatedComponent = new AggregatedEquipmentComponent(equipmentComponent);
+            equipmentProperties = new EquipmentProperties(equipmentComponent.Element.Properties);
+
+            IsStackable = equipmentProperties.ItemProperties.IsStackable;
         }
 
         /// <summary>

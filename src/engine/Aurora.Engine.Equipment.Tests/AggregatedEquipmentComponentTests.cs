@@ -2,28 +2,27 @@
 using Aurora.Engine.Data.Models;
 using Aurora.Engine.Equipment.Components;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 namespace Aurora.Engine.Equipment.Tests
 {
     [TestClass]
     public class AggregatedEquipmentComponentTests
     {
-        private readonly Mock<ElementModel> weaponElement = new();
-        private readonly Mock<ElementModel> decoratorElement = new();
+        private readonly ElementModel weaponElement = new();
+        private readonly ElementModel decoratorElement = new();
 
         [TestInitialize]
         public void Initialize()
         {
-            weaponElement.Object.Name = "Longsword";
-            decoratorElement.Object.Name = "Longsword Decorator";
+            weaponElement.Name = "Longsword";
+            decoratorElement.Name = "Longsword Decorator";
         }
 
         [TestMethod]
         public void GetEquipmentComponent_ShouldReturnComponentPassedInTheConstructer()
         {
             // arrange
-            var component = new EquipmentComponent(weaponElement.Object);
+            var component = new EquipmentComponent(weaponElement);
 
             // act
             var aggregatedComponent = new AggregatedEquipmentComponent(component);
@@ -36,7 +35,7 @@ namespace Aurora.Engine.Equipment.Tests
         public void IsDecorated_ShouldReturnFalse_WhenTheItemIsNotDecorated()
         {
             // arrange
-            var component = new EquipmentComponent(weaponElement.Object);
+            var component = new EquipmentComponent(weaponElement);
 
             // act
             var aggregatedComponent = new AggregatedEquipmentComponent(component);
@@ -49,11 +48,11 @@ namespace Aurora.Engine.Equipment.Tests
         public void IsDecorated_ShouldReturnTrue_WhenTheItemIsDecorated()
         {
             // arrange
-            var component = new EquipmentComponent(weaponElement.Object);
+            var component = new EquipmentComponent(weaponElement);
 
             // act
             var aggregatedComponent = new AggregatedEquipmentComponent(component);
-            aggregatedComponent.Decorate(weaponElement.Object);
+            aggregatedComponent.Decorate(weaponElement);
 
             // assert
             Assert.IsTrue(aggregatedComponent.IsDecorated());
@@ -63,11 +62,11 @@ namespace Aurora.Engine.Equipment.Tests
         public void GetAggregatedComponent_ShouldReturnTheLastDecoratedComponent()
         {
             // arrange
-            var component = new EquipmentComponent(weaponElement.Object);
+            var component = new EquipmentComponent(weaponElement);
 
             // act
             var aggregatedComponent = new AggregatedEquipmentComponent(component);
-            var decorator = aggregatedComponent.Decorate(decoratorElement.Object);
+            var decorator = aggregatedComponent.Decorate(decoratorElement);
 
             // assert
             Assert.IsTrue(aggregatedComponent.IsDecorated());
@@ -79,11 +78,11 @@ namespace Aurora.Engine.Equipment.Tests
         public void GetEnhancementBonus_ShouldReturnZero_WhenNoEnhancementIsSet()
         {
             // arrange
-            var component = new EquipmentComponent(weaponElement.Object);
+            var component = new EquipmentComponent(weaponElement);
 
             // act
             var aggregatedComponent = new AggregatedEquipmentComponent(component);
-            aggregatedComponent.Decorate(decoratorElement.Object);
+            aggregatedComponent.Decorate(decoratorElement);
 
             // assert
             Assert.AreEqual(0, aggregatedComponent.GetEnhancementBonus());
@@ -93,12 +92,11 @@ namespace Aurora.Engine.Equipment.Tests
         public void GetEnhancementBonus_ShouldReturnOne_WhenItemIsEnhancedWithMagicItem()
         {
             // arrange
-            var component = new EquipmentComponent(weaponElement.Object);
+            var component = new EquipmentComponent(weaponElement);
             var magicWeapon = new ElementModel
             {
                 Name = "Magic Weapon, +1"
             };
-            magicWeapon.AddProperty("enhancement", "+1");
             magicWeapon.AddProperty("enhancement.value", 1);
 
             // act
@@ -113,21 +111,23 @@ namespace Aurora.Engine.Equipment.Tests
         public void GetEnhancementBonus_ShouldReturnTwo_WhenItemIsEnhancedWithTwoMagicItems()
         {
             // arrange
-            var component = new EquipmentComponent(weaponElement.Object);
-            var magicWeapon = new Mock<ElementModel>();
-            magicWeapon.Object.Name = "Magic Weapon, +1";
-            magicWeapon.Object.AddProperty("enhancement", "+1");
-            magicWeapon.Object.AddProperty("enhancement.value", 1);
+            var component = new EquipmentComponent(weaponElement);
+            var magicWeapon = new ElementModel
+            {
+                Name = "Magic Weapon, +1"
+            };
+            magicWeapon.AddProperty("enhancement.value", 1);
 
-            var decoratorElement2 = new Mock<ElementModel>();
-            decoratorElement2.Object.Name = "Another Magic Weapon, +1";
-            decoratorElement2.Object.AddProperty("enhancement", "+1");
-            decoratorElement2.Object.AddProperty("enhancement.value", 1);
+            var anotherMagicWeapon = new ElementModel
+            {
+                Name = "Another Magic Weapon, +1"
+            };
+            anotherMagicWeapon.AddProperty("enhancement.value", 1);
 
             // act
             var aggregatedComponent = new AggregatedEquipmentComponent(component);
-            aggregatedComponent.Decorate(magicWeapon.Object);
-            aggregatedComponent.Decorate(decoratorElement2.Object);
+            aggregatedComponent.Decorate(magicWeapon);
+            aggregatedComponent.Decorate(anotherMagicWeapon);
 
             // assert
             Assert.AreEqual(2, aggregatedComponent.GetEnhancementBonus());

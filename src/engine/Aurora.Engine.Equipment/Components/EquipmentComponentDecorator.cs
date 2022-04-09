@@ -11,8 +11,6 @@ namespace Aurora.Engine.Equipment.Components
     /// </summary>
     public class EquipmentComponentDecorator : EquipmentComponentBase
     {
-        private readonly EnhancementProperties enhancementProperties;
-        private readonly ElementModel element;
         private EquipmentComponentBase parentComponent;
 
         /// <summary>
@@ -21,11 +19,9 @@ namespace Aurora.Engine.Equipment.Components
         /// <param name="element">The decorating element model.</param>
         /// <param name="parentComponent">The component that you are decorating.</param>
         public EquipmentComponentDecorator(ElementModel element, EquipmentComponentBase parentComponent)
+            : base(element)
         {
-            this.element = element;
             this.parentComponent = parentComponent;
-
-            enhancementProperties = new EnhancementProperties(this.element.Properties);
         }
 
         /// <summary>
@@ -39,20 +35,20 @@ namespace Aurora.Engine.Equipment.Components
 
         public override string GetDisplayName()
         {
-            if (element.Properties.TryGetValue(ElementStrings.Properties.Item.NameFormatting, out object? value) && value is string nameFormat)
+            if (Element.Properties.TryGetValue(ElementStrings.Properties.Item.NameFormatting, out object? value) && value is string nameFormat)
             {
                 return nameFormat.ReplaceInline(ReplacementStrings.Parent, parentComponent.GetDisplayName());
             }
 
             // when there is no formatted name provided, use the name of the decorator e.g. "Flametongue"
-            return element.Name;
+            return Element.Name;
         }
 
         public override int GetEnhancementBonus()
         {
             var bonus = parentComponent.GetEnhancementBonus();
 
-            bonus += enhancementProperties.EnhancementValue;
+            bonus += EquipmentProperties.EnhancementProperties.EnhancementValue;
 
             return bonus;
         }
