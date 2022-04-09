@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "elements", "elements", "{9A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Equipment", "engine\Aurora.Engine.Equipment\Aurora.Engine.Equipment.csproj", "{9EC04762-ECBF-4E4B-B2C0-197FD95137F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurora.Engine.Equipment.Tests", "engine\Aurora.Engine.Equipment.Tests\Aurora.Engine.Equipment.Tests.csproj", "{C0CEB689-BCE7-4F97-BBED-23E7123C3992}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Equipment.Tests", "engine\Aurora.Engine.Equipment.Tests\Aurora.Engine.Equipment.Tests.csproj", "{C0CEB689-BCE7-4F97-BBED-23E7123C3992}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

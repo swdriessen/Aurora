@@ -7,7 +7,7 @@ namespace Aurora.Engine.Equipment.Components
     /// <summary>
     /// Initializes a new instance of the <see cref="AggregatedEquipmentComponent"/> class that helps with decorating equipment.
     /// </summary>
-    public class AggregatedEquipmentComponent : IDisplayNameComponent, IEquipmentComponent
+    public class AggregatedEquipmentComponent : IEquipmentComponent
     {
         private readonly List<EquipmentComponentDecorator> equipmentComponentDecorators = new();
 

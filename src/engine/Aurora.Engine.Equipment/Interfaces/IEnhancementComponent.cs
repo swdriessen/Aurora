@@ -7,9 +7,4 @@
         /// </summary>
         int GetEnhancementBonus();
     }
-
-    public interface IEquipmentComponent : IEnhancementComponent
-    {
-
-    }
 }
