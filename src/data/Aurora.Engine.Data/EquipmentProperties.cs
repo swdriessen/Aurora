@@ -1,13 +1,14 @@
-﻿using Aurora.Engine.Data.Strings;
+﻿using Aurora.Engine.Data.Models;
+using Aurora.Engine.Data.Strings;
 using Aurora.Engine.Utilities;
 
 namespace Aurora.Engine.Data
 {
     public class EquipmentProperties
     {
-        private readonly ElementProperties properties;
+        private readonly ElementPropertiesModel properties;
 
-        public EquipmentProperties(ElementProperties properties)
+        public EquipmentProperties(ElementPropertiesModel properties)
         {
             this.properties = properties;
         }

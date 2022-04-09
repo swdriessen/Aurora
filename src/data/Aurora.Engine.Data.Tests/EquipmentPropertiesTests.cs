@@ -1,3 +1,4 @@
+using Aurora.Engine.Data.Models;
 using Aurora.Engine.Data.Strings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -7,7 +8,7 @@ namespace Aurora.Engine.Data.Tests
     [TestClass]
     public class EquipmentPropertiesTests
     {
-        private ElementProperties properties = new();
+        private ElementPropertiesModel properties = new();
 
         [TestMethod]
         public void EquipmentProperties_ShouldReturnCostValue_WhenPopulatedWithElementProperties()
