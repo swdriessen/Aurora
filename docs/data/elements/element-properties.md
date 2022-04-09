@@ -31,6 +31,16 @@ The category the item can be sorted on when displaying in for example an equipme
 </properties>
 ```
 
+### Stackable
+
+The stackable property determines if this item allows to be stacked. e.g. a potion of healing or ammunition will be stackable.
+
+```xml
+<properties>
+    <property key="item.stackable">true</property>
+</properties>
+```
+
 ### Name Formatting
 
 The name of an item may be altered by for example magic items; _e.g. Longsword of Fire_. When you don't provide a name format the name of the magic item will be used instead; _e.g. Flametongue_.
