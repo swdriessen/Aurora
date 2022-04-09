@@ -28,20 +28,32 @@ namespace Aurora.Engine.Equipment.Components
         /// Sets the component that you are decorating.
         /// </summary>
         /// <param name="parentComponent"></param>
-        public void SetParentComponent([NotNull]EquipmentComponentBase parentComponent)
+        public void SetParentComponent([NotNull] EquipmentComponentBase parentComponent)
         {
             this.parentComponent = parentComponent;
         }
 
         public override string GetDisplayName()
         {
-            if(element.Properties.TryGetValue(ElementStrings.Properties.Item.NameFormatting, out object? value) && value is string nameFormat)
+            if (element.Properties.TryGetValue(ElementStrings.Properties.Item.NameFormatting, out object? value) && value is string nameFormat)
             {
                 return nameFormat.ReplaceInline(ReplacementStrings.Parent, parentComponent.GetDisplayName());
             }
 
             // when there is no formatted name provided, use the name of the decorator e.g. "Flametongue"
             return element.Name;
+        }
+
+        public override int GetEnhancementBonus()
+        {
+            var bonus = parentComponent.GetEnhancementBonus();
+
+            if (element.Properties.TryGetValue(ElementStrings.Properties.Enhancement.Value, out object? value) && value is int enhancementValue)
+            {
+                bonus += enhancementValue;
+            }
+
+            return bonus;
         }
     }
 }

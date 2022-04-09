@@ -66,5 +66,46 @@ namespace Aurora.Engine.Equipment.Tests
             // assert
             Assert.AreEqual("Silvered Longsword of Fire", equipmentItem.GetDisplayName());
         }
+
+        [TestMethod]
+        public void EquipmentItem_ShouldIncludeEnhancementInDisplayName_WhenEquipmentIsEnhancedAndIncludeEnhancementIsEnabled()
+        {
+            // arrange
+            var component = new EquipmentComponent(weaponElement.Object);
+            var equipmentItem = new EquipmentItem(component);
+            var magicWeapon = new ElementModel
+            {
+                Name = "Magic Weapon"
+            };
+            magicWeapon.Properties.AddItemNameFormattingProperty("Magic {{parent}}");
+            magicWeapon.Properties.AddProperty(ElementStrings.Properties.Enhancement.Value, 1);
+
+            // act
+            equipmentItem.Decorate(magicWeapon);
+
+            // assert
+            Assert.AreEqual("Magic Longsword, +1", equipmentItem.GetDisplayName());
+        }
+
+        [TestMethod]
+        public void EquipmentItem_ShouldNotIncludeEnhancementInDisplayName_WhenEquipmentIsEnhancedAndIncludeEnhancementIsDisabled()
+        {
+            // arrange
+            var component = new EquipmentComponent(weaponElement.Object);
+            var equipmentItem = new EquipmentItem(component);
+            var magicWeapon = new ElementModel
+            {
+                Name = "Magic Weapon"
+            };
+            magicWeapon.Properties.AddItemNameFormattingProperty("Magic {{parent}}");
+            magicWeapon.Properties.AddProperty(ElementStrings.Properties.Enhancement.Value, 1);
+
+            // act
+            equipmentItem.Decorate(magicWeapon);
+            equipmentItem.IncludeEnhancementBonus = false;
+
+            // assert
+            Assert.AreEqual("Magic Longsword", equipmentItem.GetDisplayName());
+        }
     }
 }

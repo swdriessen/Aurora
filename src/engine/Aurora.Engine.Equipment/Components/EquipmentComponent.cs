@@ -21,12 +21,19 @@ namespace Aurora.Engine.Equipment.Components
         /// </summary>
         public ElementModel Element { get; }
 
-        /// <summary>
-        /// Gets the display name of the component.
-        /// </summary>
         public override string GetDisplayName()
         {
             return Element.Name;
+        }
+
+        public override int GetEnhancementBonus()
+        {
+            if (Element.Properties.TryGetValue("enhancement.value", out object? value) && value is int enhancementValue)
+            {
+                return enhancementValue;
+            }
+
+            return 0;
         }
     }
 }

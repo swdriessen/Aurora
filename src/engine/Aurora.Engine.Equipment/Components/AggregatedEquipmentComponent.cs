@@ -15,7 +15,7 @@ namespace Aurora.Engine.Equipment.Components
         /// Initializes a new instance of the <see cref="AggregatedEquipmentComponent"/> class with the base equipment component.
         /// </summary>
         /// <param name="equipmentComponent">The equipment component.</param>
-        public AggregatedEquipmentComponent([NotNull]EquipmentComponent equipmentComponent)
+        public AggregatedEquipmentComponent([NotNull] EquipmentComponent equipmentComponent)
         {
             EquipmentComponent = equipmentComponent;
         }
@@ -26,19 +26,22 @@ namespace Aurora.Engine.Equipment.Components
         public EquipmentComponent EquipmentComponent { get; }
 
         /// <summary>
+        /// Gets the decorated component.
+        /// </summary>
+        public EquipmentComponentDecorator DecoratedComponent => equipmentComponentDecorators.Last();
+
+        /// <summary>
         /// Decorate the equipment component with the element model.
         /// </summary>
         /// <param name="model">The element model with which you want to decorate the component.</param>
         /// <returns>The decorated that was created and added to the list of decorators.</returns>
         public EquipmentComponentDecorator Decorate(ElementModel model)
         {
-            EquipmentComponentDecorator decorater = IsDecorated()
-                ? new EquipmentComponentDecorator(model, equipmentComponentDecorators.Last())
-                : new EquipmentComponentDecorator(model, EquipmentComponent);
+            var newDecorator = new EquipmentComponentDecorator(model, IsDecorated() ? DecoratedComponent : EquipmentComponent);
 
-            equipmentComponentDecorators.Add(decorater);
+            equipmentComponentDecorators.Add(newDecorator);
 
-            return decorater;
+            return newDecorator;
         }
 
         public bool IsDecorated()
@@ -46,19 +49,19 @@ namespace Aurora.Engine.Equipment.Components
             return equipmentComponentDecorators.Any();
         }
 
-        public EquipmentComponentDecorator GetAggregatedComponent()
+        public bool HasEnhancementBonus()
         {
-            return equipmentComponentDecorators.Last();
+            return GetEnhancementBonus() > 0;
         }
 
         public string GetDisplayName()
         {
-            if (IsDecorated())
-            {
-                return GetAggregatedComponent().GetDisplayName();
-            }
+            return IsDecorated() ? DecoratedComponent.GetDisplayName() : EquipmentComponent.GetDisplayName();
+        }
 
-            return EquipmentComponent.GetDisplayName();
+        public int GetEnhancementBonus()
+        {
+            return IsDecorated() ? DecoratedComponent.GetEnhancementBonus() : EquipmentComponent.GetEnhancementBonus();
         }
     }
 }

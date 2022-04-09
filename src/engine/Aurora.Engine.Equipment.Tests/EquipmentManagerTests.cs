@@ -6,7 +6,7 @@ namespace Aurora.Engine.Equipment.Tests
     public class EquipmentManagerTests
     {
         [TestMethod]
-        public void EquipmentManager_ShouldContainNoItems_WhenInstantiated()
+        public void EquipmentManager_ShouldContainNoItems_WhenConstructed()
         {
             // arrange
             // act

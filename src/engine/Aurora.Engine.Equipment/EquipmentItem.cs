@@ -8,15 +8,20 @@ namespace Aurora.Engine.Equipment
     /// </summary>
     public class EquipmentItem : InventoryItem
     {
-        private readonly AggregatedEquipmentComponent aggregatedEquipmentComponent;
+        private readonly AggregatedEquipmentComponent aggregatedComponent;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EquipmentItem"/> class with an <see cref="EquipmentComponent"/> .
         /// </summary>
         public EquipmentItem(EquipmentComponent equipmentComponent)
         {
-            aggregatedEquipmentComponent = new AggregatedEquipmentComponent(equipmentComponent);
+            aggregatedComponent = new AggregatedEquipmentComponent(equipmentComponent);
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating wether to include the enhancement bonus in the display name of the item or not. (Default = true)
+        /// </summary>
+        public bool IncludeEnhancementBonus { get; set; } = true;
 
         /// <summary>
         /// Decorate the item with another element model.
@@ -25,12 +30,17 @@ namespace Aurora.Engine.Equipment
         /// <param name="elementModel">The element model to decorate this item with.</param>
         public void Decorate(ElementModel elementModel)
         {
-            aggregatedEquipmentComponent.Decorate(elementModel);
+            aggregatedComponent.Decorate(elementModel);
         }
 
         public override string GetDisplayName()
         {
-            return aggregatedEquipmentComponent.GetDisplayName();
+            if (IncludeEnhancementBonus && aggregatedComponent.HasEnhancementBonus())
+            {
+                return $"{aggregatedComponent.GetDisplayName()}, +{aggregatedComponent.GetEnhancementBonus()}";
+            }
+
+            return aggregatedComponent.GetDisplayName();
         }
     }
 }

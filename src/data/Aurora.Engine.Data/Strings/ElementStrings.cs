@@ -27,6 +27,12 @@
                     public const string DisplayFormatDefault = "{{item.weight.value}} {{item.weight.unit}}";
                 }
             }
+
+            public static class Enhancement
+            {
+                public const string Value = "enhancement.value";
+            }
+
         }
     }
 }
