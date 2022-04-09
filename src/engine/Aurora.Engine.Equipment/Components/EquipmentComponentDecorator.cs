@@ -1,4 +1,5 @@
-﻿using Aurora.Engine.Data.Models;
+﻿using Aurora.Engine.Data;
+using Aurora.Engine.Data.Models;
 using Aurora.Engine.Data.Strings;
 using Aurora.Engine.Utilities;
 using System.Diagnostics.CodeAnalysis;
@@ -10,6 +11,7 @@ namespace Aurora.Engine.Equipment.Components
     /// </summary>
     public class EquipmentComponentDecorator : EquipmentComponentBase
     {
+        private readonly EnhancementProperties enhancementProperties;
         private readonly ElementModel element;
         private EquipmentComponentBase parentComponent;
 
@@ -22,6 +24,8 @@ namespace Aurora.Engine.Equipment.Components
         {
             this.element = element;
             this.parentComponent = parentComponent;
+
+            enhancementProperties = new EnhancementProperties(this.element.Properties);
         }
 
         /// <summary>
@@ -48,10 +52,7 @@ namespace Aurora.Engine.Equipment.Components
         {
             var bonus = parentComponent.GetEnhancementBonus();
 
-            if (element.Properties.TryGetValue(ElementStrings.Properties.Enhancement.Value, out object? value) && value is int enhancementValue)
-            {
-                bonus += enhancementValue;
-            }
+            bonus += enhancementProperties.EnhancementValue;
 
             return bonus;
         }

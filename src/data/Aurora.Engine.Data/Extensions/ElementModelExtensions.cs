@@ -20,5 +20,15 @@ namespace Aurora.Engine.Data.Extensions
             //model.Properties.Add(new ElementPropertyModel() { Name = name, Value = value });
             model.Properties.Add(name, value);
         }
+
+        /// <summary>
+        /// Gets a new instance of the <see cref="EnhancementProperties"/> to interact with the element properties without the need to know property keys.
+        /// </summary>
+        /// <param name="elementModel">The element model from which you want to read and write the properties.</param>
+        /// <returns>A new instance of the enhancement properties.</returns>
+        public static EnhancementProperties GetEnhancementProperties(this ElementModel elementModel)
+        {
+            return new EnhancementProperties(elementModel.Properties);
+        }
     }
 }

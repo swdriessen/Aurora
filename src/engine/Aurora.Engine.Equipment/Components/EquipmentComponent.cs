@@ -1,4 +1,5 @@
 ﻿using Aurora.Engine.Data;
+using Aurora.Engine.Data.Extensions;
 using Aurora.Engine.Data.Models;
 using Aurora.Engine.Data.Strings;
 
@@ -9,7 +10,7 @@ namespace Aurora.Engine.Equipment.Components
     /// </summary>
     public class EquipmentComponent : EquipmentComponentBase
     {
-        private readonly EquipmentProperties equipmentProperties;
+        private readonly EnhancementProperties enhancementProperties;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EquipmentComponent"/> class.
@@ -18,8 +19,7 @@ namespace Aurora.Engine.Equipment.Components
         public EquipmentComponent(ElementModel element)
         {
             Element = element;
-
-            equipmentProperties = new EquipmentProperties(element.Properties);
+            enhancementProperties = element.GetEnhancementProperties();
         }
 
         /// <summary>
@@ -34,12 +34,7 @@ namespace Aurora.Engine.Equipment.Components
 
         public override int GetEnhancementBonus()
         {
-            if (Element.Properties.TryGetValue(ElementStrings.Properties.Enhancement.Value, out object? value) && value is int enhancementValue)
-            {
-                return enhancementValue;
-            }
-
-            return 0;
+            return enhancementProperties.EnhancementValue;
         }
     }
 }
