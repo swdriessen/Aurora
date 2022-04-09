@@ -1,8 +1,8 @@
-﻿using Aurora.Engine.Data;
+﻿using System.Diagnostics.CodeAnalysis;
+using Aurora.Engine.Data;
 using Aurora.Engine.Data.Models;
 using Aurora.Engine.Data.Strings;
 using Aurora.Engine.Utilities;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Aurora.Engine.Equipment.Components
 {

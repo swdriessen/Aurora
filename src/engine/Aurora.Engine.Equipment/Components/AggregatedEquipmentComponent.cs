@@ -1,13 +1,13 @@
-﻿using Aurora.Engine.Data.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+using Aurora.Engine.Data.Models;
 using Aurora.Engine.Equipment.Interfaces;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Aurora.Engine.Equipment.Components
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="AggregatedEquipmentComponent"/> class that helps with decorating equipment.
     /// </summary>
-    public class AggregatedEquipmentComponent : IDisplayNameComponent
+    public class AggregatedEquipmentComponent : IDisplayNameComponent, IEquipmentComponent
     {
         private readonly List<EquipmentComponentDecorator> equipmentComponentDecorators = new();
 

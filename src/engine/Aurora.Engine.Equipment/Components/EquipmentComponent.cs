@@ -1,7 +1,6 @@
 ﻿using Aurora.Engine.Data;
 using Aurora.Engine.Data.Extensions;
 using Aurora.Engine.Data.Models;
-using Aurora.Engine.Data.Strings;
 
 namespace Aurora.Engine.Equipment.Components
 {

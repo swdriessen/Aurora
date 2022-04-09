@@ -2,7 +2,7 @@
 
 namespace Aurora.Engine.Equipment.Components
 {
-    public abstract class EquipmentComponentBase : IDisplayNameComponent
+    public abstract class EquipmentComponentBase : IDisplayNameComponent, IEquipmentComponent
     {
         /// <summary>
         /// Gets the display name for this component.
