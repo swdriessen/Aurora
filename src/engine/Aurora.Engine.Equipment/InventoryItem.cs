@@ -7,6 +7,11 @@ namespace Aurora.Engine.Equipment
     /// </summary>
     public abstract class InventoryItem : IInventoryItem
     {
+        /// <summary>
+        /// Gets the options for this indiviual item.
+        /// </summary>
+        public InventoryItemOptions Options { get; } = new();
+
         public bool IsStackable { get; set; }
 
         public int Quantity { get; set; } = 1;
