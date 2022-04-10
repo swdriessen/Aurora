@@ -7,24 +7,9 @@
             return ContainsKey(property);
         }
 
-        public string? GetPropertyAsString(string key, string? defaultValue = null)
+        public T GetPropertyAs<T>(string key, T defaultValue)
         {
-            if (TryGetValue(key, out object? value))
-            {
-                return value?.ToString();
-            }
-
-            return defaultValue;
-        }
-
-        public int GetPropertyAsInteger(string key, int defaultValue = 0)
-        {
-            return TryGetValue(key, out object? value) ? (int)value : defaultValue;
-        }
-
-        public bool GetPropertyAsBoolean(string key, bool defaultValue = false)
-        {
-            return TryGetValue(key, out object? value) ? (bool)value : defaultValue;
+            return TryGetValue(key, out object? propertyValue) && propertyValue is T value ? value : defaultValue;
         }
     }
 }

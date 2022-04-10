@@ -52,7 +52,7 @@ You should surround your replacement property like so; `{{replacement}}`. You ca
 
 ```xml
 <properties>
-    <property key="item.nameformat">Silvered {{parent}}</property>
+    <property key="item.name_format">Silvered {{parent}}</property>
 </properties>
 ```
 

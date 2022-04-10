@@ -17,16 +17,17 @@ namespace Aurora.Engine.Data
         }
 
         public ItemProperties ItemProperties { get; }
+
         public EnhancementProperties EnhancementProperties { get; }
 
         public int GetEquipmentCostValue()
         {
-            return properties.GetPropertyAsInteger(ElementStrings.Properties.Item.Cost.Value);
+            return properties.GetPropertyAs(ElementStrings.Properties.Item.Cost.Value, 0);
         }
 
         public string GetEquipmentCostCurrency()
         {
-            return properties.GetPropertyAsString(ElementStrings.Properties.Item.Cost.Currency)?.Trim() ?? string.Empty;
+            return properties.GetPropertyAs(ElementStrings.Properties.Item.Cost.Currency, string.Empty).Trim();
         }
 
         public string GetDisplayCost()
@@ -42,7 +43,7 @@ namespace Aurora.Engine.Data
 
         private string GetFormattedDisplayCost()
         {
-            var displayFormat = properties.GetPropertyAsString(ElementStrings.Properties.Item.Cost.DisplayFormat) ?? ElementStrings.Properties.Item.Cost.DisplayFormatDefault;
+            var displayFormat = properties.GetPropertyAs(ElementStrings.Properties.Item.Cost.DisplayFormat, ElementStrings.Properties.Item.Cost.DisplayFormatDefault);
 
             displayFormat = displayFormat.ReplaceInline(GetReplacementDictionary());
 
