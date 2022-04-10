@@ -1,6 +1,5 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Aurora.Engine.Utilities;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Aurora.Engine.Utilities.Tests
 {
@@ -18,6 +17,19 @@ namespace Aurora.Engine.Utilities.Tests
 
             // assert
             Assert.AreEqual("Hello World!", output);
+        }
+
+        [TestMethod]
+        public void InlineReplacementExtensions_ShouldNotReplaceKeyWhenValueIsNull()
+        {
+            // arrange
+            var input = "Hello {{key}}!";
+
+            // act
+            var output = input.ReplaceInline("key", null);
+
+            // assert
+            Assert.AreEqual(input, output);
         }
 
         [TestMethod]

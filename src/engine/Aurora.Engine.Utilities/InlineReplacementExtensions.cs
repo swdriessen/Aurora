@@ -12,7 +12,7 @@
         /// <returns>The replaced string.</returns>
         public static string ReplaceInline(this string input, string key, object value)
         {
-            return input.Replace($"{{{{{key}}}}}", value?.ToString());
+            return value is null ? input : input.Replace($"{{{{{key}}}}}", value.ToString());
         }
 
         /// <summary>
