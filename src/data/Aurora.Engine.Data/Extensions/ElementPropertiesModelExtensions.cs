@@ -23,7 +23,7 @@ namespace Aurora.Engine.Data.Extensions
         /// <param name="value">The value of the property.</param>
         public static void AddItemNameFormattingProperty(this ElementPropertiesModel properties, string value)
         {
-            properties.Add(ElementStrings.Properties.Item.NameFormatting, value);
+            properties.Add(ElementStrings.Properties.ItemNameFormat, value);
         }
     }
 }

@@ -14,26 +14,26 @@ namespace Aurora.Engine.Data
 
         public bool IsStackable
         {
-            get { return properties.GetPropertyAs(ElementStrings.Properties.Item.Stackable, false); }
-            set { properties[ElementStrings.Properties.Item.Stackable] = value; }
+            get { return properties.GetPropertyAs(ElementStrings.Properties.ItemStackable, false); }
+            set { properties[ElementStrings.Properties.ItemStackable] = value; }
         }
 
         public decimal WeightValue
         {
-            get { return properties.GetPropertyAs(ElementStrings.Properties.Item.Weight.Value, 0); }
-            set { properties[ElementStrings.Properties.Item.Weight.Value] = value; }
+            get { return properties.GetPropertyAs(ElementStrings.Properties.ItemWeight, 0); }
+            set { properties[ElementStrings.Properties.ItemWeight] = value; }
         }
 
         public string WeightUnit
         {
-            get { return properties.GetPropertyAs(ElementStrings.Properties.Item.Weight.Unit, string.Empty); }
-            set { properties[ElementStrings.Properties.Item.Weight.Unit] = value; }
+            get { return properties.GetPropertyAs(ElementStrings.Properties.ItemWeightUnit, string.Empty); }
+            set { properties[ElementStrings.Properties.ItemWeightUnit] = value; }
         }
 
         public bool WeightIgnore
         {
-            get { return properties.GetPropertyAs(ElementStrings.Properties.Item.Weight.Ignore, false); }
-            set { properties[ElementStrings.Properties.Item.Weight.Unit] = value; }
+            get { return properties.GetPropertyAs(ElementStrings.Properties.ItemWeightIgnore, false); }
+            set { properties[ElementStrings.Properties.ItemWeightUnit] = value; }
         }
     }
 }

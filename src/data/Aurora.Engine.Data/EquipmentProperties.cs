@@ -22,18 +22,18 @@ namespace Aurora.Engine.Data
 
         public int GetEquipmentCostValue()
         {
-            return properties.GetPropertyAs(ElementStrings.Properties.Item.Cost.Value, 0);
+            return properties.GetPropertyAs(ElementStrings.Properties.ItemCost, 0);
         }
 
         public string GetEquipmentCostCurrency()
         {
-            return properties.GetPropertyAs(ElementStrings.Properties.Item.Cost.Currency, string.Empty).Trim();
+            return properties.GetPropertyAs(ElementStrings.Properties.ItemCostCurrency, string.Empty).Trim();
         }
 
         public string GetDisplayCost()
         {
             // when a format is provided, use it instead of the default one
-            if (properties.ContainsProperty(ElementStrings.Properties.Item.Cost.DisplayFormat))
+            if (properties.ContainsProperty(ElementStrings.Properties.ItemCostFormat))
             {
                 return GetFormattedDisplayCost();
             }
@@ -43,13 +43,13 @@ namespace Aurora.Engine.Data
 
         private string GetFormattedDisplayCost()
         {
-            var displayFormat = properties.GetPropertyAs(ElementStrings.Properties.Item.Cost.DisplayFormat, ElementStrings.Properties.Item.Cost.DisplayFormatDefault);
+            var displayFormat = properties.GetPropertyAs(ElementStrings.Properties.ItemCostFormat, ElementStrings.Properties.ItemCostFormatDefault);
 
             displayFormat = displayFormat.ReplaceInline(GetReplacementDictionary());
 
             if (displayFormat.Contains("{{") || displayFormat.Contains("}}"))
             {
-                throw new InvalidOperationException($"The {ElementStrings.Properties.Item.Cost.DisplayFormat} contains an unknown property that cannot be replaced.");
+                throw new InvalidOperationException($"The {ElementStrings.Properties.ItemCostFormat} contains an unknown property that cannot be replaced.");
             }
 
             return displayFormat.Trim();
@@ -59,8 +59,8 @@ namespace Aurora.Engine.Data
         {
             return new Dictionary<string, object>
             {
-                { ElementStrings.Properties.Item.Cost.Value, GetEquipmentCostValue() },
-                { ElementStrings.Properties.Item.Cost.Currency, GetEquipmentCostCurrency() }
+                { ElementStrings.Properties.ItemCost, GetEquipmentCostValue() },
+                { ElementStrings.Properties.ItemCostCurrency, GetEquipmentCostCurrency() }
             };
         }
     }

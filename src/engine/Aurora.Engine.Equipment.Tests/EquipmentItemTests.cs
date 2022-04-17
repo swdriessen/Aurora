@@ -79,7 +79,7 @@ namespace Aurora.Engine.Equipment.Tests
                 Name = "Magic Weapon"
             };
             magicWeapon.Properties.AddItemNameFormattingProperty("Magic {{parent}}");
-            magicWeapon.Properties.AddProperty(ElementStrings.Properties.Enhancement.Value, 1);
+            magicWeapon.Properties.AddProperty(ElementStrings.Properties.EnhancementValue, 1);
 
             // act
             equipmentItem.Decorate(magicWeapon);
@@ -99,7 +99,7 @@ namespace Aurora.Engine.Equipment.Tests
                 Name = "Magic Weapon"
             };
             magicWeapon.Properties.AddItemNameFormattingProperty("Magic {{parent}}");
-            magicWeapon.Properties.AddProperty(ElementStrings.Properties.Enhancement.Value, 1);
+            magicWeapon.Properties.AddProperty(ElementStrings.Properties.EnhancementValue, 1);
 
             // act
             equipmentItem.Decorate(magicWeapon);
@@ -113,7 +113,7 @@ namespace Aurora.Engine.Equipment.Tests
         public void EquipmentItem_ShouldBeStackable_WhenPropertyIsSet()
         {
             // arrange
-            potionElement.AddProperty(ElementStrings.Properties.Item.Stackable, true);
+            potionElement.AddProperty(ElementStrings.Properties.ItemStackable, true);
 
             // act
             var equipmentItem = new EquipmentItem(new EquipmentComponent(potionElement));

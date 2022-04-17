@@ -2,38 +2,32 @@
 {
     public static class ElementStrings
     {
-        public static class Properties
+        public static partial class Properties
         {
-            public static class Item
-            {
-                public const string Category = $"item.category";
-                public const string Type = $"item.type";
-                public const string Stackable = $"item.stackable";
-                public const string NameFormatting = $"item.name_format";
+            public const string ItemCost = $"item.cost";
+            public const string ItemCostCurrency = $"{ItemCost}.currency";
+            public const string ItemCostFormat = $"{ItemCost}.format";
+            public const string ItemCostFormatDefault = "{{cost}} {{cost.currency}}";
 
-                public static class Cost
-                {
-                    public const string Value = $"item.cost.value";
-                    public const string Currency = "item.cost.currency";
-                    public const string DisplayFormat = "item.cost.display_format";
-                    public const string DisplayFormatDefault = "{{item.cost.value}} {{item.cost.currency}}";
-                }
+            public const string ItemWeight = "item.weight";
+            public const string ItemWeightUnit = $"{ItemWeight}.unit";
+            public const string ItemWeightFormat = $"{ItemWeight}.format";
+            public const string ItemWeightFormatDefault = "{{weight}} {{weight.unit}}";
+            public const string ItemWeightIgnore = $"{ItemWeight}.ignore";
 
-                public static class Weight
-                {
-                    public const string Value = "item.weight.value";
-                    public const string Unit = "item.weight.unit";
-                    public const string DisplayFormat = "item.weight.display_format";
-                    public const string DisplayFormatDefault = "{{item.weight.value}} {{item.weight.unit}}";
-                    public const string Ignore = "item.weight.ignore";
-                }
-            }
+            public const string ItemCategory = "item.category";
+            public const string ItemType = "item.type";
+            public const string ItemStackable = "item.stackable";
+            public const string ItemNameFormat = "item.name_format";
 
-            public static class Enhancement
-            {
-                public const string Value = "enhancement.value";
-            }
+            public const string Enhancement = "enhancement";
+            public const string EnhancementValue = $"{Enhancement}.value";
 
+            public const string Equippable = "equippable";
+            public const string EquippableTarget = $"{Equippable}.target";
+
+            public const string Attunement = "attunement";
+            public const string AttunementTarget = $"{Attunement}.target";
         }
     }
 }

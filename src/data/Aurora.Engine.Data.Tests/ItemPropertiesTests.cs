@@ -24,7 +24,7 @@ namespace Aurora.Engine.Data.Tests
         public void ItemProperties_ShouldHaveItemStackableSetToTrue_WhenPopulatedCorrectElementProperties()
         {
             // arrange
-            elementProperties.Add(ElementStrings.Properties.Item.Stackable, true);
+            elementProperties.Add(ElementStrings.Properties.ItemStackable, true);
 
             // act
             var itemProperties = new ItemProperties(elementProperties);
@@ -37,7 +37,7 @@ namespace Aurora.Engine.Data.Tests
         public void ItemProperties_ShouldHaveWeightValueSet_WhenPropertyIsSet()
         {
             // arrange
-            elementProperties.Add(ElementStrings.Properties.Item.Weight.Value, 3);
+            elementProperties.Add(ElementStrings.Properties.ItemWeight, 3);
 
             // act
             var itemProperties = new ItemProperties(elementProperties);
@@ -62,7 +62,7 @@ namespace Aurora.Engine.Data.Tests
         {
             // arrange
             var poundsUnit = "lb.";
-            elementProperties.Add(ElementStrings.Properties.Item.Weight.Unit, poundsUnit);
+            elementProperties.Add(ElementStrings.Properties.ItemWeightUnit, poundsUnit);
 
             // act
             var itemProperties = new ItemProperties(elementProperties);
@@ -86,7 +86,7 @@ namespace Aurora.Engine.Data.Tests
         public void ItemProperties_ShouldHaveWeightIgnoreSet_WhenPropertyIsSet()
         {
             // arrange
-            elementProperties.Add(ElementStrings.Properties.Item.Weight.Ignore, true);
+            elementProperties.Add(ElementStrings.Properties.ItemWeightIgnore, true);
 
             // act
             var itemProperties = new ItemProperties(elementProperties);

@@ -27,7 +27,7 @@ namespace Aurora.Engine.Data.Tests
         {
             // arrange
             var enhancementValue = 2;
-            elementProperties.Add(ElementStrings.Properties.Enhancement.Value, enhancementValue);
+            elementProperties.Add(ElementStrings.Properties.EnhancementValue, enhancementValue);
 
             // act
             var enhancementProperties = new EnhancementProperties(elementProperties);
@@ -52,7 +52,7 @@ namespace Aurora.Engine.Data.Tests
         {
             // arrange
             var enhancementValue = 2;
-            elementProperties.Add(ElementStrings.Properties.Enhancement.Value, enhancementValue);
+            elementProperties.Add(ElementStrings.Properties.EnhancementValue, enhancementValue);
 
             // act
             var enhancementProperties = new EnhancementProperties(elementProperties);

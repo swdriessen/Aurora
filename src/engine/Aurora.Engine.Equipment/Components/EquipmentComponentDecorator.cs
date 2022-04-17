@@ -35,9 +35,10 @@ namespace Aurora.Engine.Equipment.Components
 
         public override string GetDisplayName()
         {
-            if (Element.Properties.TryGetValue(ElementStrings.Properties.Item.NameFormatting, out object? value) && value is string nameFormat)
+            if (Element.Properties.ContainsProperty(ElementStrings.Properties.ItemNameFormat))
             {
-                return nameFormat.ReplaceInline(ReplacementStrings.Parent, parentComponent.GetDisplayName());
+                return Element.Properties.GetPropertyAs(ElementStrings.Properties.ItemNameFormat, Element.Name)
+                    .ReplaceInline(ReplacementStrings.Parent, parentComponent.GetDisplayName());
             }
 
             // when there is no formatted name provided, use the name of the decorator e.g. "Flametongue"
