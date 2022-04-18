@@ -22,6 +22,11 @@ namespace Aurora.Engine.Data
             get { return properties.Get(ElementStrings.Properties.WeaponProperties, string.Empty); }
         }
 
+        private string SpecialProperties
+        {
+            get { return properties.Get(ElementStrings.Properties.WeaponPropertiesSpecial, string.Empty); }
+        }
+
         private string Group
         {
             get { return properties.Get(ElementStrings.Properties.WeaponGroup, string.Empty); }
@@ -46,6 +51,14 @@ namespace Aurora.Engine.Data
         public IEnumerable<string> GetWeaponProperties()
         {
             return Properties.Split(ElementStrings.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        /// <summary>
+        /// Gets a list of special weapon properties.
+        /// </summary>
+        public IEnumerable<string> GetSpecialWeaponProperties()
+        {
+            return SpecialProperties.Split(ElementStrings.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         }
 
         /// <summary>

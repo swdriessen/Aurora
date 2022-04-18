@@ -112,6 +112,52 @@ namespace Aurora.Engine.Data.Tests
             Assert.IsTrue(activeProperties.Contains(property2));
         }
 
+        //special properties
+
+        [TestMethod]
+        public void WeaponProperties_ShouldHaveNoSpecialProperties_WhenPropertyIsOmitted()
+        {
+            // arrange
+            // act
+            var properties = new WeaponProperties(elementProperties);
+
+            // assert
+            var specialProperties = properties.GetSpecialWeaponProperties();
+            Assert.AreEqual(0, specialProperties.Count());
+        }
+
+        [TestMethod]
+        public void WeaponProperties_ShouldReturnSpecialProperty_WhenPropertyIsSet()
+        {
+            // arrange
+            var property1 = "ID_WEAPON_PROPERTY_SPECIAL";
+            elementProperties.Set(ElementStrings.Properties.WeaponPropertiesSpecial, property1);
+
+            // act
+            var properties = new WeaponProperties(elementProperties);
+
+            // assert
+            var specialProperties = properties.GetSpecialWeaponProperties();
+            Assert.IsTrue(specialProperties.Contains(property1));
+        }
+
+        [TestMethod]
+        public void WeaponProperties_ShouldReturnSpecialProperties_WhenPropertyIsSetMultipleTimes()
+        {
+            // arrange
+            var property1 = "ID_WEAPON_PROPERTY_SPECIAL_ONE";
+            var property2 = "ID_WEAPON_PROPERTY_SPECIAL_TWO";
+            elementProperties.Set(ElementStrings.Properties.WeaponPropertiesSpecial, $"{property1};{property2}");
+
+            // act
+            var properties = new WeaponProperties(elementProperties);
+
+            // assert
+            var specialProperties = properties.GetSpecialWeaponProperties();
+            Assert.IsTrue(specialProperties.Contains(property1));
+            Assert.IsTrue(specialProperties.Contains(property2));
+        }
+
         //groups
 
         [TestMethod]

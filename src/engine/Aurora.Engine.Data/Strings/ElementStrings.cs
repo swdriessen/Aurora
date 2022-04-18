@@ -44,6 +44,7 @@
 
             public const string WeaponProficiency = "weapon.proficiency";
             public const string WeaponProperties = "weapon.properties";
+            public const string WeaponPropertiesSpecial = "weapon.properties.special";
             public const string WeaponGroup = "weapon.group";
             public const string WeaponRange = "weapon.range";
 
