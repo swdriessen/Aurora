@@ -19,7 +19,7 @@ namespace Aurora.Engine.Data
 
         public IEnumerable<string> GetProficiencies()
         {
-            return Proficiency.Split(ElementStrings.Properties.PropertiesSeparator);
+            return Proficiency.Split(ElementStrings.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }

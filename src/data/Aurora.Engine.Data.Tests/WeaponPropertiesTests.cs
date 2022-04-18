@@ -22,6 +22,18 @@ namespace Aurora.Engine.Data.Tests
         }
 
         [TestMethod]
+        public void WeaponProperties_ShouldHaveNoProficiencies_WhenPropertyIsOmitted()
+        {
+            // arrange
+            // act
+            var properties = new WeaponProperties(elementProperties);
+
+            // assert
+            var proficiencies = properties.GetProficiencies();
+            Assert.AreEqual(0, proficiencies.Count());
+        }
+
+        [TestMethod]
         public void WeaponProperties_ShouldReturnProficiency_WhenPropertyIsSet()
         {
             // arrange
