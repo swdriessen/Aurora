@@ -7,12 +7,6 @@ namespace Aurora.Engine.Utilities.Tests
     {
         private AbbreviationGenerator generator = new();
 
-        [TestInitialize]
-        public void Initalize()
-        {
-            generator = new AbbreviationGenerator(options => { options.MinimumLength = 2; });
-        }
-
         [TestMethod]
         public void Abbreviation_ShouldContainsTwoCharacters_WhenOneWordInputIsProvided()
         {
@@ -84,8 +78,8 @@ namespace Aurora.Engine.Utilities.Tests
         {
             // arrange
             var input1 = "Dungeon Master's Guide";
-            var input2 = "Unearthed Arcana: Guide";
-            var input3 = "Unearthed Arcana :Guide";
+            var input2 = "Baldur's Gate: Descent into Avernus";
+            var input3 = "One-Two Source";
 
             // act
             var output1 = generator.Generate(input1);
@@ -94,8 +88,26 @@ namespace Aurora.Engine.Utilities.Tests
 
             // assert
             Assert.AreEqual("DMG", output1);
-            Assert.AreEqual("UAG", output2);
-            Assert.AreEqual("UAG", output3);
+            Assert.AreEqual("BGDIA", output2);
+            Assert.AreEqual("OTS", output3);
+        }
+
+        [TestMethod]
+        public void Abbreviation_ShouldNotAbbreviate_WhenListedInExceptions()
+        {
+            // arrange
+            var input = "Internal";
+            generator = new AbbreviationGenerator(options =>
+            {
+                options.MaximumLength = 4;
+                options.Exceptions.Add("Internal");
+            });
+
+            // act
+            var output = generator.Generate(input);
+
+            // assert
+            Assert.AreEqual("INTERNAL", output);
         }
     }
 }

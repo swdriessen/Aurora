@@ -4,9 +4,19 @@
     {
         private readonly Options options = new();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AbbreviationGenerator"/> class for use to generate abbreviations used in element identifiers.
+        /// </summary>
+        /// <param name="configure"></param>
+        /// <exception cref="InvalidOperationException"></exception>
         public AbbreviationGenerator(Action<Options>? configure = null)
         {
             configure?.Invoke(options);
+
+            if (options.MinimumLength < 2)
+            {
+                throw new InvalidOperationException("The minimum length of an abbreviation should be set to two.");
+            }
         }
 
         /// <summary>
@@ -28,7 +38,7 @@
 
             if (parts.Length == 1)
             {
-                output = parts[0][..options.MinimumLength];
+                output = parts[0].Length < options.MinimumLength ? parts[0] : parts[0][..options.MinimumLength];
             }
             else
             {
@@ -48,12 +58,12 @@
         public class Options
         {
             /// <summary>
-            /// Gets or sets the minimum length of the abbreviation to generate.
+            /// Gets or sets the minimum length of the abbreviation to generate. (Default is 2)
             /// </summary>
             public int MinimumLength { get; set; } = 2;
 
             /// <summary>
-            /// Gets or sets the maximum length of the abbreviation to generate.
+            /// Gets or sets the maximum length of the abbreviation to generate. (Default is 6)
             /// </summary>
             public int MaximumLength { get; set; } = 6;
 
