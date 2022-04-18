@@ -17,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "projects", "projects", "{5E
 		..\docs\projects\equipment.md = ..\docs\projects\equipment.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Data", "data\Aurora.Engine.Data\Aurora.Engine.Data.csproj", "{C8500904-2381-4E00-86E7-6CA8E132A1A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Data", "engine\Aurora.Engine.Data\Aurora.Engine.Data.csproj", "{C8500904-2381-4E00-86E7-6CA8E132A1A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Data.Tests", "data\Aurora.Engine.Data.Tests\Aurora.Engine.Data.Tests.csproj", "{96A4BCC3-CBE2-4051-A102-CC096056F2B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Data.Tests", "engine\Aurora.Engine.Data.Tests\Aurora.Engine.Data.Tests.csproj", "{96A4BCC3-CBE2-4051-A102-CC096056F2B2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Utilities", "engine\Aurora.Engine.Utilities\Aurora.Engine.Utilities.csproj", "{698A74AE-2D80-4FEB-B075-F3DB9EA596E1}"
 EndProject

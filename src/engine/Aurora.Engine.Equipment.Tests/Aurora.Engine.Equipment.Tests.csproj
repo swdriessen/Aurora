@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\data\Aurora.Engine.Data\Aurora.Engine.Data.csproj" />
+    <ProjectReference Include="..\Aurora.Engine.Data\Aurora.Engine.Data.csproj" />
     <ProjectReference Include="..\Aurora.Engine.Equipment\Aurora.Engine.Equipment.csproj" />
   </ItemGroup>
 
