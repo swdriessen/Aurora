@@ -12,7 +12,6 @@ namespace Aurora.Engine.Data.Extensions
         /// <param name="value">The value of the property.</param>
         public static void AddProperty(this ElementModel model, string name, object value)
         {
-            //model.Properties.Add(new ElementPropertyModel() { Name = name, Value = value });
             model.Properties.Add(name, value);
         }
 

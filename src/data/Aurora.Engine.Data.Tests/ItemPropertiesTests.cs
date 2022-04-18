@@ -34,65 +34,30 @@ namespace Aurora.Engine.Data.Tests
         }
 
         [TestMethod]
-        public void ItemProperties_ShouldHaveWeightValueSet_WhenPropertyIsSet()
+        public void ItemProperties_ShouldReturnDefaultRarity_WhenNotSet()
         {
-            // arrange
-            elementProperties.Add(ElementStrings.Properties.ItemWeight, 3);
-
+            // arrange            
             // act
-            var itemProperties = new ItemProperties(elementProperties);
+            var properties = new ItemProperties(elementProperties);
 
             // assert
-            Assert.AreEqual(3, itemProperties.WeightValue);
+            Assert.IsFalse(elementProperties.Contains("item.rarity"));
+            Assert.AreEqual(string.Empty, properties.Rarity, "Expected the rarity to default to an empty string.");
         }
 
         [TestMethod]
-        public void ItemProperties_ShouldHaveDefaultWeightUnit_WhenPropertyIsNotSet()
+        public void ItemProperties_ShouldReturnExpectedRarity_WhenValueProvided()
         {
             // arrange
-            // act
-            var itemProperties = new ItemProperties(elementProperties);
-
-            // assert
-            Assert.AreEqual(string.Empty, itemProperties.WeightUnit);
-        }
-
-        [TestMethod]
-        public void ItemProperties_ShouldHaveWeightUnitSet_WhenPropertyIsSet()
-        {
-            // arrange
-            var poundsUnit = "lb.";
-            elementProperties.Add(ElementStrings.Properties.ItemWeightUnit, poundsUnit);
+            var rarity = "Very Rare";
+            elementProperties.Add(ElementStrings.Properties.ItemRarity, rarity);
 
             // act
-            var itemProperties = new ItemProperties(elementProperties);
+            var properties = new ItemProperties(elementProperties);
 
             // assert
-            Assert.AreEqual(poundsUnit, itemProperties.WeightUnit);
+            Assert.AreEqual(rarity, properties.Rarity);
         }
 
-        [TestMethod]
-        public void ItemProperties_ShouldHaveDefaultWeightIgnore_WhenPropertyIsNotSet()
-        {
-            // arrange
-            // act
-            var itemProperties = new ItemProperties(elementProperties);
-
-            // assert
-            Assert.IsFalse(itemProperties.WeightIgnore);
-        }
-
-        [TestMethod]
-        public void ItemProperties_ShouldHaveWeightIgnoreSet_WhenPropertyIsSet()
-        {
-            // arrange
-            elementProperties.Add(ElementStrings.Properties.ItemWeightIgnore, true);
-
-            // act
-            var itemProperties = new ItemProperties(elementProperties);
-
-            // assert
-            Assert.IsTrue(itemProperties.WeightIgnore);
-        }
     }
 }

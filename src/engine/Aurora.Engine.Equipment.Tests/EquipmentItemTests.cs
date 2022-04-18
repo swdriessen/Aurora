@@ -79,7 +79,7 @@ namespace Aurora.Engine.Equipment.Tests
                 Name = "Magic Weapon"
             };
             magicWeapon.Properties.AddItemNameFormattingProperty("Magic {{parent}}");
-            magicWeapon.Properties.AddProperty(ElementStrings.Properties.EnhancementValue, 1);
+            magicWeapon.Properties.Add(ElementStrings.Properties.EnhancementValue, 1);
 
             // act
             equipmentItem.Decorate(magicWeapon);
@@ -99,7 +99,7 @@ namespace Aurora.Engine.Equipment.Tests
                 Name = "Magic Weapon"
             };
             magicWeapon.Properties.AddItemNameFormattingProperty("Magic {{parent}}");
-            magicWeapon.Properties.AddProperty(ElementStrings.Properties.EnhancementValue, 1);
+            magicWeapon.Properties.Add(ElementStrings.Properties.EnhancementValue, 1);
 
             // act
             equipmentItem.Decorate(magicWeapon);

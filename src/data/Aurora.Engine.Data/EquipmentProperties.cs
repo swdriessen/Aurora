@@ -20,30 +20,23 @@ namespace Aurora.Engine.Data
 
         public EnhancementProperties EnhancementProperties { get; }
 
-        public int GetEquipmentCostValue()
-        {
-            return properties.GetPropertyAs(ElementStrings.Properties.ItemCost, 0);
-        }
-
-        public string GetEquipmentCostCurrency()
-        {
-            return properties.GetPropertyAs(ElementStrings.Properties.ItemCostCurrency, string.Empty).Trim();
-        }
+        public int Cost => ItemProperties.Cost;
+        public string Currency => ItemProperties.CostCurrency;
 
         public string GetDisplayCost()
         {
             // when a format is provided, use it instead of the default one
-            if (properties.ContainsProperty(ElementStrings.Properties.ItemCostFormat))
+            if (properties.Contains(ElementStrings.Properties.ItemCostFormat))
             {
                 return GetFormattedDisplayCost();
             }
 
-            return $"{GetEquipmentCostValue()} {GetEquipmentCostCurrency()}";
+            return $"{Cost} {Currency}";
         }
 
         private string GetFormattedDisplayCost()
         {
-            var displayFormat = properties.GetPropertyAs(ElementStrings.Properties.ItemCostFormat, ElementStrings.Properties.ItemCostFormatDefault);
+            var displayFormat = properties.Get(ElementStrings.Properties.ItemCostFormat, ElementStrings.Properties.ItemCostFormatDefault);
 
             displayFormat = displayFormat.ReplaceInline(GetReplacementDictionary());
 
@@ -59,8 +52,8 @@ namespace Aurora.Engine.Data
         {
             return new Dictionary<string, object>
             {
-                { ElementStrings.Properties.ItemCost, GetEquipmentCostValue() },
-                { ElementStrings.Properties.ItemCostCurrency, GetEquipmentCostCurrency() }
+                { ElementStrings.Properties.ItemCost, Cost },
+                { ElementStrings.Properties.ItemCostCurrency, Currency }
             };
         }
     }

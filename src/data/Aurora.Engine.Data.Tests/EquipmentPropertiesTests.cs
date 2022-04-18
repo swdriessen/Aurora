@@ -11,60 +11,7 @@ namespace Aurora.Engine.Data.Tests
         private readonly ElementPropertiesModel properties = new();
 
         [TestMethod]
-        public void EquipmentProperties_ShouldReturnCostValue_WhenPopulatedWithElementProperties()
-        {
-            // arrange
-            properties.Add(ElementStrings.Properties.ItemCost, 15);
-
-            // act
-            var equipmentProperties = new EquipmentProperties(properties);
-
-            // assert
-            Assert.AreEqual(15, equipmentProperties.GetEquipmentCostValue());
-        }
-
-        [TestMethod]
-        public void EquipmentProperties_ShouldReturnDefaultCostValue_WhenNoValueIsProvided()
-        {
-            // arrange
-            // ...
-
-            // act
-            var equipmentProperties = new EquipmentProperties(properties);
-
-            // assert
-            Assert.IsFalse(properties.ContainsProperty(ElementStrings.Properties.ItemCost));
-            Assert.AreEqual(0, equipmentProperties.GetEquipmentCostValue());
-        }
-
-        [TestMethod]
-        public void EquipmentProperties_ShouldReturnCostCurrency_WhenValueProvided()
-        {
-            // arrange
-            properties.Add(ElementStrings.Properties.ItemCostCurrency, "gp");
-
-            // act
-            var equipmentProperties = new EquipmentProperties(properties);
-
-            // assert
-            Assert.AreEqual("gp", equipmentProperties.GetEquipmentCostCurrency());
-        }
-
-        [TestMethod]
-        public void EquipmentProperties_ShouldReturnTrimmedCostCurrency_WhenValueWithTrailingSpacesProvided()
-        {
-            // arrange
-            properties.Add(ElementStrings.Properties.ItemCostCurrency, " gp ");
-
-            // act
-            var equipmentProperties = new EquipmentProperties(properties);
-
-            // assert
-            Assert.AreEqual("gp", equipmentProperties.GetEquipmentCostCurrency());
-        }
-
-        [TestMethod]
-        public void EquipmentProperties_ShouldReturnDisplayCost_WhenPopulatedWithElementProperties()
+        public void ItemProperties_ShouldReturnDisplayCost_WhenPopulatedWithElementProperties()
         {
             // arrange
             properties.Add(ElementStrings.Properties.ItemCost, 100);
@@ -78,7 +25,7 @@ namespace Aurora.Engine.Data.Tests
         }
 
         [TestMethod]
-        public void EquipmentProperties_ShouldReturnDisplayCost_WhenProvidingACustomDisplayFormat()
+        public void ItemProperties_ShouldReturnDisplayCost_WhenProvidingACustomDisplayFormat()
         {
             // arrange
             properties.Add(ElementStrings.Properties.ItemCost, 1);
@@ -93,7 +40,7 @@ namespace Aurora.Engine.Data.Tests
         }
 
         [TestMethod]
-        public void EquipmentProperties_ShouldThrowException_WhenUnknownDisplayFormatConstantsAreProvided()
+        public void ItemProperties_ShouldThrowException_WhenUnknownDisplayFormatConstantsAreProvided()
         {
             // arrange
             properties.Add(ElementStrings.Properties.ItemCost, 1);
