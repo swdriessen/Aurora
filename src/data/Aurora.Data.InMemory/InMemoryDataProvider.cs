@@ -16,6 +16,7 @@ namespace Aurora.Data.InMemory
             LoadCurrencyTypes();
             LoadDamageTypes();
             LoadWeaponPropertyTypes();
+            LoadWeaponGroupTypes();
             LoadWeapons();
             LoadMagicItems();
 
@@ -101,7 +102,7 @@ namespace Aurora.Data.InMemory
 
         private void LoadDamageTypes()
         {
-            var names = new List<string> { "Slashing", "Bludgeoning", "Piercing" };
+            var names = new List<string> { "Slashing", "Bludgeoning", "Piercing", "Cold" };
 
             names.ForEach(name =>
             {
@@ -115,6 +116,16 @@ namespace Aurora.Data.InMemory
             names.ForEach(name =>
             {
                 elements.Add(new ElementModel() { Name = name, Type = "Weapon Property" });
+            });
+        }
+
+        private void LoadWeaponGroupTypes()
+        {
+            var names = new List<string> { "Swords", "Bows" };
+
+            names.ForEach(name =>
+            {
+                elements.Add(new ElementModel() { Name = name, Type = "Weapon Group" });
             });
         }
 
@@ -135,6 +146,7 @@ namespace Aurora.Data.InMemory
                         { "damage.type", "Slashing" },
                         { "weapon.proficiency", "Longsword" },
                         { "weapon.properties", "Versatile" },
+                        { "weapon.group", "Swords" },
                     }
                 },
                 new ElementModel()
@@ -151,6 +163,7 @@ namespace Aurora.Data.InMemory
                         { "weapon.proficiency", "Longbow" },
                         { "weapon.properties", "Ammunition;Heavy;Two-Handed" },
                         { "weapon.range", "150/600" },
+                        { "weapon.group", "Bows" },
                     }
                 }
             };
@@ -181,13 +194,28 @@ namespace Aurora.Data.InMemory
                         { "item.name_format", "{{parent}}" },
                     }
                 },
+                /*
+Frost Brand 
+Weapon (any sword), very rare (requires attunement) 
+When you hit with an attack using this magic sword, the target takes an extra 1d6 cold damage. In addition, while you hold the sword, you have resistance to fire damage. 
+In freezing temperatures, the blade sheds bright light in a 10-­‐‑foot radius and dim light for an additional 10 feet. 
+When you draw this weapon, you can extinguish all nonmagical flames within 30 feet of you. This property can be used no more than once per hour.
+                 */
                 new ElementModel()
                 {
                     Name = "Frost Brand",
                     Properties = new()
                     {
-                        { "enhancement.target", "Weapon" },
+                        { "weapon", "any sword" },
+                        { "weapon.target", "ID_WEAPON_GROUP_SWORD" },
+                        { "attunement", true },
+                        { "item.rarity", "Very Rare" },
+                        { "damage", "extra 1d6 cold damage" },
+                        { "damage.die.quantity", 1 },
+                        { "damage.die.size", 6 },
+                        { "damage.type", "Cold" },
                     }
+                    //resistance to fire damage
                 }
             };
 
