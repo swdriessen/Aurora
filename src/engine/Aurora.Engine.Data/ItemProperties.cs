@@ -53,5 +53,15 @@ namespace Aurora.Engine.Data
             get { return properties.Get(ElementConstants.Properties.ItemRarity, ""); }
             //set { properties.Set(ElementStrings.Properties.ItemRarity, value); }
         }
+
+        public bool Extractable
+        {
+            get { return properties.Get(ElementConstants.Properties.ItemExtractable, false); }
+        }
+
+        public bool Consumable
+        {
+            get { return properties.Get(ElementConstants.Properties.ItemConsumable, false); }
+        }
     }
 }

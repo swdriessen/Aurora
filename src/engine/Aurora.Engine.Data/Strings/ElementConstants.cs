@@ -59,6 +59,8 @@
             public const string ItemCategory = "item.category";
             public const string ItemType = "item.type";
             public const string ItemStackable = "item.stackable";
+            public const string ItemExtractable = "item.extractable";
+            public const string ItemConsumable = "item.consumable";
             public const string ItemNameFormat = "item.name_format";
             public const string ItemRarity = "item.rarity";
 

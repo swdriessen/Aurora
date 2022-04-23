@@ -59,5 +59,52 @@ namespace Aurora.Engine.Data.Tests
             Assert.AreEqual(rarity, properties.Rarity);
         }
 
+        [TestMethod]
+        public void ItemProperties_ShouldHaveDefaultExtractable_WhenPropertyIsOmitted()
+        {
+            // arrange
+            // act
+            var itemProperties = new ItemProperties(elementProperties);
+
+            // assert
+            Assert.IsFalse(itemProperties.Extractable);
+        }
+
+        [TestMethod]
+        public void ItemProperties_ShouldHaveExtractableSetToTrue_WhenPropertyIsSet()
+        {
+            // arrange
+            elementProperties.Add(ElementConstants.Properties.ItemExtractable, true);
+
+            // act
+            var itemProperties = new ItemProperties(elementProperties);
+
+            // assert
+            Assert.IsTrue(itemProperties.Extractable);
+        }
+
+        [TestMethod]
+        public void ItemProperties_ShouldHaveDefaultConsumable_WhenPropertyIsOmitted()
+        {
+            // arrange
+            // act
+            var itemProperties = new ItemProperties(elementProperties);
+
+            // assert
+            Assert.IsFalse(itemProperties.Consumable);
+        }
+
+        [TestMethod]
+        public void ItemProperties_ShouldHaveConsumableSetToTrue_WhenPropertyIsSet()
+        {
+            // arrange
+            elementProperties.Add(ElementConstants.Properties.ItemConsumable, true);
+
+            // act
+            var itemProperties = new ItemProperties(elementProperties);
+
+            // assert
+            Assert.IsTrue(itemProperties.Consumable);
+        }
     }
 }
