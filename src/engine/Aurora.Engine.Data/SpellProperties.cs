@@ -77,7 +77,12 @@ namespace Aurora.Engine.Data
         ///// </summary>
         public IEnumerable<string> GetSpellcasters()
         {
-            return Spellcasters
+            return SplitDistinct(Spellcasters);
+        }
+
+        private static IEnumerable<string> SplitDistinct(string input)
+        {
+            return input
                 .Split(ElementConstants.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
                 .Distinct();
         }

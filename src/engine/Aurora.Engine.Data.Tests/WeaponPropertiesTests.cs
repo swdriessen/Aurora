@@ -66,6 +66,24 @@ namespace Aurora.Engine.Data.Tests
             Assert.IsTrue(proficiencies.Contains(proficiency2));
         }
 
+        [TestMethod]
+        public void WeaponProperties_ShouldHaveNoDuplicateProficiencies_WhenPropertyIsSetMultipleTimes()
+        {
+            // arrange
+            var proficiency1 = "ID_PROFICIENCY_LONGSWORD";
+            var proficiency2 = "ID_PROFICIENCY_CUSTOM_LONGSWORD";
+            elementProperties.Set(ElementConstants.Properties.WeaponProficiency, $"{proficiency1};{proficiency1};{proficiency2}");
+
+            // act
+            var properties = new WeaponProperties(elementProperties);
+
+            // assert
+            var proficiencies = properties.GetWeaponProficiencies();
+            Assert.AreEqual(2, proficiencies.Count());
+            Assert.IsTrue(proficiencies.Contains(proficiency1));
+            Assert.IsTrue(proficiencies.Contains(proficiency2));
+        }
+
         //properties
 
         [TestMethod]
@@ -108,6 +126,24 @@ namespace Aurora.Engine.Data.Tests
 
             // assert
             var activeProperties = properties.GetWeaponProperties();
+            Assert.IsTrue(activeProperties.Contains(property1));
+            Assert.IsTrue(activeProperties.Contains(property2));
+        }
+
+        [TestMethod]
+        public void WeaponProperties_ShouldHaveNoDuplicateProperties_WhenPropertyIsSetMultipleTimes()
+        {
+            // arrange
+            var property1 = "ID_WEAPON_PROPERTY_VERSATILE";
+            var property2 = "ID_WEAPON_PROPERTY_HEAVY";
+            elementProperties.Set(ElementConstants.Properties.WeaponProperties, $"{property1};{property1};{property2}");
+
+            // act
+            var properties = new WeaponProperties(elementProperties);
+
+            // assert
+            var activeProperties = properties.GetWeaponProperties();
+            Assert.AreEqual(2, activeProperties.Count());
             Assert.IsTrue(activeProperties.Contains(property1));
             Assert.IsTrue(activeProperties.Contains(property2));
         }
@@ -158,6 +194,24 @@ namespace Aurora.Engine.Data.Tests
             Assert.IsTrue(specialProperties.Contains(property2));
         }
 
+        [TestMethod]
+        public void WeaponProperties_ShouldHaveNoDuplicateSpecialProperties_WhenPropertyIsSetMultipleTimes()
+        {
+            // arrange
+            var property1 = "ID_WEAPON_PROPERTY_SPECIAL_ONE";
+            var property2 = "ID_WEAPON_PROPERTY_SPECIAL_TWO";
+            elementProperties.Set(ElementConstants.Properties.WeaponPropertiesSpecial, $"{property1};{property1};{property2}");
+
+            // act
+            var properties = new WeaponProperties(elementProperties);
+
+            // assert
+            var specialProperties = properties.GetSpecialWeaponProperties();
+            Assert.AreEqual(2, specialProperties.Count());
+            Assert.IsTrue(specialProperties.Contains(property1));
+            Assert.IsTrue(specialProperties.Contains(property2));
+        }
+
         //groups
 
         [TestMethod]
@@ -185,6 +239,24 @@ namespace Aurora.Engine.Data.Tests
 
             // assert
             var activeProperties = properties.GetWeaponGroups();
+            Assert.IsTrue(activeProperties.Contains(group1));
+            Assert.IsTrue(activeProperties.Contains(group2));
+        }
+
+        [TestMethod]
+        public void WeaponProperties_ShouldHaveNoDuplicateWeaponGroups_WhenPropertyIsSetMultipleTimes()
+        {
+            // arrange
+            var group1 = "ID_WEAPON_GROUP_SWORDS";
+            var group2 = "ID_WEAPON_GROUP_AXES";
+            elementProperties.Set(ElementConstants.Properties.WeaponGroup, $"{group1};{group1};{group2}");
+
+            // act
+            var properties = new WeaponProperties(elementProperties);
+
+            // assert
+            var activeProperties = properties.GetWeaponGroups();
+            Assert.AreEqual(2, activeProperties.Count());
             Assert.IsTrue(activeProperties.Contains(group1));
             Assert.IsTrue(activeProperties.Contains(group2));
         }
