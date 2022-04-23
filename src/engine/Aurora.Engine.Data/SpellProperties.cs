@@ -77,7 +77,9 @@ namespace Aurora.Engine.Data
         ///// </summary>
         public IEnumerable<string> GetSpellcasters()
         {
-            return Spellcasters.Split(ElementConstants.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            return Spellcasters
+                .Split(ElementConstants.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+                .Distinct();
         }
     }
 }

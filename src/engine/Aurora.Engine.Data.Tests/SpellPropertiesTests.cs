@@ -288,7 +288,8 @@ namespace Aurora.Engine.Data.Tests
             var properties = new SpellProperties(elementProperties);
 
             // assert
-            Assert.AreEqual(0, properties.GetSpellcasters().Count());
+            var spellcasters = properties.GetSpellcasters();
+            Assert.AreEqual(0, spellcasters.Count());
         }
 
         [TestMethod]
@@ -306,6 +307,24 @@ namespace Aurora.Engine.Data.Tests
             Assert.AreEqual(3, spellcasters.Count());
             Assert.IsTrue(spellcasters.Contains("ID_SPELLCASTER_SORCERER"));
             Assert.IsTrue(spellcasters.Contains("ID_SPELLCASTER_WIZARD"));
+            Assert.IsTrue(spellcasters.Contains("ID_SPELLCASTER_WARLOCK"));
+        }
+
+
+        [TestMethod]
+        public void SpellProperties_ShouldHaveNoDuplicatedSpellcasters_WhenPropertyIsSet()
+        {
+            // arrange
+            var casters = "ID_SPELLCASTER_SORCERER;ID_SPELLCASTER_SORCERER;ID_SPELLCASTER_WARLOCK";
+            elementProperties.Set(ElementConstants.SpellProperties.Spellcasters, casters);
+
+            // act
+            var properties = new SpellProperties(elementProperties);
+
+            // assert
+            var spellcasters = properties.GetSpellcasters();
+            Assert.AreEqual(2, spellcasters.Count(), "Expected no duplicated entries.");
+            Assert.IsTrue(spellcasters.Contains("ID_SPELLCASTER_SORCERER"));
             Assert.IsTrue(spellcasters.Contains("ID_SPELLCASTER_WARLOCK"));
         }
     }
