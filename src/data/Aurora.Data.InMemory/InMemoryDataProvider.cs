@@ -23,6 +23,7 @@ namespace Aurora.Data.InMemory
             LoadWeaponGroupTypes();
             LoadWeapons();
             LoadMagicItems();
+            LoadSpells();
 
             elements.ForEach(element =>
             {
@@ -75,7 +76,6 @@ namespace Aurora.Data.InMemory
                 order++;
             });
         }
-
         private void LoadSkillTypes()
         {
             var skills = new List<ElementModel>
@@ -236,8 +236,6 @@ namespace Aurora.Data.InMemory
 
             elements.AddRange(skills);
         }
-
-
         private void LoadCurrencyTypes()
         {
             var currencyTypes = new List<ElementModel>();
