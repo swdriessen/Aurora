@@ -310,7 +310,6 @@ namespace Aurora.Engine.Data.Tests
             Assert.IsTrue(spellcasters.Contains("ID_SPELLCASTER_WARLOCK"));
         }
 
-
         [TestMethod]
         public void SpellProperties_ShouldHaveNoDuplicatedSpellcasters_WhenPropertyIsSet()
         {
@@ -326,6 +325,63 @@ namespace Aurora.Engine.Data.Tests
             Assert.AreEqual(2, spellcasters.Count(), "Expected no duplicated entries.");
             Assert.IsTrue(spellcasters.Contains("ID_SPELLCASTER_SORCERER"));
             Assert.IsTrue(spellcasters.Contains("ID_SPELLCASTER_WARLOCK"));
+        }
+
+        [TestMethod]
+        public void SpellProperties_ShouldHaveCantripUnderline_WhenLevelIsZero()
+        {
+            // arrange
+            elementProperties.Set(ElementConstants.SpellProperties.Level, 0);
+            elementProperties.Set(ElementConstants.SpellProperties.MagicSchool, "Evocation");
+
+            // act
+            var properties = new SpellProperties(elementProperties);
+
+            // assert
+            Assert.AreEqual("Evocation cantrip", properties.GetUnderline());
+        }
+
+        [TestMethod]
+        public void SpellProperties_ShouldHave1stLevelEvocationUnderline_WhenPropertiesAreSet()
+        {
+            // arrange
+            elementProperties.Set(ElementConstants.SpellProperties.Level, 1);
+            elementProperties.Set(ElementConstants.SpellProperties.MagicSchool, "Evocation");
+
+            // act
+            var properties = new SpellProperties(elementProperties);
+
+            // assert
+            Assert.AreEqual("1st-level evocation", properties.GetUnderline());
+        }
+
+        [TestMethod]
+        public void SpellProperties_ShouldHave2rdLevelDivinationWithRitualUnderline_WhenPropertiesAreSet()
+        {
+            // arrange
+            elementProperties.Set(ElementConstants.SpellProperties.Level, 2);
+            elementProperties.Set(ElementConstants.SpellProperties.MagicSchool, "Divination");
+            elementProperties.Set(ElementConstants.SpellProperties.Ritual, true);
+
+            // act
+            var properties = new SpellProperties(elementProperties);
+
+            // assert
+            Assert.AreEqual("2nd-level divination (ritual)", properties.GetUnderline());
+        }
+
+        [TestMethod]
+        public void SpellProperties_ShouldHave3rdLevelEvocationUnderline_WhenPropertiesAreSet()
+        {
+            // arrange
+            elementProperties.Set(ElementConstants.SpellProperties.Level, 3);
+            elementProperties.Set(ElementConstants.SpellProperties.MagicSchool, "Evocation");
+
+            // act
+            var properties = new SpellProperties(elementProperties);
+
+            // assert
+            Assert.AreEqual("3rd-level evocation", properties.GetUnderline());
         }
     }
 }

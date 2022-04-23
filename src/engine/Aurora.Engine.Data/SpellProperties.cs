@@ -1,5 +1,6 @@
 ﻿using Aurora.Engine.Data.Models;
 using Aurora.Engine.Data.Strings;
+using Aurora.Engine.Utilities;
 
 namespace Aurora.Engine.Data
 {
@@ -78,6 +79,27 @@ namespace Aurora.Engine.Data
         public IEnumerable<string> GetSpellcasters()
         {
             return SplitDistinct(Spellcasters);
+        }
+
+        /// <summary>
+        /// Gets the spell underline which consists of the level of the spell and the magic school.
+        /// </summary>
+        /// <returns>The underline for the spell.</returns>
+        public string GetUnderline()
+        {
+            if (Level == 0)
+            {
+                return $"{MagicSchool} cantrip";
+            }
+
+            var output = $"{Level.ToOrdinalNumeral()}-level {MagicSchool}";
+
+            if (Ritual)
+            {
+                output += " (ritual)";
+            }
+
+            return output.ToLowerInvariant();
         }
 
         private static IEnumerable<string> SplitDistinct(string input)
