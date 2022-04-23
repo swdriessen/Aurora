@@ -1,5 +1,6 @@
 ﻿using Aurora.Engine.Data.Interfaces;
 using Aurora.Engine.Data.Models;
+using Aurora.Engine.Data.Strings;
 
 namespace Aurora.Data.InMemory
 {
@@ -13,6 +14,9 @@ namespace Aurora.Data.InMemory
         /// </summary>
         public InMemoryDataProvider()
         {
+            LoadAbilitiesTypes();
+            LoadSkillTypes();
+
             LoadCurrencyTypes();
             LoadDamageTypes();
             LoadWeaponPropertyTypes();
@@ -20,14 +24,16 @@ namespace Aurora.Data.InMemory
             LoadWeapons();
             LoadMagicItems();
 
-            elements.ForEach(element => element.Source = new ElementSourceModel() { Name = "System Reference Document" });
+            elements.ForEach(element =>
+            {
+                element.Source = new ElementSourceModel() { Name = "System Reference Document" };
+            });
         }
 
         public List<ElementModel> GetElements()
         {
             return elements;
         }
-
         public List<ElementModel> GetElements(string type)
         {
             if (!typedElements.ContainsKey(type))
@@ -38,6 +44,200 @@ namespace Aurora.Data.InMemory
             return typedElements[type];
         }
 
+        private void LoadAbilitiesTypes()
+        {
+            var names = new List<string> { "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma" };
+
+            var order = 1;
+            names.ForEach(name =>
+            {
+                elements.Add(new ElementModel()
+                {
+                    Name = name,
+                    Type = ElementTypeConstants.Ability,
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.SortingOrder, order },
+                    }
+                });
+
+                elements.Add(new ElementModel()
+                {
+                    Name = $"{name} Saving Throw",
+                    Type = ElementTypeConstants.SavingThrow,
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, name },
+                        { ElementConstants.Properties.SortingOrder, order },
+                    }
+                });
+
+                order++;
+            });
+        }
+
+        private void LoadSkillTypes()
+        {
+            var skills = new List<ElementModel>
+            {
+                new ElementModel()
+                {
+                    Name = "Athletics",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Strength" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Acrobatics",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Dexterity" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Sleight of Hand",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Dexterity" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Stealth",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Dexterity" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Arcana",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Intelligence" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "History",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Intelligence" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Investigation",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Intelligence" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Nature",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Intelligence" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Religion",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Intelligence" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Animal Handling",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Wisdom" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Insight",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Wisdom" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Medicine",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Wisdom" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Perception",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Wisdom" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Survival",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Wisdom" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Deception",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Charisma" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Intimidation",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Charisma" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Performance",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Charisma" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Persuasion",
+                    Properties = new()
+                    {
+                        { ElementConstants.Properties.Ability, "Charisma" },
+                    }
+                }
+            };
+
+            var order = 1;
+            skills.ForEach(e =>
+            {
+                e.Type = "Skill";
+                e.Properties.Add(ElementConstants.Properties.SortingOrder, order);
+                order++;
+            });
+
+            elements.AddRange(skills);
+        }
+
+
         private void LoadCurrencyTypes()
         {
             var currencyTypes = new List<ElementModel>();
@@ -47,7 +247,7 @@ namespace Aurora.Data.InMemory
                 Name = "Copper",
                 Properties = new()
                 {
-                    { "abbreviation", "cp" },
+                    { ElementConstants.Properties.Abbreviation, "cp" },
                     { "currency.rate", 0.01 }
                 }
             };
@@ -56,7 +256,7 @@ namespace Aurora.Data.InMemory
                 Name = "Silver",
                 Properties = new()
                 {
-                    { "abbreviation", "sp" },
+                    { ElementConstants.Properties.Abbreviation, "sp" },
                     { "currency.rate", 0.1 }
                 }
             };
@@ -65,7 +265,7 @@ namespace Aurora.Data.InMemory
                 Name = "Gold",
                 Properties = new()
                 {
-                    { "abbreviation", "gp" },
+                    { ElementConstants.Properties.Abbreviation, "gp" },
                     { "currency.rate", 1 }
                 }
             };
@@ -74,7 +274,7 @@ namespace Aurora.Data.InMemory
                 Name = "Platinum",
                 Properties = new()
                 {
-                    { "abbreviation", "pp" },
+                    { ElementConstants.Properties.Abbreviation, "pp" },
                     { "currency.rate", 10 }
                 }
             };
@@ -83,7 +283,7 @@ namespace Aurora.Data.InMemory
                 Name = "Electrum",
                 Properties = new()
                 {
-                    { "abbreviation", "ep" },
+                    { ElementConstants.Properties.Abbreviation, "ep" },
                     { "currency.rate", 0.5 }
                 }
             };
@@ -99,7 +299,6 @@ namespace Aurora.Data.InMemory
 
             elements.AddRange(currencyTypes);
         }
-
         private void LoadDamageTypes()
         {
             var names = new List<string> { "Slashing", "Bludgeoning", "Piercing", "Cold" };
@@ -118,7 +317,6 @@ namespace Aurora.Data.InMemory
                 elements.Add(new ElementModel() { Name = name, Type = "Weapon Property" });
             });
         }
-
         private void LoadWeaponGroupTypes()
         {
             var names = new List<string> { "Swords", "Bows" };
@@ -128,7 +326,6 @@ namespace Aurora.Data.InMemory
                 elements.Add(new ElementModel() { Name = name, Type = "Weapon Group" });
             });
         }
-
         private void LoadWeapons()
         {
             var weaponTypes = new List<ElementModel>
@@ -179,7 +376,6 @@ namespace Aurora.Data.InMemory
 
             elements.AddRange(weaponTypes);
         }
-
         private void LoadMagicItems()
         {
             var types = new List<ElementModel>
@@ -226,6 +422,47 @@ When you draw this weapon, you can extinguish all nonmagical flames within 30 fe
             });
 
             elements.AddRange(types);
+        }
+        private void LoadSpells()
+        {
+            var spells = new List<ElementModel>
+            {
+                new ElementModel()
+                {
+                    Name = "Fireball",
+                    Properties = new()
+                    {
+                        { ElementConstants.SpellProperties.CastingTime, "1 action" },
+                        { ElementConstants.SpellProperties.Range, "120 feet" },
+                        { ElementConstants.SpellProperties.Duration, "Instantaneous" },
+                        { ElementConstants.SpellProperties.SomaticComponent, true },
+                        { ElementConstants.SpellProperties.VerbalComponent, true },
+                        { ElementConstants.SpellProperties.MaterialComponent, true },
+                        { ElementConstants.SpellProperties.MaterialComponentDescription, "a brimstone" },
+                    }
+                },
+                new ElementModel()
+                {
+                    Name = "Iceball",
+                    Properties = new()
+                    {
+                        { ElementConstants.SpellProperties.CastingTime, "1 action" },
+                        { ElementConstants.SpellProperties.Range, "120 feet" },
+                        { ElementConstants.SpellProperties.Duration, "Instantaneous" },
+                        { ElementConstants.SpellProperties.SomaticComponent, true },
+                        { ElementConstants.SpellProperties.VerbalComponent, true },
+                        { ElementConstants.SpellProperties.MaterialComponent, true },
+                        { ElementConstants.SpellProperties.MaterialComponentDescription, "a snowflake" },
+                    }
+                }
+            };
+
+            spells.ForEach(e =>
+            {
+                e.Type = "Spell";
+            });
+
+            elements.AddRange(spells);
         }
     }
 }

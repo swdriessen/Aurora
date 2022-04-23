@@ -35,9 +35,9 @@ namespace Aurora.Engine.Equipment.Components
 
         public override string GetDisplayName()
         {
-            if (Element.Properties.Contains(ElementStrings.Properties.ItemNameFormat))
+            if (Element.Properties.Contains(ElementConstants.Properties.ItemNameFormat))
             {
-                return Element.Properties.Get(ElementStrings.Properties.ItemNameFormat, Element.Name)
+                return Element.Properties.Get(ElementConstants.Properties.ItemNameFormat, Element.Name)
                     .ReplaceInline(ReplacementStrings.Parent, parentComponent.GetDisplayName());
             }
 

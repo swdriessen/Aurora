@@ -14,8 +14,8 @@ namespace Aurora.Engine.Data.Tests
         public void ItemProperties_ShouldReturnDisplayCost_WhenPopulatedWithElementProperties()
         {
             // arrange
-            properties.Add(ElementStrings.Properties.ItemCost, 100);
-            properties.Add(ElementStrings.Properties.ItemCostCurrency, "cp");
+            properties.Add(ElementConstants.Properties.ItemCost, 100);
+            properties.Add(ElementConstants.Properties.ItemCostCurrency, "cp");
 
             // act
             var equipmentProperties = new EquipmentProperties(properties);
@@ -28,9 +28,9 @@ namespace Aurora.Engine.Data.Tests
         public void ItemProperties_ShouldReturnDisplayCost_WhenProvidingACustomDisplayFormat()
         {
             // arrange
-            properties.Add(ElementStrings.Properties.ItemCost, 1);
-            properties.Add(ElementStrings.Properties.ItemCostCurrency, "gp");
-            properties.Add(ElementStrings.Properties.ItemCostFormat, "{{item.cost}} {{item.cost.currency}} for a 10 pack");
+            properties.Add(ElementConstants.Properties.ItemCost, 1);
+            properties.Add(ElementConstants.Properties.ItemCostCurrency, "gp");
+            properties.Add(ElementConstants.Properties.ItemCostFormat, "{{item.cost}} {{item.cost.currency}} for a 10 pack");
 
             // act
             var equipmentProperties = new EquipmentProperties(properties);
@@ -43,9 +43,9 @@ namespace Aurora.Engine.Data.Tests
         public void ItemProperties_ShouldThrowException_WhenUnknownDisplayFormatConstantsAreProvided()
         {
             // arrange
-            properties.Add(ElementStrings.Properties.ItemCost, 1);
-            properties.Add(ElementStrings.Properties.ItemCostCurrency, "gp");
-            properties.Add(ElementStrings.Properties.ItemCostFormat, "{{item.cost.unknown}} format");
+            properties.Add(ElementConstants.Properties.ItemCost, 1);
+            properties.Add(ElementConstants.Properties.ItemCostCurrency, "gp");
+            properties.Add(ElementConstants.Properties.ItemCostFormat, "{{item.cost.unknown}} format");
 
             // act
             var equipmentProperties = new EquipmentProperties(properties);

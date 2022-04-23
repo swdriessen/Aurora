@@ -15,7 +15,7 @@ namespace Aurora.Engine.Data
 
         public int EnhancementValue
         {
-            get { return properties.Get(ElementStrings.Properties.EnhancementValue, 0); }
+            get { return properties.Get(ElementConstants.Properties.EnhancementValue, 0); }
             //set { properties[ElementStrings.Properties.EnhancementValue] = value; }
         }
 

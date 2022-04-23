@@ -25,7 +25,7 @@ namespace Aurora.Engine.Data.Tests
         {
             // arrange
             var cost = 15;
-            elementProperties.Add(ElementStrings.Properties.ItemCost, cost);
+            elementProperties.Add(ElementConstants.Properties.ItemCost, cost);
 
             // act
             var itemProperties = new ItemProperties(elementProperties);
@@ -52,7 +52,7 @@ namespace Aurora.Engine.Data.Tests
         {
             // arrange
             var currency = "sp"; //non-default currency
-            elementProperties.Add(ElementStrings.Properties.ItemCostCurrency, currency);
+            elementProperties.Add(ElementConstants.Properties.ItemCostCurrency, currency);
 
             // act
             var itemProperties = new ItemProperties(elementProperties);
@@ -66,7 +66,7 @@ namespace Aurora.Engine.Data.Tests
         {
             // arrange
             var currency = " gp ";
-            elementProperties.Add(ElementStrings.Properties.ItemCostCurrency, currency);
+            elementProperties.Add(ElementConstants.Properties.ItemCostCurrency, currency);
 
             // act
             var itemProperties = new ItemProperties(elementProperties);

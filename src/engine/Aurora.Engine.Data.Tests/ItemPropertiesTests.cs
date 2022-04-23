@@ -24,7 +24,7 @@ namespace Aurora.Engine.Data.Tests
         public void ItemProperties_ShouldHaveItemStackableSetToTrue_WhenPopulatedCorrectElementProperties()
         {
             // arrange
-            elementProperties.Add(ElementStrings.Properties.ItemStackable, true);
+            elementProperties.Add(ElementConstants.Properties.ItemStackable, true);
 
             // act
             var itemProperties = new ItemProperties(elementProperties);
@@ -50,7 +50,7 @@ namespace Aurora.Engine.Data.Tests
         {
             // arrange
             var rarity = "Very Rare";
-            elementProperties.Add(ElementStrings.Properties.ItemRarity, rarity);
+            elementProperties.Add(ElementConstants.Properties.ItemRarity, rarity);
 
             // act
             var properties = new ItemProperties(elementProperties);

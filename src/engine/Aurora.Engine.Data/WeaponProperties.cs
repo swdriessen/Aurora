@@ -14,27 +14,27 @@ namespace Aurora.Engine.Data
 
         public string Proficiency
         {
-            get { return properties.Get(ElementStrings.Properties.WeaponProficiency, string.Empty); }
+            get { return properties.Get(ElementConstants.Properties.WeaponProficiency, string.Empty); }
         }
 
         private string Properties
         {
-            get { return properties.Get(ElementStrings.Properties.WeaponProperties, string.Empty); }
+            get { return properties.Get(ElementConstants.Properties.WeaponProperties, string.Empty); }
         }
 
         private string SpecialProperties
         {
-            get { return properties.Get(ElementStrings.Properties.WeaponPropertiesSpecial, string.Empty); }
+            get { return properties.Get(ElementConstants.Properties.WeaponPropertiesSpecial, string.Empty); }
         }
 
         private string Group
         {
-            get { return properties.Get(ElementStrings.Properties.WeaponGroup, string.Empty); }
+            get { return properties.Get(ElementConstants.Properties.WeaponGroup, string.Empty); }
         }
 
         public string Range
         {
-            get { return properties.Get(ElementStrings.Properties.WeaponRange, string.Empty); }
+            get { return properties.Get(ElementConstants.Properties.WeaponRange, string.Empty); }
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Aurora.Engine.Data
         /// </summary>
         public IEnumerable<string> GetWeaponProficiencies()
         {
-            return Proficiency.Split(ElementStrings.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            return Proficiency.Split(ElementConstants.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Aurora.Engine.Data
         /// </summary>
         public IEnumerable<string> GetWeaponProperties()
         {
-            return Properties.Split(ElementStrings.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            return Properties.Split(ElementConstants.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Aurora.Engine.Data
         /// </summary>
         public IEnumerable<string> GetSpecialWeaponProperties()
         {
-            return SpecialProperties.Split(ElementStrings.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            return SpecialProperties.Split(ElementConstants.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Aurora.Engine.Data
         /// </summary>
         public IEnumerable<string> GetWeaponGroups()
         {
-            return Group.Split(ElementStrings.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            return Group.Split(ElementConstants.Properties.PropertiesSeparator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }

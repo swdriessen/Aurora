@@ -1,7 +1,41 @@
 ﻿namespace Aurora.Engine.Data.Strings
 {
-    public static class ElementStrings
+    public static partial class ElementConstants
     {
+        public static partial class Properties
+        {
+            public const string Abbreviation = "abbreviation";
+
+            //abilities
+            public const string Ability = "ability";
+        }
+
+        // sorting
+        public static partial class Properties
+        {
+            public const string SortingOrder = "sort.order";
+        }
+
+        public static partial class SpellProperties
+        {
+            public const string Level = "spell.level";
+            public const string MagicSchool = "spell.magic_school";
+
+            public const string CastingTime = "spell.casting_time";
+            public const string Range = "spell.range";
+            public const string Duration = "spell.duration";
+
+            public const string VerbalComponent = "component.verbal";
+            public const string SomaticComponent = "component.somatic";
+            public const string MaterialComponent = "component.material";
+            public const string MaterialComponentDescription = "component.material_description";
+
+            public const string Concentration = "spell.concentration";
+            public const string Ritual = "spell.ritual";
+
+            public const string Spellcasters = "spell.spellcasters";
+        }
+
         public static partial class Properties
         {
             public const string PropertiesSeparator = ";";
@@ -47,6 +81,10 @@
             public const string WeaponPropertiesSpecial = "weapon.properties.special";
             public const string WeaponGroup = "weapon.group";
             public const string WeaponRange = "weapon.range";
+
+            public const string AbilityKey = $"ability.key";
+
+
 
 
         }

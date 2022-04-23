@@ -13,7 +13,7 @@ namespace Aurora.Engine.Data.Tests
         public void ItemProperties_ShouldHaveWeightValueSet_WhenPropertyIsSet()
         {
             // arrange
-            elementProperties.Add(ElementStrings.Properties.ItemWeight, 3);
+            elementProperties.Add(ElementConstants.Properties.ItemWeight, 3);
 
             // act
             var itemProperties = new ItemProperties(elementProperties);
@@ -38,7 +38,7 @@ namespace Aurora.Engine.Data.Tests
         {
             // arrange
             var poundsUnit = "lb.";
-            elementProperties.Add(ElementStrings.Properties.ItemWeightUnit, poundsUnit);
+            elementProperties.Add(ElementConstants.Properties.ItemWeightUnit, poundsUnit);
 
             // act
             var itemProperties = new ItemProperties(elementProperties);
@@ -62,7 +62,7 @@ namespace Aurora.Engine.Data.Tests
         public void ItemProperties_ShouldHaveWeightIgnoreSet_WhenPropertyIsSet()
         {
             // arrange
-            elementProperties.Add(ElementStrings.Properties.ItemWeightIgnore, true);
+            elementProperties.Add(ElementConstants.Properties.ItemWeightIgnore, true);
 
             // act
             var itemProperties = new ItemProperties(elementProperties);

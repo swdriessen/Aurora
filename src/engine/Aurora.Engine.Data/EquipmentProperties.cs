@@ -26,7 +26,7 @@ namespace Aurora.Engine.Data
         public string GetDisplayCost()
         {
             // when a format is provided, use it instead of the default one
-            if (properties.Contains(ElementStrings.Properties.ItemCostFormat))
+            if (properties.Contains(ElementConstants.Properties.ItemCostFormat))
             {
                 return GetFormattedDisplayCost();
             }
@@ -36,13 +36,13 @@ namespace Aurora.Engine.Data
 
         private string GetFormattedDisplayCost()
         {
-            var displayFormat = properties.Get(ElementStrings.Properties.ItemCostFormat, ElementStrings.Properties.ItemCostFormatDefault);
+            var displayFormat = properties.Get(ElementConstants.Properties.ItemCostFormat, ElementConstants.Properties.ItemCostFormatDefault);
 
             displayFormat = displayFormat.ReplaceInline(GetReplacementDictionary());
 
             if (displayFormat.Contains("{{") || displayFormat.Contains("}}"))
             {
-                throw new InvalidOperationException($"The {ElementStrings.Properties.ItemCostFormat} contains an unknown property that cannot be replaced.");
+                throw new InvalidOperationException($"The {ElementConstants.Properties.ItemCostFormat} contains an unknown property that cannot be replaced.");
             }
 
             return displayFormat.Trim();
@@ -52,8 +52,8 @@ namespace Aurora.Engine.Data
         {
             return new Dictionary<string, object>
             {
-                { ElementStrings.Properties.ItemCost, Cost },
-                { ElementStrings.Properties.ItemCostCurrency, Currency }
+                { ElementConstants.Properties.ItemCost, Cost },
+                { ElementConstants.Properties.ItemCostCurrency, Currency }
             };
         }
     }

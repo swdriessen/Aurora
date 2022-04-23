@@ -40,7 +40,7 @@ namespace Aurora.Engine.Data.Tests
         {
             // arrange
             var proficiency = "ID_PROFICIENCY_LONGSWORD";
-            elementProperties.Set(ElementStrings.Properties.WeaponProficiency, proficiency);
+            elementProperties.Set(ElementConstants.Properties.WeaponProficiency, proficiency);
 
             // act
             var properties = new WeaponProperties(elementProperties);
@@ -55,7 +55,7 @@ namespace Aurora.Engine.Data.Tests
             // arrange
             var proficiency1 = "ID_PROFICIENCY_LONGSWORD";
             var proficiency2 = "ID_PROFICIENCY_CUSTOM_LONGSWORD";
-            elementProperties.Set(ElementStrings.Properties.WeaponProficiency, $"{proficiency1};{proficiency2}");
+            elementProperties.Set(ElementConstants.Properties.WeaponProficiency, $"{proficiency1};{proficiency2}");
 
             // act
             var properties = new WeaponProperties(elementProperties);
@@ -85,7 +85,7 @@ namespace Aurora.Engine.Data.Tests
         {
             // arrange
             var property1 = "ID_WEAPON_PROPERTY_VERSATILE";
-            elementProperties.Set(ElementStrings.Properties.WeaponProperties, property1);
+            elementProperties.Set(ElementConstants.Properties.WeaponProperties, property1);
 
             // act
             var properties = new WeaponProperties(elementProperties);
@@ -101,7 +101,7 @@ namespace Aurora.Engine.Data.Tests
             // arrange
             var property1 = "ID_WEAPON_PROPERTY_VERSATILE";
             var property2 = "ID_WEAPON_PROPERTY_HEAVY";
-            elementProperties.Set(ElementStrings.Properties.WeaponProperties, $"{property1};{property2}");
+            elementProperties.Set(ElementConstants.Properties.WeaponProperties, $"{property1};{property2}");
 
             // act
             var properties = new WeaponProperties(elementProperties);
@@ -131,7 +131,7 @@ namespace Aurora.Engine.Data.Tests
         {
             // arrange
             var property1 = "ID_WEAPON_PROPERTY_SPECIAL";
-            elementProperties.Set(ElementStrings.Properties.WeaponPropertiesSpecial, property1);
+            elementProperties.Set(ElementConstants.Properties.WeaponPropertiesSpecial, property1);
 
             // act
             var properties = new WeaponProperties(elementProperties);
@@ -147,7 +147,7 @@ namespace Aurora.Engine.Data.Tests
             // arrange
             var property1 = "ID_WEAPON_PROPERTY_SPECIAL_ONE";
             var property2 = "ID_WEAPON_PROPERTY_SPECIAL_TWO";
-            elementProperties.Set(ElementStrings.Properties.WeaponPropertiesSpecial, $"{property1};{property2}");
+            elementProperties.Set(ElementConstants.Properties.WeaponPropertiesSpecial, $"{property1};{property2}");
 
             // act
             var properties = new WeaponProperties(elementProperties);
@@ -178,7 +178,7 @@ namespace Aurora.Engine.Data.Tests
             // arrange
             var group1 = "ID_WEAPON_GROUP_SWORDS";
             var group2 = "ID_WEAPON_GROUP_AXES";
-            elementProperties.Set(ElementStrings.Properties.WeaponGroup, $"{group1};{group2}");
+            elementProperties.Set(ElementConstants.Properties.WeaponGroup, $"{group1};{group2}");
 
             // act
             var properties = new WeaponProperties(elementProperties);
@@ -207,7 +207,7 @@ namespace Aurora.Engine.Data.Tests
         {
             // arrange
             var range = "150/600";
-            elementProperties.Set(ElementStrings.Properties.WeaponRange, range);
+            elementProperties.Set(ElementConstants.Properties.WeaponRange, range);
 
             // act
             var properties = new WeaponProperties(elementProperties);
