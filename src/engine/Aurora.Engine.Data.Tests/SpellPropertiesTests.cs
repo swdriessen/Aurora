@@ -356,7 +356,7 @@ namespace Aurora.Engine.Data.Tests
         }
 
         [TestMethod]
-        public void SpellProperties_ShouldHave2rdLevelDivinationWithRitualUnderline_WhenPropertiesAreSet()
+        public void SpellProperties_ShouldHave2ndLevelDivinationWithRitualUnderline_WhenPropertiesAreSet()
         {
             // arrange
             elementProperties.Set(ElementConstants.SpellProperties.Level, 2);
