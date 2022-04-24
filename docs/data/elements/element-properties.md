@@ -41,6 +41,18 @@ The stackable property determines if this item allows to be stacked. e.g. a poti
 </properties>
 ```
 
+### Valuable
+
+The valuable property determines if this item is consired to be a valuable item. e.g. a bar of gold
+
+These items are usually sold for 100% of their cost and might appear in a different section on the sheet.
+
+```xml
+<properties>
+    <property key="item.valuable">true</property>
+</properties>
+```
+
 ### Name Formatting
 
 The name of an item may be altered by for example magic items; _e.g. Longsword of Fire_. When you don't provide a name format the name of the magic item will be used instead; _e.g. Flametongue_.
@@ -146,6 +158,16 @@ Some items only work when a character attunes to it. Like `equippable`, there ca
 - `enhancement` defaults to `+` combined with whatever value `enhancement.value` is if one is provided
 - `enhancement.value` defaults to `0`
 
+### Extractable
+
+```xml
+<properties>
+    <property key="item.extractable">true</property>
+</properties>
+```
+
+- `item.extractable` defaults to `false` when it is omitted
+
 ### Weapon
 
 ```xml
@@ -249,3 +271,29 @@ A good example is a selection of abilities e.g. maintain the order of a _Strengt
 <!-- have a flag on the selection rule to enable sorting? -->
 <selection sort="true" />
 ```
+
+### Spell
+
+```xml
+<properties>
+    <property key="spell.level">3</property>
+    <property key="spell.magic_school">Evocation</property>
+    <property key="spell.casting_time">1 action</property>
+    <property key="spell.range">120 feet</property>
+    <property key="spell.duration">1 minute</property>
+    <property key="component.verbal">true</property>
+    <property key="component.somatic">true</property>
+    <property key="component.material">true</property>
+    <property key="component.material_description">a feather</property>
+    <property key="spell.concentration">true</property>
+    <property key="spell.ritual">true</property>
+    <property key="spell.spellcasters">Sorcerer;Wizard;Warlock</property>
+</properties>
+```
+
+- `spell.level` defaults to `-1` when it is omitted so it does not automatically count as level 0
+- `component.verbal` defaults to `false` when it is omitted
+- `component.somatic` defaults to `false` when it is omitted
+- `component.material` defaults to `false` when it is omitted
+- `spell.concentration` defaults to `false` when it is omitted
+- `spell.ritual` defaults to `false` when it is omitted

@@ -66,3 +66,10 @@ The first tests should include some straightforward items variations.
     - Bag of Holding (Container, Weightless)
 - Extracting
     - Item Pack ('readonly' Container)
+
+## Extracting
+
+Extractable items are marked with `item.extractable` and will be removed once extracted. You can extract a preset item (an item with an identifier) or a mundate item that can be generated on the spot.
+
+You can also add some properties to these mundane items such as cost, weight, stackable, or whether they are a valuable item such as treasure.
+

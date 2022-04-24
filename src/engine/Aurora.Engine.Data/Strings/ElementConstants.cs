@@ -61,6 +61,7 @@
             public const string ItemStackable = "item.stackable";
             public const string ItemExtractable = "item.extractable";
             public const string ItemConsumable = "item.consumable";
+            public const string ItemValuable = "item.valuable";
             public const string ItemNameFormat = "item.name_format";
             public const string ItemRarity = "item.rarity";
 
