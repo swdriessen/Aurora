@@ -1,10 +1,18 @@
-﻿namespace Aurora.Engine.Equipment
+﻿using Aurora.Engine.Equipment.Interfaces;
+
+namespace Aurora.Engine.Equipment
 {
+
     /// <summary>
     /// Initializes a new instance of the <see cref="EquipmentExtractor"/> class.
     /// </summary>
-    public class EquipmentExtractor
+    public class EquipmentExtractor : IEquipmentExtractor
     {
+        public bool CanExtract(InventoryItem inventoryItem)
+        {
+            return inventoryItem is EquipmentItem item && item.IsExtractable;
+        }
+
         /// <summary>
         /// Extracts items from an existing equipment item.
         /// </summary>

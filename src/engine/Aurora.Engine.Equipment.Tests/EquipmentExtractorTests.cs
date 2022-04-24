@@ -22,6 +22,33 @@ namespace Aurora.Engine.Equipment.Tests
         }
 
         [TestMethod]
+        public void EquipmentExtractorCanExtract_ShouldReturnFalse_WhenItemIsNotExtractable()
+        {
+            // arrange
+            element.Properties.Set("item.extractable", false);
+            var item = new EquipmentItem(new EquipmentComponent(element));
+
+            // act
+            var result = equipmentExtractor.CanExtract(item);
+
+            // assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void EquipmentExtractorCanExtract_ShouldReturnTrue_WhenItemIsExtractable()
+        {
+            // arrange
+            var extractableItem = new EquipmentItem(new EquipmentComponent(element));
+
+            // act
+            var result = equipmentExtractor.CanExtract(extractableItem);
+
+            // assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
         public void EquipmentExtractor_ShouldThrowException_WhenItemIsNotExtractable()
         {
             // arrange
