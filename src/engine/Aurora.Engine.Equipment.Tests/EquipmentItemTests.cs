@@ -11,6 +11,7 @@ namespace Aurora.Engine.Equipment.Tests
     {
         private readonly ElementModel weaponElement = new() { Name = "Longsword" };
         private readonly ElementModel potionElement = new() { Name = "Potion of Healing" };
+        private readonly ElementModel packageElement = new() { Name = "Item Package" };
 
         [TestInitialize]
         public void Initialize()
@@ -131,6 +132,20 @@ namespace Aurora.Engine.Equipment.Tests
 
             // assert
             Assert.AreEqual(1, equipmentItem.Quantity);
+        }
+
+
+        [TestMethod]
+        public void EquipmentItem_ShouldBeExtractable_WhenPropertyIsSet()
+        {
+            // arrange
+            packageElement.AddProperty(ElementConstants.Properties.ItemExtractable, true);
+
+            // act
+            var equipmentItem = new EquipmentItem(new EquipmentComponent(packageElement));
+
+            // assert
+            Assert.IsTrue(equipmentItem.IsExtractable);
         }
     }
 }

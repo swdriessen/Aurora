@@ -21,7 +21,14 @@ namespace Aurora.Engine.Equipment
             equipmentProperties = new EquipmentProperties(equipmentComponent.Element.Properties);
 
             IsStackable = equipmentProperties.ItemProperties.IsStackable;
+            IsExtractable = equipmentProperties.ItemProperties.Extractable;
         }
+
+        /// <summary>
+        /// Gets a value indicating wether this item contains other items that can be extracted from it.
+        /// <para>e.g. an explorer's pack</para>
+        /// </summary>
+        public bool IsExtractable { get; }
 
         /// <summary>
         /// Gets or sets a value indicating wether to include the enhancement bonus in the display name of the item or not. (Default = true)
@@ -46,6 +53,15 @@ namespace Aurora.Engine.Equipment
             }
 
             return aggregatedComponent.GetDisplayName();
+        }
+
+        /// <summary>
+        /// Gets the extractable items from the original element model that was used to create this item.
+        /// </summary>
+        /// <returns>A list of extractable items.</returns>
+        public IEnumerable<ExtractableItem> GetExtractableItems()
+        {
+            return aggregatedComponent.EquipmentComponent.Element.ExtractableItems.Items;
         }
     }
 }

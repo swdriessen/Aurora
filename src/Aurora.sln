@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Equipment", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Equipment.Tests", "engine\Aurora.Engine.Equipment.Tests\Aurora.Engine.Equipment.Tests.csproj", "{C0CEB689-BCE7-4F97-BBED-23E7123C3992}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurora.Data.InMemory", "data\Aurora.Data.InMemory\Aurora.Data.InMemory.csproj", "{B0035424-1825-4718-950C-62BA5FB3E206}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Data.InMemory", "data\Aurora.Data.InMemory\Aurora.Data.InMemory.csproj", "{B0035424-1825-4718-950C-62BA5FB3E206}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documents", "documents", "{64D216AA-83BE-46A8-9705-FD3CB653F2C2}"
 EndProject

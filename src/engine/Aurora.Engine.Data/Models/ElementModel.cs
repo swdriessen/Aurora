@@ -14,5 +14,7 @@
         public ElementSourceModel Source { get; set; } = new();
 
         public ElementPropertiesModel Properties { get; set; } = new();
+
+        public ExtractableItemsModel ExtractableItems { get; } = new();
     }
 }
