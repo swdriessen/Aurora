@@ -109,5 +109,22 @@ namespace Aurora.Engine.Utilities.Tests
             // assert
             Assert.AreEqual("INTERNAL", output);
         }
+
+        [TestMethod]
+        public void Abbreviation_ShouldAbbreviateToPresetInsteadOfGenerating_WhenListedInPresets()
+        {
+            // arrange
+            var input = "Player's Handbook";
+            generator = new AbbreviationGenerator(options =>
+            {
+                options.Presets.Add("Player's Handbook", "PHB");
+            });
+
+            // act
+            var output = generator.Generate(input);
+
+            // assert
+            Assert.AreEqual("PHB", output);
+        }
     }
 }

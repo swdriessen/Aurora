@@ -32,6 +32,11 @@
                 return input.Sanitize().ToUpperInvariant();
             }
 
+            if (options.Presets.ContainsKey(input))
+            {
+                return options.Presets[input].ToUpperInvariant();
+            }
+
             var parts = input.Sanitize().Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
             string output;
@@ -71,6 +76,11 @@
             /// Gets a list of exceptions that should not be abbreviated.
             /// </summary>
             public List<string> Exceptions { get; } = new();
+
+            /// <summary>
+            /// Gets a list of preset mappings of source to abbreviation to force certain abbreviations.
+            /// </summary>
+            public Dictionary<string, string> Presets { get; } = new();
         }
     }
 }
