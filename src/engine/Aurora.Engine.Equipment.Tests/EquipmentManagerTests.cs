@@ -1,19 +1,22 @@
 ﻿using System.Linq;
 using Aurora.Engine.Data.Models;
 using Aurora.Engine.Data.Strings;
+using Aurora.Engine.Equipment.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Aurora.Engine.Equipment.Tests
 {
     [TestClass]
     public class EquipmentManagerTests
     {
+        private readonly Mock<IEquipmentDataProvider> equipmentDataProvider = new();
         private EquipmentManager equipmentManager = default!;
 
         [TestInitialize]
         public void Initialize()
         {
-            equipmentManager = new EquipmentManager(new EquipmentExtractor());
+            equipmentManager = new EquipmentManager(new EquipmentExtractor(equipmentDataProvider.Object));
         }
 
         [TestMethod]

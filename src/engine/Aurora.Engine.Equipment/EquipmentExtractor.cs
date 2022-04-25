@@ -1,13 +1,20 @@
-﻿using Aurora.Engine.Equipment.Interfaces;
+﻿using Aurora.Engine.Equipment.Components;
+using Aurora.Engine.Equipment.Interfaces;
 
 namespace Aurora.Engine.Equipment
 {
-
     /// <summary>
     /// Initializes a new instance of the <see cref="EquipmentExtractor"/> class.
     /// </summary>
     public class EquipmentExtractor : IEquipmentExtractor
     {
+        private readonly IEquipmentDataProvider equipmentDataProvider;
+
+        public EquipmentExtractor(IEquipmentDataProvider equipmentDataProvider)
+        {
+            this.equipmentDataProvider = equipmentDataProvider;
+        }
+
         public bool CanExtract(InventoryItem inventoryItem)
         {
             return inventoryItem is EquipmentItem item && item.IsExtractable;
@@ -32,8 +39,11 @@ namespace Aurora.Engine.Equipment
             {
                 if (extractableItem.IsExistingItem())
                 {
-                    // TODO: create equipment item
-                    throw new NotImplementedException();
+                    var element = equipmentDataProvider.GetElementModel(extractableItem.Item);
+
+                    var item = new EquipmentItem(new EquipmentComponent(element));
+
+                    items.Add(item);
                 }
                 else
                 {
