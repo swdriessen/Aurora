@@ -1,4 +1,5 @@
-﻿using Aurora.Engine.Equipment.Components;
+﻿using Aurora.Engine.Data.Extensions;
+using Aurora.Engine.Equipment.Components;
 using Aurora.Engine.Equipment.Interfaces;
 
 namespace Aurora.Engine.Equipment
@@ -35,20 +36,44 @@ namespace Aurora.Engine.Equipment
 
             var items = new List<InventoryItem>();
 
-            foreach (var extractableItem in equipmentItem.GetExtractableItems())
+            foreach (var extractable in equipmentItem.GetExtractableItems())
             {
-                if (extractableItem.IsExistingItem())
+                if (extractable.IsExistingItem())
                 {
-                    var element = equipmentDataProvider.GetElementModel(extractableItem.Item);
+                    var element = equipmentDataProvider.GetElementModel(extractable.Item); // throw unable to extract exception?
+                    if (element.HasProperties() && element.GetItemProperties().IsStackable)
+                    {
+                        // create item once with set quantity if it is stackable
+                        var item = new EquipmentItem(new EquipmentComponent(element))
+                        {
+                            Quantity = extractable.Quantity
+                        };
 
-                    var item = new EquipmentItem(new EquipmentComponent(element));
-
-                    items.Add(item);
+                        items.Add(item);
+                    }
+                    else
+                    {
+                        for (int i = 0; i < extractable.Quantity; i++)
+                        {
+                            items.Add(new EquipmentItem(new EquipmentComponent(element)));
+                        }
+                    }
                 }
                 else
                 {
-                    // create mundate item
-                    items.Add(new MundaneItem(extractableItem.Item));
+                    if (extractable.HasProperties() && extractable.GetItemProperties().IsStackable)
+                    {
+                        // create stackable mundane item
+                        items.Add(new MundaneItem(extractable.Item) { Quantity = extractable.Quantity, IsStackable = true });
+                    }
+                    else
+                    {
+                        // create non-stackable mundate item multiple times
+                        for (int i = 0; i < extractable.Quantity; i++)
+                        {
+                            items.Add(new MundaneItem(extractable.Item));
+                        }
+                    }
                 }
             }
 

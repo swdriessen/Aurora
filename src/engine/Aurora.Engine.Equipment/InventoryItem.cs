@@ -17,5 +17,10 @@ namespace Aurora.Engine.Equipment
         public int Quantity { get; set; } = 1;
 
         public abstract string GetDisplayName();
+
+        public override string ToString()
+        {
+            return GetDisplayName();
+        }
     }
 }

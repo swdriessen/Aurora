@@ -1,8 +1,9 @@
-﻿using Aurora.Engine.Utilities;
+﻿using Aurora.Engine.Data.Interfaces;
+using Aurora.Engine.Utilities;
 
 namespace Aurora.Engine.Data.Models
 {
-    public class ExtractableItem
+    public class ExtractableItem : IProperties
     {
         public ExtractableItem(string item, int quantity = 1)
         {
