@@ -1,4 +1,5 @@
 ﻿using Aurora.Engine.Data.Extensions;
+using Aurora.Engine.Data.Models;
 using Aurora.Engine.Equipment.Components;
 using Aurora.Engine.Equipment.Interfaces;
 
@@ -34,50 +35,67 @@ namespace Aurora.Engine.Equipment
                 throw new InvalidOperationException($"The equipment item '{equipmentItem}' is not extractable.");
             }
 
+            Console.WriteLine($"extracting '{equipmentItem}'");
+
             var items = new List<InventoryItem>();
 
             foreach (var extractable in equipmentItem.GetExtractableItems())
             {
                 if (extractable.IsExistingItem())
                 {
-                    var element = equipmentDataProvider.GetElementModel(extractable.Item); // throw unable to extract exception?
-                    if (element.HasProperties() && element.GetItemProperties().IsStackable)
-                    {
-                        // create item once with set quantity if it is stackable
-                        var item = new EquipmentItem(new EquipmentComponent(element))
-                        {
-                            Quantity = extractable.Quantity
-                        };
-
-                        items.Add(item);
-                    }
-                    else
-                    {
-                        for (int i = 0; i < extractable.Quantity; i++)
-                        {
-                            items.Add(new EquipmentItem(new EquipmentComponent(element)));
-                        }
-                    }
+                    ExtractExistingItem(items, extractable);
                 }
                 else
                 {
-                    if (extractable.HasProperties() && extractable.GetItemProperties().IsStackable)
-                    {
-                        // create stackable mundane item
-                        items.Add(new MundaneItem(extractable.Item) { Quantity = extractable.Quantity, IsStackable = true });
-                    }
-                    else
-                    {
-                        // create non-stackable mundate item multiple times
-                        for (int i = 0; i < extractable.Quantity; i++)
-                        {
-                            items.Add(new MundaneItem(extractable.Item));
-                        }
-                    }
+                    ExtractMundaneItem(items, extractable);
                 }
             }
 
+            items.ForEach(item =>
+            {
+                Console.WriteLine($"extracted '{item}' (x{item.Quantity})");
+            });
+
             return items;
+        }
+
+        private static void ExtractMundaneItem(List<InventoryItem> items, ExtractableItem extractable)
+        {
+            if (extractable.HasProperties() && extractable.GetItemProperties().IsStackable)
+            {
+                // create stackable mundane item
+                items.Add(new MundaneItem(extractable.Item) { Quantity = extractable.Quantity, IsStackable = true });
+            }
+            else
+            {
+                // create non-stackable mundate item multiple times
+                for (int i = 0; i < extractable.Quantity; i++)
+                {
+                    items.Add(new MundaneItem(extractable.Item));
+                }
+            }
+        }
+
+        private void ExtractExistingItem(List<InventoryItem> items, ExtractableItem extractable)
+        {
+            var element = equipmentDataProvider.GetElementModel(extractable.Item); // throw unable to extract exception?
+            if (element.HasProperties() && element.GetItemProperties().IsStackable)
+            {
+                // create item once with set quantity if it is stackable
+                var item = new EquipmentItem(new EquipmentComponent(element))
+                {
+                    Quantity = extractable.Quantity
+                };
+
+                items.Add(item);
+            }
+            else
+            {
+                for (int i = 0; i < extractable.Quantity; i++)
+                {
+                    items.Add(new EquipmentItem(new EquipmentComponent(element)));
+                }
+            }
         }
     }
 }

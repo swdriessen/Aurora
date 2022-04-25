@@ -69,6 +69,7 @@ namespace Aurora.Engine.Equipment.Tests
         {
             // arrange
             var name = "Map of Baldur's Gate";
+            element.Name = "Abyssal Map Case";
             element.ExtractableItems.Items.AddRange(new[] {
                 new ExtractableItem(name),
             });
@@ -158,6 +159,7 @@ namespace Aurora.Engine.Equipment.Tests
             // arrange
             var bottles = new ExtractableItem("Bottle of Wine", 5);
 
+            element.Name = "Box of Wine";
             element.ExtractableItems.Items.AddRange(new[] {
                 bottles
             });
@@ -181,6 +183,7 @@ namespace Aurora.Engine.Equipment.Tests
             var bottles = new ExtractableItem(expectedName, expectedQuantity);
             bottles.Properties.Set("item.stackable", true);
 
+            element.Name = "Box of Wine";
             element.ExtractableItems.Items.AddRange(new[] {
                 bottles
             });
@@ -197,7 +200,6 @@ namespace Aurora.Engine.Equipment.Tests
             Assert.AreEqual(expectedName, item.GetDisplayName());
             Assert.AreEqual(expectedQuantity, item.Quantity);
         }
-
 
         [TestMethod]
         public void EquipmentExtractor_ShouldExtractStackableExistingItemOnceWithQuantitySet_WhenExtracted()
