@@ -21,38 +21,6 @@ The properties for elements of all kinds e.g. feats, items, spells.
 
 The properties that are specific to all item types e.g. items, magic items, weapons, and armor. Some of these only make sense on for example a weapon, these will be prefixed with `weapon` for now.
 
-### Category
-
-The category the item can be sorted on when displaying in for example an equipment section.
-
-```xml
-<properties>
-    <property key="item.category">Weapons</property>
-</properties>
-```
-
-### Stackable
-
-The stackable property determines if this item allows to be stacked. e.g. a potion of healing or ammunition will be stackable.
-
-```xml
-<properties>
-    <property key="item.stackable">true</property>
-</properties>
-```
-
-### Valuable
-
-The valuable property determines if this item is consired to be a valuable item. e.g. a bar of gold
-
-These items are usually sold for 100% of their cost and might appear in a different section on the sheet.
-
-```xml
-<properties>
-    <property key="item.valuable">true</property>
-</properties>
-```
-
 ### Name Formatting
 
 The name of an item may be altered by for example magic items; _e.g. Longsword of Fire_. When you don't provide a name format the name of the magic item will be used instead; _e.g. Flametongue_.
@@ -70,103 +38,6 @@ You should surround your replacement property like so; `{{replacement}}`. You ca
 
 Note: at first it will support the basics; _e.g. a __Longsword__ with a __Weapon of Fire__ and a __Weapon of Ice__ will likely result in __Longsword of Fire of Ice___
 
-### Cost
-
-The cost of the item.
-
-```xml
-<properties>
-    <!-- default display value -->
-    <property key="item.cost">15 gp</property>
-    <!-- used in the engine for calculation -->
-    <property key="item.cost.value">15</property>
-    <property key="item.cost.currency">gp</property>
-    <!-- when a custom format is provided it will override the default value -->
-    <property key="item.cost.displayformat">{{item.cost.value}} {{item.cost.currency}}</property>
-    <!-- amount of items added to inventory when getting this item e.g. 10 arrows -->
-    <property key="item.cost.bulk">10</property>
-</properties>
-```
-
-### Weight
-
-The weight of the item.
-
-```xml
-<properties>
-    <!-- default display value -->
-    <property key="item.weight">3 lb.</property>
-    <!-- used in the engine for calculation -->
-    <property key="item.weight.value">3</property>
-    <property key="item.weight.unit">lb.</property>
-    <!-- when a custom format is provided it will override the default value -->
-    <property key="item.weight.displayformat">{{item.weight.value}} {{item.weight.currency}}</property>
-    <!-- allow weight for an item to be ignored in calculation e.g. having a cart or mount in the inventory -->
-    <property key="item.weight.ignore">true</property>
-</properties>
-```
-
-- `item.weight.ignore` is optional and defaults to `false`
-
-### Equippable
-
-Some items like weapons and armor can be equipped, but also common items such as a pair of boots or a feathered hat show be allowed to be equipped.
-
-There can be certains `rules` only apply when an item is equipped instead of just having it in your inventory.
-
-```xml
-<properties>
-    <!-- allows an item to be equipped -->
-    <property key="equippable">true</property>
-    <!-- the 'item slot' where the item can be equipped -->
-    <property key="equippable.target">twohand</property>
-</properties>
-```
-
-- `equippable` is optional and defaults to `false`
-- `equippable.target` is optional
-  - this can be set to `onehand`, `twohand`, or a custom value e.g. `ring`
-
-
-### Attunement
-
-Some items only work when a character attunes to it. Like `equippable`, there can be certains `rules` only apply when an item is attuned instead of just having it in your inventory.
-
-```xml
-<properties>
-    <!-- true when the item requires attunement -->
-    <property key="attunement">true</property>
-    <!-- the optional condition of the attunement e.g. a spellcaster or a specific class -->
-    <property key="attunement.target">by a spellcaster</property>
-</properties>
-```
-
-- `attunement` is optional and defaults to `false`
-- `attunement.target` is optional and defaults to `null`
-
-### Enhancement
-
-```xml
-<properties>
-    <!-- default display value -->
-    <property key="enhancement">+1</property>
-    <!-- used in the engine for calculation -->
-    <property key="enhancement.value">1</property>
-</properties>
-```
-
-- `enhancement` defaults to `+` combined with whatever value `enhancement.value` is if one is provided
-- `enhancement.value` defaults to `0`
-
-### Extractable
-
-```xml
-<properties>
-    <property key="item.extractable">true</property>
-</properties>
-```
-
-- `item.extractable` defaults to `false` when it is omitted
 
 ### Weapon
 
@@ -198,8 +69,6 @@ Some items only work when a character attunes to it. Like `equippable`, there ca
     <property key="weapon.properties">ID_PROPERTY_SLASHING;ID_PROPERTY_VERSATILE</property>
     <!-- a list of special weapon properties, displayed at the end of the list of normal properties -->
     <property key="weapon.properties.special">ID_PROPERTY_SPECIAL</property>
-    <!-- xxxxxxxxxxxxxxxxx -->
-    <property key="weapon.xxxxxxxxxxxxxx">xxxxxxxxxx</property>
 </properties>
 ```
 
@@ -271,29 +140,3 @@ A good example is a selection of abilities e.g. maintain the order of a _Strengt
 <!-- have a flag on the selection rule to enable sorting? -->
 <selection sort="true" />
 ```
-
-### Spell
-
-```xml
-<properties>
-    <property key="spell.level">3</property>
-    <property key="spell.magic_school">Evocation</property>
-    <property key="spell.casting_time">1 action</property>
-    <property key="spell.range">120 feet</property>
-    <property key="spell.duration">1 minute</property>
-    <property key="component.verbal">true</property>
-    <property key="component.somatic">true</property>
-    <property key="component.material">true</property>
-    <property key="component.material_description">a feather</property>
-    <property key="spell.concentration">true</property>
-    <property key="spell.ritual">true</property>
-    <property key="spell.spellcasters">Sorcerer;Wizard;Warlock</property>
-</properties>
-```
-
-- `spell.level` defaults to `-1` when it is omitted so it does not automatically count as level 0
-- `component.verbal` defaults to `false` when it is omitted
-- `component.somatic` defaults to `false` when it is omitted
-- `component.material` defaults to `false` when it is omitted
-- `spell.concentration` defaults to `false` when it is omitted
-- `spell.ritual` defaults to `false` when it is omitted
