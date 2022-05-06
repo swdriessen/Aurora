@@ -2,6 +2,8 @@
 
 All spells and cantrips are of the `Spell` type.
 
+_TODO: generic element doc_
+
 ## Properties
 
 | Property Name                                                    | Type       | Required | Default Value      |
@@ -50,7 +52,7 @@ The possible values are:
 - `Necromancy`
 - `Transmutation`
 
-In addition to the possible values custom elements of the `Magic School` type can be created and its name can then be used here.
+In addition to the possible values custom elements of the `Magic School` type can be created and its `name` can then be used here.
 
 ```xml
 <property name="spell.magic_school">Evocation</property>

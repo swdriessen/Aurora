@@ -2,6 +2,8 @@
 
 All basic items are of the `Item` type.
 
+_TODO: generic element doc_
+
 ## Properties
 
 All item properties have additional details and a small example snippet in XML below. Most of these properties are currently prefixed with `item.`, this may change in the future when it is clear what is needed or how it will be structured in the end.
