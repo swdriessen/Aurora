@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using Aurora.Engine.Data.Interfaces;
 using Aurora.Engine.Data.Models;
 using Aurora.Engine.Data.Strings;
-using Aurora.Engine.Equipment.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

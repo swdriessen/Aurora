@@ -1,4 +1,5 @@
 ﻿using Aurora.Engine.Data.Extensions;
+using Aurora.Engine.Data.Interfaces;
 using Aurora.Engine.Data.Models;
 using Aurora.Engine.Equipment.Components;
 using Aurora.Engine.Equipment.Interfaces;

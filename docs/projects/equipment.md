@@ -73,3 +73,22 @@ Extractable items are marked with `item.extractable` and will be removed once ex
 
 You can also add some properties to these mundane items such as cost, weight, stackable, or whether they are a valuable item such as treasure.
 
+## Equipment Data Provider
+
+The `IEquipmentDataProvider` is responsible for providing all elements related to equipment. This can be used to either fill a store or retrieve items that need to be obtained by another component.
+ 
+- Elements
+    - Items
+    - Armor
+    - Weapons
+    - Magic Items
+
+The provider should have a filtered list based on for example source restrictions. This way there is no need to filter it everywhere the interface is used. There should be something like an `ISourceRestriction` interface that can hook into the provider and act like some sort of middleware.
+
+## Equipment Extractor
+
+The `IEquipmentExtractor` is responsible for extracting item packs into a collection individual items.
+
+## Equipment Store
+
+The equipment store is responsible for providing all that is needed to a store front from which to retrieve items. The `IEquipmentDataProvider` is used to provide the content for the store.

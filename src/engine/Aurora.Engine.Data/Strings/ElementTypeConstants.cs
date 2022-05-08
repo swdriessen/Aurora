@@ -13,5 +13,11 @@
         public const string Ability = "Ability";
         public const string SavingThrow = "Saving Throw";
         public const string Skill = "Skill";
+
+        public const string WeaponGroup = "Weapon Group";
+        public const string WeaponProperty = "Weapon Property";
+
+        public const string DamageType = "Damage Type";
+
     }
 }
