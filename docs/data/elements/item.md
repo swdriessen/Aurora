@@ -22,6 +22,7 @@ All item properties have additional details and a small example snippet in XML b
 | [item.stackable](#itemstackable)                | boolean    | —        | `false`                                |
 | [item.valuable](#itemvaluable)                  | boolean    | —        | `false`                                |
 | [item.extractable](#itemextractable)            | boolean    | —        | `false`                                |
+| [item.rarity](#itemrarity)                      | string     | —        | —                                      |
 | [item.name_format](#itemnameformat)             | string     | —        | —                                      |
 | [item.equippable](#itemequippable)              | boolean    | —        | `false`                                |
 | [item.equippable.target](#itemequippabletarget) | string     | —        | —                                      |
@@ -155,6 +156,25 @@ This requires the extractable items to be defined in the element.
 ```
 
 _TODO: allow slightly more complex extractions_
+
+### item.rarity
+
+The `item.rarity` property, which is optional, specifies the rarity of the item.
+
+The possible values are: 
+
+- `Common`
+- `Uncommon`
+- `Rare`
+- `Very Rare`
+- `Legendary`
+- `Artifact`
+- `Unique`
+
+```xml
+<!-- e.g. a rarity of a wand of polymorph  -->
+<property name="item.rarity">Very Rare</property>
+```
 
 ### item.name_format
 
