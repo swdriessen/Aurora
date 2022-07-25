@@ -1,5 +1,4 @@
-﻿
-using Aurora.Engine.Data.Models;
+﻿using Aurora.Engine.Data.Models;
 
 namespace Aurora.Engine.Data.Extensions
 {
@@ -10,9 +9,10 @@ namespace Aurora.Engine.Data.Extensions
         /// </summary>
         /// <param name="name">The name of the property.</param>
         /// <param name="value">The value of the property.</param>
-        public static void AddProperty(this ElementModel model, string name, object value)
+        public static ElementModel AddProperty(this ElementModel model, string name, object value)
         {
             model.Properties.Add(name, value);
+            return model;
         }
     }
 }

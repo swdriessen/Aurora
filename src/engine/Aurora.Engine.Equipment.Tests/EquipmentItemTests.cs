@@ -40,7 +40,7 @@ namespace Aurora.Engine.Equipment.Tests
             var component = new EquipmentComponent(weaponElement);
             var equipmentItem = new EquipmentItem(component);
             var silveredDecorator = new ElementModel();
-            silveredDecorator.Properties.AddItemNameFormattingProperty("Silvered {{parent}}");
+            silveredDecorator.Properties.Add(ElementConstants.Properties.ItemNameFormat, "Silvered {{parent}}");
 
             // act
             equipmentItem.Decorate(silveredDecorator);
@@ -58,8 +58,8 @@ namespace Aurora.Engine.Equipment.Tests
             var silveredDecorator = new ElementModel();
             var fireDecorator = new ElementModel();
 
-            silveredDecorator.Properties.AddItemNameFormattingProperty("Silvered {{parent}}");
-            fireDecorator.Properties.AddItemNameFormattingProperty("{{parent}} of Fire");
+            silveredDecorator.Properties.Add(ElementConstants.Properties.ItemNameFormat, "Silvered {{parent}}");
+            fireDecorator.Properties.Add(ElementConstants.Properties.ItemNameFormat, "{{parent}} of Fire");
 
             // act
             equipmentItem.Decorate(silveredDecorator);
@@ -79,7 +79,7 @@ namespace Aurora.Engine.Equipment.Tests
             {
                 Name = "Magic Weapon"
             };
-            magicWeapon.Properties.AddItemNameFormattingProperty("Magic {{parent}}");
+            magicWeapon.Properties.Add(ElementConstants.Properties.ItemNameFormat, "Magic {{parent}}");
             magicWeapon.Properties.Add(ElementConstants.Properties.EnhancementValue, 1);
 
             // act
@@ -99,7 +99,7 @@ namespace Aurora.Engine.Equipment.Tests
             {
                 Name = "Magic Weapon"
             };
-            magicWeapon.Properties.AddItemNameFormattingProperty("Magic {{parent}}");
+            magicWeapon.Properties.Add(ElementConstants.Properties.ItemNameFormat, "Magic {{parent}}");
             magicWeapon.Properties.Add(ElementConstants.Properties.EnhancementValue, 1);
 
             // act

@@ -10,6 +10,7 @@ namespace Aurora.Engine.Data.Extensions
         /// A shorthand to add the item nameformatting property to the list of properties of the element model.
         /// </summary>
         /// <param name="value">The value of the property.</param>
+        [Obsolete]
         public static void AddItemNameFormattingProperty(this ElementPropertiesModel properties, string value)
         {
             properties.Add(ElementConstants.Properties.ItemNameFormat, value);

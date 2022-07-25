@@ -351,3 +351,6 @@ MigrationBackup/
 
 # Local Temp
 temp
+
+# temp remove designs from checkin
+*.drawio

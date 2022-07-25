@@ -1,6 +1,7 @@
 ﻿using Aurora.Data.InMemory.DataProviders;
 using Aurora.Engine.Data.Interfaces;
 using Aurora.Engine.Data.Models;
+using Aurora.Engine.Data.Strings;
 using Aurora.Engine.Utilities;
 
 namespace Aurora.Data.InMemory
@@ -48,6 +49,12 @@ namespace Aurora.Data.InMemory
                     element.Id = identifierGenerator.GenerateIdentifier(element.Source.Name, "WOTC", element.Type, element.Name);
                 }
             });
+
+            var weapons = GetElements(ElementTypeConstants.Weapon);
+            foreach (var weapon in weapons)
+            {
+
+            }
         }
 
         public List<ElementModel> GetElements()
