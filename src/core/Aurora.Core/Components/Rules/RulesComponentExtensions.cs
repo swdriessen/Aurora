@@ -6,7 +6,7 @@ public static class RulesComponentExtensions
 {
     public static IElement AddRulesComponent(this IElement element)
     {
-        element.Components.AddComponent(new ItemComponent());
+        element.Components.AddComponent(new RulesComponent());
 
         return element;
     }

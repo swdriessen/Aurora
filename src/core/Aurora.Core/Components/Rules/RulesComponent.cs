@@ -1,6 +1,6 @@
 ﻿namespace Aurora.Core.Components.Rules;
 
-public class ItemComponent : IElementComponent
+public class RulesComponent : IElementComponent
 {
-    public List<IElementRule> Rules { get; } = new List<IElementRule>();
+    public List<IElementRule> Rules { get; } = new();
 }
