@@ -7,5 +7,8 @@ public interface IElement : IProperties
     string ElementType { get; set; }
     string Source { get; set; }
 
+    /// <summary>
+    /// Gets the components that make up this element's additional functionallity.
+    /// </summary>
     ElementComponents Components { get; }
 }

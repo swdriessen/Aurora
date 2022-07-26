@@ -12,7 +12,7 @@ public static class ElementExtensions
         return element;
     }
 
-    public static bool TryGetComponent<T>(this IElement element, [NotNullWhen(true)] out T? component) where T : IElementComponent
+    public static bool TryGetComponent<T>(this IElement element, [NotNullWhen(true)] out T? component) where T : class, IElementComponent
     {
         component = element.Components.GetComponent<T>();
         return component is not null;
