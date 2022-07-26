@@ -1,6 +1,6 @@
 ﻿namespace Aurora.Core.Components.Extractable;
 
-public interface IExtractableItem
+public interface IExtractableItem : IProperties
 {
     /// <summary>
     /// Gets or sets the identifier of the extractable item.
