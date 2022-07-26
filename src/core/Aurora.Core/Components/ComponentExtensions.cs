@@ -1,4 +1,5 @@
 ﻿using Aurora.Core.Abstractions;
+using Aurora.Core.Components.Extractable;
 using Aurora.Core.Components.Item;
 
 namespace Aurora.Core.Components;
@@ -20,6 +21,12 @@ public static class ComponentExtensions
     public static IElement AddCostComponent(this IElement element)
     {
         element.Components.AddComponent(new CostComponent());
+        return element;
+    }
+
+    public static IElement AddExtractableComponent(this IElement element)
+    {
+        element.Components.AddComponent(new ExtractableComponent());
         return element;
     }
 }

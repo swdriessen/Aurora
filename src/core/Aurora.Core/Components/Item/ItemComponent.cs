@@ -8,11 +8,6 @@ public class ItemComponent : IElementComponent
     public bool IsStackable { get; set; }
 
     /// <summary>
-    /// Gets or sets a value whether the item is extractable.
-    /// </summary>
-    public bool IsExtractable { get; set; }
-
-    /// <summary>
     /// Gets or sets a value whether the item is consumable.
     /// </summary>
     public bool IsConsumable { get; set; }
