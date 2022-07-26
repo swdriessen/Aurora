@@ -1,6 +1,6 @@
 ﻿namespace Aurora.Core;
 
-public interface IElementRule
+public interface IElementRule : IProperties
 {
 
 }
