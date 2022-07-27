@@ -1,5 +1,6 @@
-using Aurora.Core.Abstractions;
 using Aurora.Core.Components.Rules;
+using Aurora.Engine.Components;
+using Aurora.Engine.Components.Description;
 
 namespace Aurora.Core.Tests;
 
@@ -10,13 +11,56 @@ public class ElementTests
     public void Element_ShouldInitializeWithRulesComponent_WhenConstructedFromBuilder()
     {
         // arrange
-        IElementBuilder builder = new ElementBuilder();
+        var builder = new ElementBuilder();
 
         // act
-        IElement element = builder.Create();
+        var element = builder.Create();
 
         // assert
         Assert.IsTrue(element.Components.HasComponents());
-        Assert.IsTrue(element.Components.ContainsComponent<RulesComponent>(), "Expected the rules component to be available on all created elements.");
+        Assert.IsTrue(element.Components.ContainsComponent<RulesComponent>(), "Expected the RulesComponent to be available on all created elements.");
+    }
+
+    [TestMethod]
+    public void Element_ShouldInitializeComposeElementWithRulesComponent_WhenConstructedFromBuilder()
+    {
+        // arrange
+        var expectedName = "Composed Element";
+        var builder = new ElementBuilder();
+
+        // act
+        var element = builder.Compose(element =>
+        {
+            element.Name = expectedName;
+            // do nothing else yet
+        });
+
+        // assert
+        Assert.IsTrue(element.Components.HasComponents());
+        Assert.IsTrue(element.Components.ContainsComponent<RulesComponent>(), "Expected the RulesComponent to be available on the composed element.");
+        Assert.AreEqual(expectedName, element.Name, "Expected the name to be set.");
+    }
+
+    [TestMethod]
+    public void Element_ShouldContainDescriptionComponentWithContent_WhenComposed()
+    {
+        // arrange
+        var description = "sample description content";
+        var builder = new ElementBuilder();
+
+        // act
+        var element = builder.Compose(element =>
+        {
+            element.AddDescriptionComponent();
+
+            if (element.TryGetComponent<DescriptionComponent>(out var component))
+            {
+                component.Content = description;
+            }
+        });
+
+        // assert
+        Assert.IsTrue(element.HasDescriptionComponent(), "Expected the DescriptionComponent to be available on the composed element.");
+        Assert.AreEqual(description, element.Components.GetComponent<DescriptionComponent>()?.Content, "Expected the Content to be set.");
     }
 }

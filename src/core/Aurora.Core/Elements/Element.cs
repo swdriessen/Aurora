@@ -8,7 +8,7 @@ namespace Aurora.Core;
 public class Element : IElement
 {
     public string Identifier { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public string Name { get; set; } = string.Empty;
     public string ElementType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public string Source { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 

@@ -9,4 +9,13 @@ public class ElementBuilder : IElementBuilder
     {
         return new Element().AddRulesComponent();
     }
+
+    public IElement Compose(Action<IElement> configureElement)
+    {
+        var element = Create();
+
+        configureElement?.Invoke(element);
+
+        return element;
+    }
 }
