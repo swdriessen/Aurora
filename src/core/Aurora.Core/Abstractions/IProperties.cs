@@ -1,4 +1,6 @@
-﻿namespace Aurora.Core;
+﻿using Aurora.Engine.Elements;
+
+namespace Aurora.Engine.Abstractions;
 
 public interface IProperties
 {

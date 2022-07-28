@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Aurora.Core.Abstractions;
+using Aurora.Engine.Abstractions;
 
-namespace Aurora.Core;
+namespace Aurora.Engine.Elements;
 
 public static class ElementExtensions
 {

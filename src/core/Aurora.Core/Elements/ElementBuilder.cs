@@ -1,7 +1,7 @@
-﻿using Aurora.Core.Abstractions;
-using Aurora.Core.Components.Rules;
+﻿using Aurora.Engine.Abstractions;
+using Aurora.Engine.Components.Rules;
 
-namespace Aurora.Core;
+namespace Aurora.Engine.Elements;
 
 public class ElementBuilder : IElementBuilder
 {

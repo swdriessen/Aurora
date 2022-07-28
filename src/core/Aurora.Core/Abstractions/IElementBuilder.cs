@@ -1,4 +1,4 @@
-﻿namespace Aurora.Core.Abstractions;
+﻿namespace Aurora.Engine.Abstractions;
 
 public interface IElementBuilder
 {

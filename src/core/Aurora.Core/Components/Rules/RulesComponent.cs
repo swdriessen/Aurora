@@ -1,4 +1,6 @@
-﻿namespace Aurora.Core.Components.Rules;
+﻿using Aurora.Engine.Abstractions;
+
+namespace Aurora.Engine.Components.Rules;
 
 public class RulesComponent : IElementComponent
 {

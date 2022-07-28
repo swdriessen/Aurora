@@ -1,4 +1,4 @@
-﻿namespace Aurora.Core;
+﻿namespace Aurora.Engine.Abstractions;
 
 /// <summary>
 /// The interface that represents a handler that evaluates conditions for the rule.

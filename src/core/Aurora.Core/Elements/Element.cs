@@ -1,9 +1,9 @@
-﻿using Aurora.Core.Abstractions;
+﻿using Aurora.Engine.Abstractions;
 
-namespace Aurora.Core;
+namespace Aurora.Engine.Elements;
 
 /// <summary>
-/// The element represents the basic building block of the engine that is populated from loaded content.
+/// The element represents a composable element of the engine that is populated from loaded content.
 /// </summary>
 public class Element : IElement
 {

@@ -1,6 +1,6 @@
-using Aurora.Core.Components.Rules;
-using Aurora.Engine.Components;
 using Aurora.Engine.Components.Description;
+using Aurora.Engine.Components.Rules;
+using Aurora.Engine.Elements;
 
 namespace Aurora.Core.Tests;
 
@@ -38,7 +38,7 @@ public class ElementTests
         // assert
         Assert.IsTrue(element.Components.HasComponents());
         Assert.IsTrue(element.Components.ContainsComponent<RulesComponent>(), "Expected the RulesComponent to be available on the composed element.");
-        Assert.AreEqual(expectedName, element.Name, "Expected the name to be set.");
+        Assert.AreEqual(expectedName, element.Name, "Expected the Name to be set.");
     }
 
     [TestMethod]

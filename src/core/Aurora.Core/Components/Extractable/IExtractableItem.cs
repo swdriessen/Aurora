@@ -1,4 +1,6 @@
-﻿namespace Aurora.Core.Components.Extractable;
+﻿using Aurora.Engine.Abstractions;
+
+namespace Aurora.Engine.Components.Extractable;
 
 public interface IExtractableItem : IProperties
 {

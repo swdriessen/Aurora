@@ -1,4 +1,6 @@
-﻿namespace Aurora.Core.Components.Item;
+﻿using Aurora.Engine.Abstractions;
+
+namespace Aurora.Engine.Components.Item;
 
 public class CostComponent : IElementComponent
 {
