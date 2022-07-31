@@ -1,6 +1,6 @@
-using Aurora.Engine.Components.Description;
-using Aurora.Engine.Components.Rules;
-using Aurora.Engine.Elements;
+using Aurora.Engine.Elements.Components.Description;
+using Aurora.Engine.Elements.Components.Rules;
+using Aurora.Engine.Elements.Elements;
 
 namespace Aurora.Core.Tests;
 

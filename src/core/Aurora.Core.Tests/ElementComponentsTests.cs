@@ -1,5 +1,5 @@
-﻿using Aurora.Engine.Components.Item;
-using Aurora.Engine.Elements;
+﻿using Aurora.Engine.Elements.Components.Item;
+using Aurora.Engine.Elements.Elements;
 
 namespace Aurora.Core.Tests;
 
