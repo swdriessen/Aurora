@@ -1,6 +1,6 @@
+using Aurora.Engine.Elements;
 using Aurora.Engine.Elements.Components.Description;
 using Aurora.Engine.Elements.Components.Rules;
-using Aurora.Engine.Elements.Elements;
 
 namespace Aurora.Core.Tests;
 
@@ -18,7 +18,7 @@ public class ElementTests
 
         // assert
         Assert.IsTrue(element.Components.HasComponents());
-        Assert.IsTrue(element.Components.ContainsComponent<RulesComponent>(), "Expected the RulesComponent to be available on all created elements.");
+        Assert.IsTrue(element.Components.TryGetComponent<RulesComponent>(out _), "Expected the RulesComponent to be available on all created elements.");
     }
 
     [TestMethod]
@@ -37,7 +37,7 @@ public class ElementTests
 
         // assert
         Assert.IsTrue(element.Components.HasComponents());
-        Assert.IsTrue(element.Components.ContainsComponent<RulesComponent>(), "Expected the RulesComponent to be available on the composed element.");
+        Assert.IsTrue(element.Components.TryGetComponent<RulesComponent>(out _), "Expected the RulesComponent to be available on the composed element.");
         Assert.AreEqual(expectedName, element.Name, "Expected the Name to be set.");
     }
 
@@ -61,6 +61,6 @@ public class ElementTests
 
         // assert
         Assert.IsTrue(element.HasDescriptionComponent(), "Expected the DescriptionComponent to be available on the composed element.");
-        Assert.AreEqual(description, element.Components.GetComponent<DescriptionComponent>()?.Content, "Expected the Content to be set.");
+        Assert.AreEqual(description, element.GetDescriptionComponent()?.Content, "Expected the Content to be set.");
     }
 }

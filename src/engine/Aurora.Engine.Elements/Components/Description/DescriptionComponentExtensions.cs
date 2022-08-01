@@ -25,6 +25,11 @@ public static class DescriptionComponentExtensions
     /// <returns>True when the element has a <see cref="DescriptionComponent"/>.</returns>
     public static bool HasDescriptionComponent(this IElement element)
     {
-        return element.Components.ContainsComponent<DescriptionComponent>();
+        return element.Components.TryGetComponent<DescriptionComponent>(out _);
+    }
+
+    public static DescriptionComponent? GetDescriptionComponent(this IElement element)
+    {
+        return element.Components.TryGetComponent<DescriptionComponent>(out var component) ? component : null;
     }
 }

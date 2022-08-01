@@ -1,11 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Aurora.Engine.Elements.Abstractions;
 
-namespace Aurora.Engine.Elements.Elements;
+namespace Aurora.Engine.Elements;
 
 public static class ElementExtensions
 {
-    public static IElement AddComponent<T>(this IElement element, T component) where T : IElementComponent
+    public static IElement AddComponent<T>(this IElement element, T component) where T : class, IElementComponent
     {
         element.Components.AddComponent(component);
 
@@ -14,7 +14,6 @@ public static class ElementExtensions
 
     public static bool TryGetComponent<T>(this IElement element, [NotNullWhen(true)] out T? component) where T : class, IElementComponent
     {
-        component = element.Components.GetComponent<T>();
-        return component is not null;
+        return element.Components.TryGetComponent(out component);
     }
 }

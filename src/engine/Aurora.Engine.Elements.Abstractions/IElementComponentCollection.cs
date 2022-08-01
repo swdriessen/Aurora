@@ -1,4 +1,6 @@
-﻿namespace Aurora.Engine.Elements.Abstractions;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Aurora.Engine.Elements.Abstractions;
 
 public interface IElementComponentCollection
 {
@@ -15,7 +17,7 @@ public interface IElementComponentCollection
     /// <typeparam name="T">The type of the component.</typeparam>
     /// <param name="component">The component to retrieve.</param>
     /// <returns>True when the component was found.</returns>
-    bool TryGetComponent<T>(out T component) where T : class, IElementComponent;
+    bool TryGetComponent<T>([NotNullWhen(true)] out T? component) where T : class, IElementComponent;
 
     /// <summary>
     /// Gets a value indicating whether the collection contains any components.

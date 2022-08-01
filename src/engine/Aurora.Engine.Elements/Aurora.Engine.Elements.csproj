@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Aurora.Engine.Elements.Abstractions\Aurora.Engine.Elements.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

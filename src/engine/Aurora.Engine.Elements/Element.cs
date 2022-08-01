@@ -1,6 +1,6 @@
 ﻿using Aurora.Engine.Elements.Abstractions;
 
-namespace Aurora.Engine.Elements.Elements;
+namespace Aurora.Engine.Elements;
 
 /// <summary>
 /// The element represents a composable element of the engine that is populated from loaded content.
@@ -12,10 +12,13 @@ public class Element : IElement
     public string ElementType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public string Source { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-    public ElementComponents Components { get; } = new();
-
     /// <summary>
     /// Gets the properties associated with this element.
     /// </summary>
-    public Properties Properties { get; } = new();
+    public IPropertiesCollection Properties { get; } = new Properties();
+
+    /// <summary>
+    /// Gets the components that provide additional functionallity to this element.
+    /// </summary>
+    public IElementComponentCollection Components { get; } = new ElementComponents();
 }
