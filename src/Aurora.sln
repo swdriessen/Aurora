@@ -52,11 +52,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "presentation", "presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Elements.Tests", "core\Aurora.Core.Tests\Aurora.Engine.Elements.Tests.csproj", "{F804D5E5-60F7-4B55-9955-FB20E53211B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurora.Engine", "engine\Aurora.Engine\Aurora.Engine\Aurora.Engine.csproj", "{4CFA7870-4149-4183-87A1-DDADD40E7400}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine", "engine\Aurora.Engine\Aurora.Engine\Aurora.Engine.csproj", "{4CFA7870-4149-4183-87A1-DDADD40E7400}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "elements", "elements", "{00B56182-BCD7-4727-896F-EA16D4485636}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurora.Engine.Elements", "engine\Aurora.Engine.Elements\Aurora.Engine.Elements.csproj", "{0655C73D-C02D-4042-90BC-A1B988B7D5D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Elements", "engine\Aurora.Engine.Elements\Aurora.Engine.Elements.csproj", "{0655C73D-C02D-4042-90BC-A1B988B7D5D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurora.Engine.Elements.Abstractions", "engine\Aurora.Engine.Elements.Abstractions\Aurora.Engine.Elements.Abstractions.csproj", "{17CAC967-1FFC-450C-B800-237F47E41B28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +106,10 @@ Global
 		{0655C73D-C02D-4042-90BC-A1B988B7D5D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0655C73D-C02D-4042-90BC-A1B988B7D5D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0655C73D-C02D-4042-90BC-A1B988B7D5D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17CAC967-1FFC-450C-B800-237F47E41B28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17CAC967-1FFC-450C-B800-237F47E41B28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17CAC967-1FFC-450C-B800-237F47E41B28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17CAC967-1FFC-450C-B800-237F47E41B28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,6 +134,7 @@ Global
 		{4CFA7870-4149-4183-87A1-DDADD40E7400} = {F8EF4E25-E57C-4FA8-85AE-23D023BE9378}
 		{00B56182-BCD7-4727-896F-EA16D4485636} = {F8EF4E25-E57C-4FA8-85AE-23D023BE9378}
 		{0655C73D-C02D-4042-90BC-A1B988B7D5D2} = {F8EF4E25-E57C-4FA8-85AE-23D023BE9378}
+		{17CAC967-1FFC-450C-B800-237F47E41B28} = {F8EF4E25-E57C-4FA8-85AE-23D023BE9378}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {824A3E82-B8C3-4B1C-8724-0C35E0F34900}
