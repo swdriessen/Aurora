@@ -1,25 +1,29 @@
-﻿namespace Aurora.Engine.Hosting;
+﻿using Microsoft.Extensions.Hosting;
+
+namespace Aurora.Engine.Hosting;
 
 /// <summary>
 /// Initializes a new instance of the <see cref="EngineHost"/> class.
 /// </summary>
 public class EngineHost : IEngineHost
 {
-    public EngineHost(IServiceProvider services)
+    private readonly IHost host;
+
+    public EngineHost(IHost host)
     {
-        Services = services;
+        this.host = host;
     }
 
-    public IServiceProvider Services { get; }
+    public IServiceProvider Services => host.Services;
 
     public Task StartAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return host.StartAsync(cancellationToken);
     }
 
     public Task StopAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return host.StopAsync(cancellationToken);
     }
 
     #region IDisposable
@@ -32,11 +36,9 @@ public class EngineHost : IEngineHost
         {
             if (disposing)
             {
-                // TODO: dispose managed state (managed objects)
+                host.Dispose();
             }
 
-            // TODO: free unmanaged resources (unmanaged objects) and override finalizer
-            // TODO: set large fields to null
             isDisposed = true;
         }
     }

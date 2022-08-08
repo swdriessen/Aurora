@@ -1,12 +1,18 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Aurora.Engine.Hosting;
 
 public class EngineHostBuilder
 {
-    //TODO: create a generic host within but limit it by wrapping it in here
+    private readonly IHostBuilder builder;
     private readonly List<Action<IServiceCollection>> configureServicesActions = new();
-    private bool isBuilt;
+
+    private EngineHostBuilder()
+    {
+        builder = Host.CreateDefaultBuilder();
+    }
 
     public EngineHostBuilder ConfigureServices(Action<IServiceCollection> services)
     {
@@ -16,32 +22,24 @@ public class EngineHostBuilder
 
     public IEngineHost Build()
     {
-        if (isBuilt)
-        {
-            throw new InvalidOperationException("The engine host was already built.");
-        }
-
-        isBuilt = true;
-
         var services = new ServiceCollection();
 
-        // engine
-        //   TODO: configuration (e.g. engine.json)
-        //   services (including default implementations, system can remove or override)
+        // default engine host
+        builder.ConfigureServices(services => services.AddSingleton<IEngineHost, EngineHost>());
 
-        // system = "dnd5e"
-        // system context (defaults to 5e during development)
-        //   TODO: configuration (e.g. system.dnd5e.json)
-        //     config.AddJsonFile("config.{system}.json", optional: true); // in ConfigureAppConfiguration
-        //   services
+        // default engine configuration
+        builder.ConfigureAppConfiguration((context, configure) =>
+        {
+            configure.AddJsonFile($"engine.json", optional: true);
+        });
 
-        configureServicesActions.ForEach(configureServices => configureServices.Invoke(services));
+        // engine configured services
+        configureServicesActions.ForEach(configureServices =>
+        {
+            builder.ConfigureServices(configureServices);
+        });
 
-        var provider = services.BuildServiceProvider();
-
-        services.AddSingleton<IEngineHost>(provider => { return new EngineHost(provider); });
-
-        return provider.GetRequiredService<IEngineHost>();
+        return builder.Build().Services.GetRequiredService<IEngineHost>();
     }
 
     public static EngineHostBuilder CreateDefaultBuilder()
