@@ -14,7 +14,7 @@ public class EngineHostBuilderTest
         var builder = EngineHostBuilder.CreateDefaultBuilder();
 
         // act
-        var engineHost = builder.Build();
+        using var engineHost = builder.Build();
 
         // assert
         Assert.IsNotNull(engineHost);
@@ -26,7 +26,7 @@ public class EngineHostBuilderTest
     {
         // arrange
         var builder = EngineHostBuilder.CreateDefaultBuilder();
-        var engineHost = builder.Build();
+        using var engineHost = builder.Build();
 
         // act + assert
         Assert.ThrowsException<InvalidOperationException>(() => { _ = engineHost.Services.GetRequiredService<EngineHostBuilderTest>(); });
@@ -40,7 +40,7 @@ public class EngineHostBuilderTest
         builder.ConfigureServices(services => { services.AddSingleton<EngineHostBuilderTest>(); });
 
         // act
-        var engineHost = builder.Build();
+        using var engineHost = builder.Build();
 
         // assert
         Assert.IsNotNull(engineHost.Services.GetRequiredService<EngineHostBuilderTest>());
@@ -50,7 +50,7 @@ public class EngineHostBuilderTest
     public void EngineHost_ShouldResolveRequestedLogger()
     {
         // arrange
-        var host = EngineHostBuilder.CreateDefaultBuilder().Build();
+        using var host = EngineHostBuilder.CreateDefaultBuilder().Build();
 
         // act
         var logger = host.Services.GetRequiredService<ILogger<EngineHostBuilderTest>>();

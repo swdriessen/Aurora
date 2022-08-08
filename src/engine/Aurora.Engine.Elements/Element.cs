@@ -7,9 +7,9 @@ namespace Aurora.Engine.Elements;
 /// </summary>
 public class Element : IElement
 {
-    public string Identifier { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public string Identifier { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
-    public string ElementType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public string ElementType { get; set; } = string.Empty;
     public string Source { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     /// <summary>
