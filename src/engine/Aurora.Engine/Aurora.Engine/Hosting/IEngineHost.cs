@@ -1,9 +1,12 @@
-﻿namespace Aurora.Engine;
+﻿using Microsoft.Extensions.Hosting;
 
-public interface IEngineHost
+namespace Aurora.Engine.Hosting;
+
+/// <summary>
+/// A single host for generating a character.
+/// </summary>
+public interface IEngineHost : IHost
 {
-    // single host for the character generation (created with builder similar to a generic host)
-
     // application hooks to interact with the application host (e.g. error handling, context switching)
     // application configuration and services where applicable
     // engine and system configuration
