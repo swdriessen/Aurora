@@ -59,6 +59,12 @@ public class ElementSelectionScenarioTests
             .Build();
     }
 
+    [TestCleanup]
+    public void Teardown()
+    {
+        engine.Dispose();
+    }
+
     [TestMethod]
     public void ElementSelectionHandlerManager_ShouldCreateHandler()
     {
