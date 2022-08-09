@@ -50,7 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "presentation", "presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Elements.Tests", "core\Aurora.Core.Tests\Aurora.Engine.Elements.Tests.csproj", "{F804D5E5-60F7-4B55-9955-FB20E53211B7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine", "engine\Aurora.Engine\Aurora.Engine\Aurora.Engine.csproj", "{4CFA7870-4149-4183-87A1-DDADD40E7400}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine", "engine\Aurora.Engine\Aurora.Engine.csproj", "{4CFA7870-4149-4183-87A1-DDADD40E7400}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Engine.Elements", "engine\Aurora.Engine.Elements\Aurora.Engine.Elements.csproj", "{0655C73D-C02D-4042-90BC-A1B988B7D5D2}"
 EndProject

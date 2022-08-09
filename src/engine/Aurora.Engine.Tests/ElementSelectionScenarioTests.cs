@@ -47,14 +47,12 @@ public class ElementSelectionScenarioTests
             .Callback<string>(x => { System.Diagnostics.Debug.WriteLine(x); });
 
         engine = EngineHostBuilder.CreateDefaultBuilder()
+            .ConfigureScenarioDefaults()
             .ConfigureServices(services =>
             {
                 services.AddSingleton(dataProviderMock.Object); // infrastructure
                 services.AddSingleton(presenterFactoryMock.Object); // presentation
                 services.AddSingleton(registrationMock.Object);
-                services.AddSingleton<IElementSelectionHandlerFactory, ElementSelectionHandlerFactory>();
-                services.AddSingleton<IElementSelectionDataProvider, ElementSelectionDataProvider>();
-                services.AddSingleton<IElementSelectionHandlerManager, ElementSelectionHandlerManager>();
             })
             .Build();
     }
