@@ -141,7 +141,7 @@ public class ElementSelectionScenarioTests
         var selectionRule = new SelectionRule("Language");
         var handler = manager.CreateHandler(selectionRule);
         _ = handler.Initialize();
-        var option = presenterOptions.First(); // take the first option, lets register this one
+        var option = presenterOptions.First(); // lets register the first option
 
         // act        
         // (in the presentation layer you have access to the interactor, not the handler directly (you can't initialize handler from the presentation layer)

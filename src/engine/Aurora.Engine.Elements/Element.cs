@@ -21,4 +21,16 @@ public class Element : IElement
     /// Gets the components that provide additional functionallity to this element.
     /// </summary>
     public IElementComponentCollection Components { get; } = new ElementComponents();
+
+    /// <summary>
+    /// Compose a new instance of the <see cref="Element"/> class.
+    /// </summary>
+    public static Element Compose(Action<Element> element)
+    {
+        var instance = new Element();
+
+        element.Invoke(instance);
+
+        return instance;
+    }
 }
