@@ -128,4 +128,27 @@ public class ElementSelectionScenarioTests
         presenterMock.Verify(x => x.UpdateSelectionOptions(It.IsAny<IEnumerable<ISelectionOption>>()), Times.Once, "Expected the selection options to be updated when initializing the selection handler.");
         Assert.AreEqual(languages.Count, presenterOptions.Count, "Expected the selection options to be the same as the number of provided language elements.");
     }
+
+    [TestMethod]
+    public void ElementSelectionHandler_ShouldRegisterElementAggregate_WhenSelectionOptionPicked()
+    {
+        // arrange
+        var presenterOptions = new List<ISelectionOption>();
+        presenterMock.Setup(x => x.UpdateSelectionOptions(It.IsAny<IEnumerable<ISelectionOption>>()))
+            .Callback<IEnumerable<ISelectionOption>>(options => { presenterOptions.AddRange(options); });
+
+        var manager = engine.Services.GetRequiredService<IElementSelectionHandlerManager>();
+        var selectionRule = new SelectionRule("Language");
+        var handler = manager.CreateHandler(selectionRule);
+        _ = handler.Initialize();
+        var option = presenterOptions.First(); // take the first option, lets register this one
+
+        // act        
+        // (in the presentation layer you have access to the interactor, not the handler directly (you can't initialize handler from the presentation layer)
+        var interactor = (IElementSelectionInteractor)handler;
+        _ = interactor.Register(option.Identifier);
+
+        // assert
+        registrationMock.Verify(x => x.Register(It.IsAny<IElement>()), Times.Once, "Expected the handler to register the selected item.");
+    }
 }

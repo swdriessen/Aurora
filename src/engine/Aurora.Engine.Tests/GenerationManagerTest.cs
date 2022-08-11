@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Aurora.Engine.Elements;
+﻿using Aurora.Engine.Elements;
 using Aurora.Engine.Elements.Abstractions;
 using Aurora.Engine.Generation;
 using Microsoft.Extensions.Logging;
@@ -16,7 +15,7 @@ public class GenerationManagerTest
     [TestInitialize]
     public void Setup()
     {
-        manager = new GenerationManager(new Mock<ILogger<GenerationManager>>().Object);
+        manager = new GenerationManager(Mock.Of<ILogger<GenerationManager>>());
 
         element = new Element()
         {
@@ -36,8 +35,6 @@ public class GenerationManagerTest
         // act
         manager.Register(aggregate);
         manager.Register(anotherAggregate);
-
-        Debug.WriteLine(manager);
 
         // assert
         Assert.IsTrue(manager.Unregister(anotherAggregate));
