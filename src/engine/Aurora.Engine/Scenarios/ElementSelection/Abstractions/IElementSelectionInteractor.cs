@@ -11,5 +11,6 @@ public interface IElementSelectionInteractor
     /// <summary>
     /// Unregister the current selection.
     /// </summary>
-    Task Unregister();
+    /// <returns>True if the selection was unregistered successfully.</returns>
+    Task<bool> Unregister();
 }

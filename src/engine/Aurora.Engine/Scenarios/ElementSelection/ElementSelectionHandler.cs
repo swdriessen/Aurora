@@ -1,4 +1,5 @@
 ﻿using Aurora.Engine.Elements.Abstractions;
+using Aurora.Engine.Generation;
 using Aurora.Engine.Scenarios.ElementSelection.Abstractions;
 
 namespace Aurora.Engine.Scenarios.ElementSelection;
@@ -10,18 +11,19 @@ public class ElementSelectionHandler : IElementSelectionHandler, IElementSelecti
 {
     private readonly ElementSelectionHandlerContext context;
     private readonly IElementSelectionDataProvider dataProvider;
-    private readonly IElementRegistration registration;
+    private readonly IElementAggregateManager aggregateManager;
     private readonly IElementSelectionPresenter presenter;
 
     private List<IElement>? elementsCollection;
     private List<ISelectionOption>? selectionOptions;
     private IElement? currentSelection;
+    private ElementAggregate? elementAggregate;
 
-    public ElementSelectionHandler(ElementSelectionHandlerContext context, IElementSelectionDataProvider dataProvider, IElementRegistration registration, IElementSelectionPresenter presenter)
+    public ElementSelectionHandler(ElementSelectionHandlerContext context, IElementSelectionDataProvider dataProvider, IElementAggregateManager aggregateManager, IElementSelectionPresenter presenter)
     {
         this.context = context;
         this.dataProvider = dataProvider;
-        this.registration = registration;
+        this.aggregateManager = aggregateManager;
         this.presenter = presenter;
     }
 
@@ -49,13 +51,14 @@ public class ElementSelectionHandler : IElementSelectionHandler, IElementSelecti
         }
 
         currentSelection = elementsCollection.First(x => x.Identifier == identifier);
+        elementAggregate = ElementAggregate.ForElement(currentSelection);
 
-        registration.Register(currentSelection);
+        aggregateManager.Register(elementAggregate);
 
         return Task.CompletedTask;
     }
 
-    public Task Unregister()
+    public Task<bool> Unregister()
     {
         if (elementsCollection is null)
         {
@@ -67,9 +70,14 @@ public class ElementSelectionHandler : IElementSelectionHandler, IElementSelecti
             throw new InvalidOperationException("Unable to unregister when no selection is made.");
         }
 
-        registration.Unregister(currentSelection);
+        if (elementAggregate is null)
+        {
+            throw new InvalidOperationException("Unable to unregister when no aggregate was stored.");
+        }
 
-        return Task.CompletedTask;
+        var unregisted = aggregateManager.Unregister(elementAggregate);
+
+        return Task.FromResult(unregisted);
     }
 
     public bool HasActiveSelection() => currentSelection is not null;

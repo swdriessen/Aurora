@@ -1,4 +1,5 @@
-﻿using Aurora.Engine.Scenarios.ElementSelection;
+﻿using Aurora.Engine.Generation;
+using Aurora.Engine.Scenarios.ElementSelection;
 using Aurora.Engine.Scenarios.ElementSelection.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,7 +23,7 @@ public static class EngineHostBuilderExtensions
             // these require the
             // data provider
             // presenter factory
-            // character manager (register selections)
+            services.AddSingleton<IElementAggregateManager, GenerationManager>();
             services.AddSingleton<IElementSelectionHandlerFactory, ElementSelectionHandlerFactory>();
             services.AddSingleton<IElementSelectionDataProvider, ElementSelectionDataProvider>();
             services.AddSingleton<IElementSelectionHandlerManager, ElementSelectionHandlerManager>();

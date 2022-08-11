@@ -1,4 +1,5 @@
 ﻿using Aurora.Engine.Elements.Rules;
+using Aurora.Engine.Generation;
 using Aurora.Engine.Scenarios.ElementSelection.Abstractions;
 
 namespace Aurora.Engine.Scenarios.ElementSelection;
@@ -6,16 +7,16 @@ namespace Aurora.Engine.Scenarios.ElementSelection;
 public class ElementSelectionHandlerManager : IElementSelectionHandlerManager
 {
     private readonly IElementSelectionDataProvider dataProvider;
-    private readonly IElementRegistration registration;
+    private readonly IElementAggregateManager aggregateManager;
     private readonly IElementSelectionPresenterFactory presenterFactory;
     private readonly IElementSelectionHandlerFactory handlerFactory;
 
     private readonly Dictionary<string, IElementSelectionHandler> handlers = new();
 
-    public ElementSelectionHandlerManager(IElementSelectionDataProvider dataProvider, IElementRegistration registration, IElementSelectionPresenterFactory presenterFactory, IElementSelectionHandlerFactory handlerFactory)
+    public ElementSelectionHandlerManager(IElementSelectionDataProvider dataProvider, IElementAggregateManager aggregateManager, IElementSelectionPresenterFactory presenterFactory, IElementSelectionHandlerFactory handlerFactory)
     {
         this.dataProvider = dataProvider;
-        this.registration = registration; // char manager or another manager based on selection rule
+        this.aggregateManager = aggregateManager;
         this.presenterFactory = presenterFactory;
         this.handlerFactory = handlerFactory;
     }

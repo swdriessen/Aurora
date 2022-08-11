@@ -1,6 +1,7 @@
 ﻿using Aurora.Engine.Elements;
 using Aurora.Engine.Elements.Abstractions;
 using Aurora.Engine.Elements.Rules;
+using Aurora.Engine.Generation;
 using Aurora.Engine.Hosting;
 using Aurora.Engine.Scenarios.ElementSelection;
 using Aurora.Engine.Scenarios.ElementSelection.Abstractions;
@@ -15,7 +16,7 @@ public class ElementSelectionScenarioTests
     private IEngineHost engine = null!;
     private readonly Mock<IElementSelectionPresenterFactory> presenterFactoryMock = new();
     private readonly Mock<IElementSelectionPresenter> presenterMock = new();
-    private readonly Mock<IElementRegistration> registrationMock = new();
+    private readonly Mock<IElementAggregateManager> registrationMock = new();
     private readonly Mock<IElementDataProvider> dataProviderMock = new();
 
     private readonly ElementBuilder elementBuilder = new();
@@ -149,6 +150,6 @@ public class ElementSelectionScenarioTests
         _ = interactor.Register(option.Identifier);
 
         // assert
-        registrationMock.Verify(x => x.Register(It.IsAny<IElement>()), Times.Once, "Expected the handler to register the selected item.");
+        registrationMock.Verify(x => x.Register(It.IsAny<ElementAggregate>()), Times.Once, "Expected the handler to register the selected item.");
     }
 }
