@@ -53,7 +53,7 @@ public class ElementSelectionScenarioTests
             {
                 services.AddSingleton(dataProviderMock.Object); // infrastructure
                 services.AddSingleton(presenterFactoryMock.Object); // presentation
-                services.AddSingleton(registrationMock.Object);
+                services.AddSingleton(registrationMock.Object); // mock the GenerationManager we are not testing it here, we just want to verify it was called as expected
             })
             .Build();
     }
@@ -138,6 +138,10 @@ public class ElementSelectionScenarioTests
         presenterMock.Setup(x => x.UpdateSelectionOptions(It.IsAny<IEnumerable<ISelectionOption>>()))
             .Callback<IEnumerable<ISelectionOption>>(options => { presenterOptions.AddRange(options); });
 
+        ElementAggregate? associatedAggregate = null;
+        registrationMock.Setup(x => x.Register(It.IsAny<ElementAggregate>()))
+            .Callback<ElementAggregate>(x => associatedAggregate = x);
+
         var manager = engine.Services.GetRequiredService<IElementSelectionHandlerManager>();
         var selectionRule = new SelectionRule("Language");
         var handler = manager.CreateHandler(selectionRule);
@@ -150,6 +154,35 @@ public class ElementSelectionScenarioTests
         _ = interactor.Register(option.Identifier);
 
         // assert
-        registrationMock.Verify(x => x.Register(It.IsAny<ElementAggregate>()), Times.Once, "Expected the handler to register the selected item.");
+        Assert.IsNotNull(associatedAggregate);
+        registrationMock.Verify(x => x.Register(associatedAggregate), Times.Once, "Expected the handler to register the selected item.");
+    }
+
+    [TestMethod]
+    public async Task ElementSelectionHandler_ShouldUnregisterElementAggregate_WhenUnregisterRequested()
+    {
+        // arrange
+        var presenterOptions = new List<ISelectionOption>();
+        presenterMock.Setup(x => x.UpdateSelectionOptions(It.IsAny<IEnumerable<ISelectionOption>>()))
+            .Callback<IEnumerable<ISelectionOption>>(options => { presenterOptions.AddRange(options); });
+
+        ElementAggregate? associatedAggregate = null;
+        registrationMock.Setup(x => x.Register(It.IsAny<ElementAggregate>()))
+            .Callback<ElementAggregate>(x => associatedAggregate = x);
+
+        var manager = engine.Services.GetRequiredService<IElementSelectionHandlerManager>();
+        var selectionRule = new SelectionRule("Language");
+        var handler = manager.CreateHandler(selectionRule);
+        _ = handler.Initialize();
+        var option = presenterOptions.First(); // lets register the first option
+        var interactor = (IElementSelectionInteractor)handler;
+        await interactor.Register(option.Identifier);
+
+        // act        
+        var result = await interactor.Unregister();
+
+        // assert
+        Assert.IsNotNull(associatedAggregate);
+        registrationMock.Verify(x => x.Unregister(associatedAggregate), Times.Once, "Expected the handler to unregister the selected item.");
     }
 }
