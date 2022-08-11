@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Aurora.Engine.Elements;
+using Aurora.Engine.Elements.Abstractions;
 using Aurora.Engine.Generation;
 
 namespace Aurora.Engine.Tests;
@@ -7,17 +8,23 @@ namespace Aurora.Engine.Tests;
 [TestClass]
 public class ElementAggregationTest
 {
-    [TestMethod]
-    public void ElementAggregate_ShouldInitializeWithElementReference()
+    private IElement element = null!;
+
+    [TestInitialize]
+    public void Setup()
     {
-        // arrange
-        var element = new Element()
+        element = new Element()
         {
             Identifier = "ID_A",
             Name = "Element A",
             ElementType = "Type"
         };
+    }
 
+    [TestMethod]
+    public void ElementAggregate_ShouldInitializeWithElementReference()
+    {
+        // arrange
         // act
         var aggregate = ElementAggregate.ForElement(element);
 
@@ -29,19 +36,11 @@ public class ElementAggregationTest
     public void ElementAggregate_ShouldInitializeWithUniqueIdentifier()
     {
         // arrange
-        var element = new Element()
-        {
-            Identifier = "ID_A",
-            Name = "Element A",
-            ElementType = "Type"
-        };
-
         // act
         var aggregate = ElementAggregate.ForElement(element);
         Debug.WriteLine(aggregate);
 
         // assert
-        Assert.IsNotNull(aggregate.Element);
         Assert.IsFalse(string.IsNullOrWhiteSpace(aggregate.Identifier));
         Assert.AreNotEqual("00000000-0000-0000-0000-000000000000", aggregate.Identifier, "Expected the guid to be initialized with a unique id.");
     }
