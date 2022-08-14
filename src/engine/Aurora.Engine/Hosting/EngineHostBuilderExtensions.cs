@@ -10,6 +10,7 @@ public static class EngineHostBuilderExtensions
     /// <summary>
     /// Register the following services as default:
     /// <list type="bullet">
+    /// <item><see cref="GenerationManager"/> as <see cref="IElementAggregateManager"/></item>
     /// <item><see cref="IElementSelectionHandlerFactory"/></item>
     /// <item><see cref="IElementSelectionDataProvider"/></item>
     /// <item><see cref="IElementSelectionHandlerManager"/></item>

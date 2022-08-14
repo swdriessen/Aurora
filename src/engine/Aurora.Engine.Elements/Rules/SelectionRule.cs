@@ -14,4 +14,9 @@ public class SelectionRule : ElementRuleBase
     /// Gets or sets the element type for the selection rule.
     /// </summary>
     public string ElementType { get; set; }
+
+    public override string ToString()
+    {
+        return $"{base.ToString()} ({ElementType})";
+    }
 }

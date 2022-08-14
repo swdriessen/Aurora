@@ -8,4 +8,9 @@ public abstract class ElementRuleBase : IElementRule
     /// Gets a collection of properties associated with this rule.
     /// </summary>
     public IPropertiesCollection Properties { get; } = new Properties();
+
+    public override string ToString()
+    {
+        return GetType().Name;
+    }
 }

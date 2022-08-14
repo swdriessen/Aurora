@@ -35,6 +35,6 @@ public class ElementAggregate
 
     public override string ToString()
     {
-        return $"[{Identifier}] {Element.Name}";
+        return $"[{Identifier}] {Element.Name} ({Element.ElementType})";
     }
 }

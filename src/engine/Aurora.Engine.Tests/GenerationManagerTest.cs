@@ -1,28 +1,40 @@
 ﻿using Aurora.Engine.Elements;
 using Aurora.Engine.Elements.Abstractions;
 using Aurora.Engine.Generation;
-using Microsoft.Extensions.Logging;
-using Moq;
+using Aurora.Engine.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Aurora.Engine.Tests;
 
 [TestClass]
 public class GenerationManagerTest
 {
-    private GenerationManager manager = null!;
+    private IElementAggregateManager manager = null!;
     private IElement element = null!;
+    private IEngineHost engine = null!;
 
     [TestInitialize]
     public void Setup()
     {
-        manager = new GenerationManager(Mock.Of<ILogger<GenerationManager>>());
+        // use the host builder to include ILogger instead of mocking
+        engine = EngineHostBuilder.CreateDefaultBuilder()
+            .ConfigureServices(services => { services.AddSingleton<IElementAggregateManager, GenerationManager>(); })
+            .Build();
+
+        manager = engine.Services.GetRequiredService<IElementAggregateManager>();
 
         element = new Element()
         {
             Identifier = "ID_A",
             Name = "Element A",
-            ElementType = "Type"
+            ElementType = "TestType"
         };
+    }
+
+    [TestCleanup]
+    public void Teardown()
+    {
+        engine.Dispose();
     }
 
     [TestMethod]
