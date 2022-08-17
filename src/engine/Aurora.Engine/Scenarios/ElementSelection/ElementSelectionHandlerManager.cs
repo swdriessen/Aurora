@@ -31,4 +31,9 @@ public class ElementSelectionHandlerManager : IElementSelectionHandlerManager
 
         return handler;
     }
+
+    public List<IElementSelectionHandler> Create(SelectionRule selectionRule)
+    {
+        return new List<IElementSelectionHandler>() { CreateHandler(selectionRule) }; //TODO: refactor
+    }
 }

@@ -72,10 +72,13 @@ public class ElementSelectionScenarioTests
         var selectionRule = new SelectionRule("Language");
 
         // act
-        var handler = manager.CreateHandler(selectionRule);
+        var handler = manager.Create(selectionRule).FirstOrDefault();
 
         // assert
         Assert.IsNotNull(handler);
+        Assert.IsNotNull(handler.UniqueIdentifier);
+        Assert.AreNotEqual(Guid.Empty, handler.UniqueIdentifier);
+
         presenterFactoryMock.Verify(x => x.CreatePresenter(It.IsAny<Action<PresenterConfiguration>>()), Times.Once, "Expected a presenter for the handler to be created when the handler is created.");
         dataProviderMock.Verify(x => x.GetElements(It.IsAny<Func<IElement, bool>>()), Times.Never, "Expected the creation of the handler to not start getting data until it is initialized.");
     }
@@ -185,4 +188,25 @@ public class ElementSelectionScenarioTests
         Assert.IsNotNull(associatedAggregate);
         registrationMock.Verify(x => x.Unregister(associatedAggregate), Times.Once, "Expected the handler to unregister the selected item.");
     }
+
+
+
+    [TestMethod]
+    public void ElementSelectionHandlerManager_ShouldCreateMultipleHandlers()
+    {
+        // arrange
+        var manager = engine.Services.GetRequiredService<IElementSelectionHandlerManager>();
+        var selectionRule = new SelectionRule("Language");
+
+        // act
+        var handlers = manager.Create(selectionRule);
+
+        // assert
+        Assert.IsNotNull(handlers);
+        Assert.AreEqual(1, handlers.Count(), "Expected one handler in the returned collection.");
+
+        presenterFactoryMock.Verify(x => x.CreatePresenter(It.IsAny<Action<PresenterConfiguration>>()), Times.Once, "Expected a presenter for the handler to be created when the handler is created.");
+        dataProviderMock.Verify(x => x.GetElements(It.IsAny<Func<IElement, bool>>()), Times.Never, "Expected the creation of the handler to not start getting data until it is initialized.");
+    }
+
 }

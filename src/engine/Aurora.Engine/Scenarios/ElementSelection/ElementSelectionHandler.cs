@@ -27,6 +27,8 @@ public class ElementSelectionHandler : IElementSelectionHandler, IElementSelecti
         this.presenter = presenter;
     }
 
+    public Guid UniqueIdentifier => Guid.Parse(context.Identifier); //TODO: update context, lets just use guids unless we need a custom string
+
     //TODO: check if action<options> configure is needed e.g. for selection number if multiple selections from single rule (order identifier)
     public Task Initialize()
     {

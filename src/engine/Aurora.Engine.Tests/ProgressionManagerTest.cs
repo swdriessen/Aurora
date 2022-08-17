@@ -30,8 +30,10 @@ public class ProgressionManagerTest
     [TestInitialize]
     public void Setup()
     {
-        selectionHandlerManagerMock.Setup(x => x.CreateHandler(It.IsAny<SelectionRule>()))
-            .Returns(selectionHandlerMock.Object);
+        selectionHandlerMock.SetupGet(x => x.UniqueIdentifier).Returns(Guid.NewGuid());
+
+        selectionHandlerManagerMock.Setup(x => x.Create(It.IsAny<SelectionRule>()))
+            .Returns<SelectionRule>((rule) => { return new List<IElementSelectionHandler> { selectionHandlerMock.Object }; });
 
         engine = EngineHostBuilder.CreateDefaultBuilder()
             //.ConfigureScenarioDefaults()
@@ -41,6 +43,7 @@ public class ProgressionManagerTest
                 //services.AddSingleton(presenterFactoryMock.Object); // presentation
 
                 services.AddProgressionManagers();
+                services.AddSelectionRuleProcessor();
                 services.AddSingleton(selectionHandlerManagerMock.Object);
             })
             .Build();
@@ -62,7 +65,6 @@ public class ProgressionManagerTest
     public void Teardown()
     {
         selectionHandlerManagerMock.VerifyNoOtherCalls();
-        selectionHandlerMock.VerifyNoOtherCalls();
 
         engine.Dispose();
     }
@@ -78,7 +80,7 @@ public class ProgressionManagerTest
         manager.Process(aggregate);
 
         // assert
-        selectionHandlerManagerMock.Verify(x => x.CreateHandler(It.IsAny<SelectionRule>()), Times.Once, "Expected the progress manager to process the selection rule.");
+        selectionHandlerManagerMock.Verify(x => x.Create(It.IsAny<SelectionRule>()), Times.Once, "Expected the progress manager to process the selection rule.");
         selectionHandlerMock.Verify(x => x.Initialize(), Times.Once, "Expected the created selection handler to be initialized.");
     }
 
@@ -97,9 +99,10 @@ public class ProgressionManagerTest
         element.TryGetComponent<RulesComponent>(out var component);
         Assert.IsNotNull(component);
 
-        selectionHandlerManagerMock.Verify(x => x.CreateHandler(rule1), Times.Exactly(1), "Expected the progress manager to process the selection rule 1.");
-        selectionHandlerManagerMock.Verify(x => x.CreateHandler(rule2), Times.Exactly(1), "Expected the progress manager to process the selection rule 2.");
-        selectionHandlerManagerMock.Verify(x => x.CreateHandler(It.IsAny<SelectionRule>()), Times.Exactly(2), "Expected the progress manager to process both selection rules.");
+        selectionHandlerManagerMock.Verify(x => x.Create(rule1), Times.Exactly(1), "Expected the progress manager to process the selection rule 1.");
+        selectionHandlerManagerMock.Verify(x => x.Create(rule2), Times.Exactly(1), "Expected the progress manager to process the selection rule 2.");
+        selectionHandlerManagerMock.Verify(x => x.Create(It.IsAny<SelectionRule>()), Times.Exactly(2), "Expected the progress manager to process both selection rules.");
         selectionHandlerMock.Verify(x => x.Initialize(), Times.Exactly(2), "Expected the created selection handlers both to be initialized.");
     }
 }
+

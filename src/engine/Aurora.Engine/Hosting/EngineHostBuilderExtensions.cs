@@ -1,4 +1,6 @@
-﻿using Aurora.Engine.Generation;
+﻿using Aurora.Engine.Elements.Abstractions;
+using Aurora.Engine.Elements.Rules;
+using Aurora.Engine.Generation;
 using Aurora.Engine.Scenarios.ElementSelection;
 using Aurora.Engine.Scenarios.ElementSelection.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,5 +31,32 @@ public static class EngineHostBuilderExtensions
             services.AddSingleton<IElementSelectionDataProvider, ElementSelectionDataProvider>();
             services.AddSingleton<IElementSelectionHandlerManager, ElementSelectionHandlerManager>();
         });
+    }
+
+    public static EngineHostBuilder ConfigureCharacterGeneration(this EngineHostBuilder builder)
+    {
+        return builder.ConfigureServices(services =>
+        {
+            // configure:
+            // character (npc/monster/?)
+            // character manager
+            services.AddSingleton<IElementAggregateManager, GenerationManager>();
+            // progress managers
+            services.AddTransient<IProgressionManager, ProgressionManager>();
+            // rule processors
+            services.AddSelectionRuleProcessor();
+            // statistics calculator
+            // character data update 
+            // output generator (sheet)
+
+        });
+    }
+
+    public static IServiceCollection AddSelectionRuleProcessor(this IServiceCollection services)
+    {
+        //services.AddTransient<IRuleProcessor<SelectionRule>, SelectionRuleProcessor>();
+        services.AddTransient<IRuleConditionHandler<SelectionRule>, SelectionRuleConditionHandler>();
+
+        return services;
     }
 }
