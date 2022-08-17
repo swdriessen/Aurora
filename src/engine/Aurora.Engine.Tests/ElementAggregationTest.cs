@@ -41,7 +41,7 @@ public class ElementAggregationTest
         Debug.WriteLine(aggregate);
 
         // assert
-        Assert.IsFalse(string.IsNullOrWhiteSpace(aggregate.Identifier));
-        Assert.AreNotEqual("00000000-0000-0000-0000-000000000000", aggregate.Identifier, "Expected the guid to be initialized with a unique id.");
+        Assert.IsNotNull(aggregate.Identifier);
+        Assert.AreNotEqual("00000000-0000-0000-0000-000000000000", aggregate.Identifier.ToString(), "Expected the guid to be initialized with a unique id.");
     }
 }

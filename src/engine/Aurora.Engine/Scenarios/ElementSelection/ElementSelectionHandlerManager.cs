@@ -11,7 +11,7 @@ public class ElementSelectionHandlerManager : IElementSelectionHandlerManager
     private readonly IElementSelectionPresenterFactory presenterFactory;
     private readonly IElementSelectionHandlerFactory handlerFactory;
 
-    private readonly Dictionary<string, IElementSelectionHandler> handlers = new();
+    private readonly Dictionary<Guid, IElementSelectionHandler> handlers = new();
 
     public ElementSelectionHandlerManager(IElementSelectionDataProvider dataProvider, IElementAggregateManager aggregateManager, IElementSelectionPresenterFactory presenterFactory, IElementSelectionHandlerFactory handlerFactory)
     {

@@ -10,13 +10,13 @@ public class ElementAggregate
     public ElementAggregate(IElement element)
     {
         Element = element;
-        Identifier = Guid.NewGuid().ToString();
+        Identifier = Guid.NewGuid();
     }
 
     /// <summary>
     /// Gets the unique identifier for this aggregate.
     /// </summary>
-    public string Identifier { get; }
+    public Guid Identifier { get; }
 
     /// <summary>
     /// Gets the element associated with this aggregate.

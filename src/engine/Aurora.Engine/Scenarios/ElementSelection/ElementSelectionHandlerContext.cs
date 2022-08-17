@@ -4,7 +4,7 @@ namespace Aurora.Engine.Scenarios.ElementSelection;
 
 public class ElementSelectionHandlerContext
 {
-    private ElementSelectionHandlerContext(string identifier, SelectionRule selectionRule)
+    private ElementSelectionHandlerContext(Guid identifier, SelectionRule selectionRule)
     {
         Identifier = identifier;
         SelectionRule = selectionRule;
@@ -13,7 +13,7 @@ public class ElementSelectionHandlerContext
     /// <summary>
     /// Gets a unique identifier for the selection handler associated with this context.
     /// </summary>
-    public string Identifier { get; }
+    public Guid Identifier { get; }
 
     /// <summary>
     /// Gets the selection rule associated with this context.
@@ -27,7 +27,6 @@ public class ElementSelectionHandlerContext
     /// <returns>A new context.</returns>
     public static ElementSelectionHandlerContext Create(SelectionRule selectionRule)
     {
-        // TODO: helper utilities for creating simple guid string to align format
-        return new ElementSelectionHandlerContext(Guid.NewGuid().ToString(), selectionRule);
+        return new ElementSelectionHandlerContext(Guid.NewGuid(), selectionRule);
     }
 }
