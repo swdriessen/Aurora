@@ -22,9 +22,12 @@ public class ProgressionManager : IProgressionManager
         this.selectionManager = selectionManager;
     }
 
+    public int CurrentProgressionValue { get; }
+
     public void Process(ElementAggregate aggregate)
     {
         logger.LogInformation("processing element: {Aggregate}", aggregate);
+        logger.LogInformation("current progression value: {CurrentProgressionValue}", CurrentProgressionValue);
 
         // process rules
         if (aggregate.Element.Components.TryGetComponent<RulesComponent>(out var rulesComponent))
