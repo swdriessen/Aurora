@@ -1,4 +1,5 @@
 ﻿using Aurora.Engine.Elements.Abstractions;
+using Aurora.Engine.Elements.Rules;
 using Aurora.Engine.Generation;
 using Aurora.Engine.Scenarios.ElementSelection.Abstractions;
 
@@ -7,7 +8,7 @@ namespace Aurora.Engine.Scenarios.ElementSelection;
 /// <summary>
 /// Initializes a new instance of the <see cref="ElementSelectionHandler"/> class.
 /// </summary>
-public class ElementSelectionHandler : IElementSelectionHandler, IElementSelectionInteractor
+public sealed class ElementSelectionHandler : IElementSelectionHandler, IElementSelectionInteractor
 {
     private readonly ElementSelectionHandlerContext context;
     private readonly IElementSelectionDataProvider dataProvider;
@@ -28,6 +29,8 @@ public class ElementSelectionHandler : IElementSelectionHandler, IElementSelecti
     }
 
     public Guid UniqueIdentifier => context.Identifier;
+
+    public SelectionRule SelectionRule => context.SelectionRule;
 
     //TODO: check if action<options> configure is needed e.g. for selection number if multiple selections from single rule (order identifier)
     public Task Initialize()

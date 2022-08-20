@@ -1,4 +1,5 @@
 ﻿using Aurora.Engine.Elements.Abstractions;
+using Aurora.Engine.Elements.Components.Level;
 using Aurora.Engine.Elements.Components.Rules;
 using Aurora.Engine.Elements.Rules;
 using Aurora.Engine.Scenarios.ElementSelection.Abstractions;
@@ -15,6 +16,8 @@ public class ProgressionManager : IProgressionManager
     private readonly IRuleConditionHandler<SelectionRule> conditionHandler;
     private readonly IElementSelectionHandlerManager selectionManager;
 
+    private readonly List<ElementAggregate> aggregates = new();
+
     public ProgressionManager(ILogger<ProgressionManager> logger, IRuleConditionHandler<SelectionRule> conditionHandler, IElementSelectionHandlerManager selectionManager)
     {
         this.logger = logger;
@@ -22,12 +25,28 @@ public class ProgressionManager : IProgressionManager
         this.selectionManager = selectionManager;
     }
 
-    public int CurrentProgressionValue { get; }
+    public int CurrentProgressionValue { get; private set; }
 
-    public void Process(ElementAggregate aggregate)
+    public virtual void Process(ElementAggregate aggregate)
     {
         logger.LogInformation("processing element: {Aggregate}", aggregate);
         logger.LogInformation("current progression value: {CurrentProgressionValue}", CurrentProgressionValue);
+
+        // add to a collection to keep track and re-process 
+        aggregates.Add(aggregate);
+
+        #region Refactor Element Handlers
+
+        // TODO: create handlers for dealing with specifics for certain types, pre-processing and post-processing
+        if (aggregate.Element.ElementType == "Level" && aggregate.Element.Components.TryGetComponent<LevelComponent>(out var levelComponent))
+        {
+            CurrentProgressionValue = levelComponent.Level;
+            logger.LogInformation("progression value was set to: {CurrentProgressionValue}", CurrentProgressionValue);
+        }
+
+        #endregion
+
+        #region Rules Processing
 
         // process rules
         if (aggregate.Element.Components.TryGetComponent<RulesComponent>(out var rulesComponent))
@@ -44,28 +63,31 @@ public class ProgressionManager : IProgressionManager
                     {
                         logger.LogInformation("evaluated... OK");
 
-                        // TODO: check on the selectionManager if it already exists
-
-                        foreach (var handler in selectionManager.Create(selectionRule))
+                        if (selectionManager.HandlerExistsForSelectionRule(selectionRule.UniqueIdentifier))
                         {
-                            if (handler is null)
-                            {
-                                logger.LogError("handler is null");
-                                continue;
-                            }
-
-                            logger.LogInformation("created handler: [{UniqueIdentifier}]", handler.UniqueIdentifier);
-                            _ = handler.Initialize();
-
-                            logger.LogInformation("handler [{UniqueIdentifier}] initialized", handler.UniqueIdentifier);
+                            logger.LogInformation("handler already exist for [{UniqueIdentifier}]", selectionRule.UniqueIdentifier);
+                            continue;
                         }
+
+                        var handlers = selectionManager.Create(selectionRule);
+
+
+                        handlers.ForEach(handler =>
+                        {
+                            logger.LogInformation("created handler: [{UniqueIdentifier}]", handler.UniqueIdentifier);
+                            _ = handler.Initialize(); // TODO: check where to initialize handlers (outside of direct processing unless there is a default selection?)
+                            logger.LogInformation("handler [{UniqueIdentifier}] initialized", handler.UniqueIdentifier);
+                        });
                     }
                     else
                     {
                         logger.LogInformation("evaluated... NOK");
 
-                        // TODO: check on the selectionManager if it already exists
-                        // if it does, undo it
+                        if (selectionManager.HandlerExistsForSelectionRule(selectionRule.UniqueIdentifier))
+                        {
+                            logger.LogInformation("handler already exist for [{UniqueIdentifier}], remove it as it is no longer valid", selectionRule.UniqueIdentifier);
+                            // TODO: remove handler for selection rule
+                        }
                     }
                 }
                 else
@@ -78,6 +100,9 @@ public class ProgressionManager : IProgressionManager
         {
             logger.LogWarning("The element did not have a rules component to process.");
         }
+
+        #endregion
+
 
         // process other things e.g. equipment or spellcasting
     }

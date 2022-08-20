@@ -34,6 +34,22 @@ public class ElementSelectionHandlerManager : IElementSelectionHandlerManager
 
     public List<IElementSelectionHandler> Create(SelectionRule selectionRule)
     {
-        return new List<IElementSelectionHandler>() { CreateHandler(selectionRule) }; //TODO: refactor
+        var newHandlers = new List<IElementSelectionHandler>();
+
+        foreach (var orderIdentifier in Enumerable.Range(1, selectionRule.Quantity))
+        {
+            var context = ElementSelectionHandlerContext.Create(selectionRule, orderIdentifier);
+            var handler = handlerFactory.Create(context);
+            newHandlers.Add(handler);
+
+            handlers.Add(handler.UniqueIdentifier, handler);
+        }
+
+        return newHandlers;
+    }
+
+    public bool HandlerExistsForSelectionRule(Guid ruleIdentifier)
+    {
+        return handlers.Values.Any(handler => handler.SelectionRule.UniqueIdentifier.Equals(ruleIdentifier));
     }
 }
