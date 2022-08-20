@@ -21,17 +21,6 @@ public class ElementSelectionHandlerManager : IElementSelectionHandlerManager
         this.handlerFactory = handlerFactory;
     }
 
-    public IElementSelectionHandler CreateHandler(SelectionRule selectionRule)
-    {
-        var context = ElementSelectionHandlerContext.Create(selectionRule);
-
-        var handler = handlerFactory.Create(context);
-
-        handlers.Add(context.Identifier, handler);
-
-        return handler;
-    }
-
     public List<IElementSelectionHandler> Create(SelectionRule selectionRule)
     {
         var newHandlers = new List<IElementSelectionHandler>();

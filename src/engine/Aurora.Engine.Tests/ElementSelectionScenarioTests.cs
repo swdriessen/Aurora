@@ -89,10 +89,10 @@ public class ElementSelectionScenarioTests
         // arrange
         var manager = engine.Services.GetRequiredService<IElementSelectionHandlerManager>();
         var selectionRule = new SelectionRule("Language");
-        var handler = manager.CreateHandler(selectionRule);
+        var handlers = manager.Create(selectionRule);
 
         // act
-        _ = handler.Initialize();
+        handlers.ForEach(handler => _ = handler.Initialize());
 
         // assert
         dataProviderMock.Verify(x => x.GetElements(It.IsAny<Func<IElement, bool>>()), Times.Once, "Expected the handler get the elements from the data provider.");
@@ -104,10 +104,10 @@ public class ElementSelectionScenarioTests
         // arrange
         var manager = engine.Services.GetRequiredService<IElementSelectionHandlerManager>();
         var selectionRule = new SelectionRule("Language");
-        var handler = manager.CreateHandler(selectionRule);
+        var handlers = manager.Create(selectionRule);
 
         // act
-        _ = handler.Initialize();
+        handlers.ForEach(handler => _ = handler.Initialize());
 
         // assert
         presenterMock.Verify(x => x.UpdateHeader(It.IsAny<string>()), Times.Once, "Expected the header to be updated when initializing the selection handler.");
@@ -123,10 +123,10 @@ public class ElementSelectionScenarioTests
 
         var manager = engine.Services.GetRequiredService<IElementSelectionHandlerManager>();
         var selectionRule = new SelectionRule("Language");
-        var handler = manager.CreateHandler(selectionRule);
+        var handlers = manager.Create(selectionRule);
 
         // act
-        _ = handler.Initialize();
+        handlers.ForEach(handler => _ = handler.Initialize());
 
         // assert
         presenterMock.Verify(x => x.UpdateSelectionOptions(It.IsAny<IEnumerable<ISelectionOption>>()), Times.Once, "Expected the selection options to be updated when initializing the selection handler.");
@@ -147,14 +147,17 @@ public class ElementSelectionScenarioTests
 
         var manager = engine.Services.GetRequiredService<IElementSelectionHandlerManager>();
         var selectionRule = new SelectionRule("Language");
-        var handler = manager.CreateHandler(selectionRule);
-        _ = handler.Initialize();
+        var handlers = manager.Create(selectionRule);
+        handlers.ForEach(handler => _ = handler.Initialize());
         var option = presenterOptions.First(); // lets register the first option
 
         // act        
         // (in the presentation layer you have access to the interactor, not the handler directly (you can't initialize handler from the presentation layer)
-        var interactor = (IElementSelectionInteractor)handler;
-        _ = interactor.Register(option.Identifier);
+        handlers.ForEach(handler =>
+        {
+            var interactor = (IElementSelectionInteractor)handler;
+            _ = interactor.Register(option.Identifier);
+        });
 
         // assert
         Assert.IsNotNull(associatedAggregate);
@@ -175,10 +178,10 @@ public class ElementSelectionScenarioTests
 
         var manager = engine.Services.GetRequiredService<IElementSelectionHandlerManager>();
         var selectionRule = new SelectionRule("Language");
-        var handler = manager.CreateHandler(selectionRule);
-        _ = handler.Initialize();
+        var handlers = manager.Create(selectionRule);
+        handlers.ForEach(handler => _ = handler.Initialize());
         var option = presenterOptions.First(); // lets register the first option
-        var interactor = (IElementSelectionInteractor)handler;
+        var interactor = (IElementSelectionInteractor)(handlers.First());
         await interactor.Register(option.Identifier);
 
         // act        
@@ -188,8 +191,6 @@ public class ElementSelectionScenarioTests
         Assert.IsNotNull(associatedAggregate);
         registrationMock.Verify(x => x.Unregister(associatedAggregate), Times.Once, "Expected the handler to unregister the selected item.");
     }
-
-
 
     [TestMethod]
     public void ElementSelectionHandlerManager_ShouldCreateMultipleHandlers()
@@ -208,5 +209,4 @@ public class ElementSelectionScenarioTests
         presenterFactoryMock.Verify(x => x.CreatePresenter(It.IsAny<Action<PresenterConfiguration>>()), Times.Once, "Expected a presenter for the handler to be created when the handler is created.");
         dataProviderMock.Verify(x => x.GetElements(It.IsAny<Func<IElement, bool>>()), Times.Never, "Expected the creation of the handler to not start getting data until it is initialized.");
     }
-
 }
