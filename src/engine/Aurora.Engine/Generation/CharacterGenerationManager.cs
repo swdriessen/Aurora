@@ -3,14 +3,14 @@
 namespace Aurora.Engine.Generation;
 
 /// <summary>
-/// Create an instance of the <see cref="GenerationManager"/> class that manages the registered elements for the character.
+/// Create an instance of the <see cref="CharacterGenerationManager"/> class that manages the registered elements for the character.
 /// </summary>
-public class GenerationManager : IElementAggregateManager
+public class CharacterGenerationManager : IElementAggregateManager
 {
-    private readonly ILogger<GenerationManager> logger;
+    private readonly ILogger<CharacterGenerationManager> logger;
     private readonly List<ElementAggregate> aggregates = new();
 
-    public GenerationManager(ILogger<GenerationManager> logger)
+    public CharacterGenerationManager(ILogger<CharacterGenerationManager> logger)
     {
         this.logger = logger;
     }
@@ -18,7 +18,6 @@ public class GenerationManager : IElementAggregateManager
     public void Register(ElementAggregate aggregate)
     {
         logger.LogInformation("Registering: {Aggregate}", aggregate);
-
         aggregates.Add(aggregate);
     }
 

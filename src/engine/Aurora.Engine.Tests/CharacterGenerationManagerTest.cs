@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Aurora.Engine.Tests;
 
 [TestClass]
-public class GenerationManagerTest
+public class CharacterGenerationManagerTest
 {
     private IElementAggregateManager manager = null!;
     private IElement element = null!;
@@ -18,7 +18,7 @@ public class GenerationManagerTest
     {
         // use the host builder to include ILogger instead of mocking
         engine = EngineHostBuilder.CreateDefaultBuilder()
-            .ConfigureServices(services => { services.AddSingleton<IElementAggregateManager, GenerationManager>(); })
+            .ConfigureServices(services => { services.AddSingleton<IElementAggregateManager, CharacterGenerationManager>(); })
             .Build();
 
         manager = engine.Services.GetRequiredService<IElementAggregateManager>();
