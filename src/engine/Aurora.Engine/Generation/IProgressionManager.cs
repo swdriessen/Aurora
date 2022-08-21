@@ -9,8 +9,14 @@ public interface IProgressionManager
     int CurrentProgressionValue { get; }
 
     /// <summary>
-    /// Adds the element aggregate to the internal list of the progression manager and processes it.
+    /// Adds the element aggregate to the progression manager and processes it.
     /// </summary>
     /// <param name="aggregate">The element aggregate to process.</param>
     void Process(ElementAggregate aggregate);
+
+    /// <summary>
+    /// Processes the aggregate for removal and removes the element aggregate from the progression manager.
+    /// </summary>
+    /// <param name="aggregate">The element aggregate to remove.</param>
+    void Remove(ElementAggregate aggregate);
 }

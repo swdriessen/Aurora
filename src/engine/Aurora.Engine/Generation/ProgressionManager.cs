@@ -106,4 +106,6 @@ public class ProgressionManager : IProgressionManager
 
         // process other things e.g. equipment or spellcasting
     }
+
+    public void Remove(ElementAggregate aggregate) => throw new NotImplementedException();
 }

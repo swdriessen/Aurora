@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Aurora.Engine.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Aurora.Engine.Generation;
 
@@ -14,6 +15,8 @@ public class CharacterGenerationManager : IElementAggregateManager
     {
         this.logger = logger;
     }
+
+    public Character Character { get; } = new();
 
     public void Register(ElementAggregate aggregate)
     {
