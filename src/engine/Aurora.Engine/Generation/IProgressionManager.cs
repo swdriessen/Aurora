@@ -18,5 +18,5 @@ public interface IProgressionManager
     /// Processes the aggregate for removal and removes the element aggregate from the progression manager.
     /// </summary>
     /// <param name="aggregate">The element aggregate to remove.</param>
-    void Remove(ElementAggregate aggregate);
+    bool Remove(ElementAggregate aggregate);
 }

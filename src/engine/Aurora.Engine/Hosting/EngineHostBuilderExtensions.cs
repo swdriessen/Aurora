@@ -12,7 +12,6 @@ public static class EngineHostBuilderExtensions
     /// <summary>
     /// Register the following services as default:
     /// <list type="bullet">
-    /// <item><see cref="GenerationManager"/> as <see cref="IElementAggregateManager"/></item>
     /// <item><see cref="IElementSelectionHandlerFactory"/></item>
     /// <item><see cref="IElementSelectionDataProvider"/></item>
     /// <item><see cref="IElementSelectionHandlerManager"/></item>
@@ -24,9 +23,9 @@ public static class EngineHostBuilderExtensions
         return builder.ConfigureServices(services =>
         {
             // these require the
+            // registration provider (offers a registration manager where the handler registers elements)
             // data provider
             // presenter factory
-            services.AddSingleton<IElementAggregateManager, GenerationManager>();
             services.AddSingleton<IElementSelectionHandlerFactory, ElementSelectionHandlerFactory>();
             services.AddSingleton<IElementSelectionDataProvider, ElementSelectionDataProvider>();
             services.AddSingleton<IElementSelectionHandlerManager, ElementSelectionHandlerManager>();
@@ -40,7 +39,8 @@ public static class EngineHostBuilderExtensions
             // configure:
             // character (npc/monster/?)
             // character manager
-            services.AddSingleton<IElementAggregateManager, GenerationManager>();
+            services.AddSingleton<IElementAggregateRegistrationManager, CharacterGenerationManager>();
+            services.AddSingleton<IAggregateRegistrationProvider, AggregateRegistrationProvider>();
             // progress managers
             services.AddTransient<IProgressionManager, ProgressionManager>();
             // rule processors

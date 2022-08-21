@@ -12,7 +12,7 @@ public sealed class ElementSelectionHandler : IElementSelectionHandler, IElement
 {
     private readonly ElementSelectionHandlerContext context;
     private readonly IElementSelectionDataProvider dataProvider;
-    private readonly IElementAggregateManager aggregateManager;
+    private readonly IElementAggregateRegistrationManager aggregateManager;
     private readonly IElementSelectionPresenter presenter;
 
     private List<IElement>? elementsCollection;
@@ -20,7 +20,7 @@ public sealed class ElementSelectionHandler : IElementSelectionHandler, IElement
     private IElement? currentSelection;
     private ElementAggregate? elementAggregate;
 
-    public ElementSelectionHandler(ElementSelectionHandlerContext context, IElementSelectionDataProvider dataProvider, IElementAggregateManager aggregateManager, IElementSelectionPresenter presenter)
+    public ElementSelectionHandler(ElementSelectionHandlerContext context, IElementSelectionDataProvider dataProvider, IElementAggregateRegistrationManager aggregateManager, IElementSelectionPresenter presenter)
     {
         this.context = context;
         this.dataProvider = dataProvider;

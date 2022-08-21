@@ -103,9 +103,12 @@ public class ProgressionManager : IProgressionManager
 
         #endregion
 
-
         // process other things e.g. equipment or spellcasting
     }
 
-    public void Remove(ElementAggregate aggregate) => throw new NotImplementedException();
+    public bool Remove(ElementAggregate aggregate)
+    {
+        // TODO: implement the 'unprocessing'
+        return aggregates.Remove(aggregate);
+    }
 }

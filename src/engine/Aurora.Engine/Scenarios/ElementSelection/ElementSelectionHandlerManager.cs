@@ -1,23 +1,16 @@
 ﻿using Aurora.Engine.Elements.Rules;
-using Aurora.Engine.Generation;
 using Aurora.Engine.Scenarios.ElementSelection.Abstractions;
 
 namespace Aurora.Engine.Scenarios.ElementSelection;
 
 public class ElementSelectionHandlerManager : IElementSelectionHandlerManager
 {
-    private readonly IElementSelectionDataProvider dataProvider;
-    private readonly IElementAggregateManager aggregateManager;
-    private readonly IElementSelectionPresenterFactory presenterFactory;
     private readonly IElementSelectionHandlerFactory handlerFactory;
 
     private readonly Dictionary<Guid, IElementSelectionHandler> handlers = new();
 
-    public ElementSelectionHandlerManager(IElementSelectionDataProvider dataProvider, IElementAggregateManager aggregateManager, IElementSelectionPresenterFactory presenterFactory, IElementSelectionHandlerFactory handlerFactory)
+    public ElementSelectionHandlerManager(IElementSelectionHandlerFactory handlerFactory)
     {
-        this.dataProvider = dataProvider;
-        this.aggregateManager = aggregateManager;
-        this.presenterFactory = presenterFactory;
         this.handlerFactory = handlerFactory;
     }
 

@@ -6,14 +6,15 @@ namespace Aurora.Engine.Generation;
 /// <summary>
 /// Create an instance of the <see cref="CharacterGenerationManager"/> class that manages the registered elements for the character.
 /// </summary>
-public class CharacterGenerationManager : IElementAggregateManager
+public class CharacterGenerationManager : IElementAggregateRegistrationManager
 {
     private readonly ILogger<CharacterGenerationManager> logger;
-    private readonly List<ElementAggregate> aggregates = new();
+    private readonly IProgressionManager characterProgressionManager; //for now, a single progression
 
-    public CharacterGenerationManager(ILogger<CharacterGenerationManager> logger)
+    public CharacterGenerationManager(ILogger<CharacterGenerationManager> logger, IProgressionManager characterProgressionManager)
     {
         this.logger = logger;
+        this.characterProgressionManager = characterProgressionManager;
     }
 
     public Character Character { get; } = new();
@@ -21,18 +22,16 @@ public class CharacterGenerationManager : IElementAggregateManager
     public void Register(ElementAggregate aggregate)
     {
         logger.LogInformation("Registering: {Aggregate}", aggregate);
-        aggregates.Add(aggregate);
+
+        characterProgressionManager.Process(aggregate);
+
+        Character.Level = characterProgressionManager.CurrentProgressionValue;
     }
 
     public bool Unregister(ElementAggregate aggregate)
     {
         logger.LogInformation("Unregistering: {Aggregate}", aggregate);
 
-        return aggregates.Remove(aggregate);
-    }
-
-    public override string ToString()
-    {
-        return $"[{string.Join(", ", aggregates.Select(x => x.Element.Name))}]";
+        return characterProgressionManager.Remove(aggregate);
     }
 }

@@ -16,7 +16,7 @@ public class ElementSelectionScenarioTests
     private IEngineHost engine = null!;
     private readonly Mock<IElementSelectionPresenterFactory> presenterFactoryMock = new();
     private readonly Mock<IElementSelectionPresenter> presenterMock = new();
-    private readonly Mock<IElementAggregateManager> registrationMock = new();
+    private readonly Mock<IElementAggregateRegistrationManager> registrationMock = new();
     private readonly Mock<IElementDataProvider> dataProviderMock = new();
 
     private readonly ElementBuilder elementBuilder = new();
@@ -49,6 +49,7 @@ public class ElementSelectionScenarioTests
 
         engine = EngineHostBuilder.CreateDefaultBuilder()
             .ConfigureScenarioDefaults()
+            .ConfigureCharacterGeneration()
             .ConfigureServices(services =>
             {
                 services.AddSingleton(dataProviderMock.Object); // infrastructure
