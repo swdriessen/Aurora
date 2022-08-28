@@ -15,6 +15,11 @@ public interface IProgressionManager
     void Process(ElementAggregate aggregate);
 
     /// <summary>
+    /// Reprocesses all elements contained within the progression manager.
+    /// </summary>
+    void Reprocess();
+
+    /// <summary>
     /// Processes the aggregate for removal and removes the element aggregate from the progression manager.
     /// </summary>
     /// <param name="aggregate">The element aggregate to remove.</param>

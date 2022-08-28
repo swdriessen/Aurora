@@ -85,6 +85,38 @@ public class ElementSelectionScenarioTests
     }
 
     [TestMethod]
+    public void ElementSelectionHandlerManager_ShouldRemoveExistingHandler()
+    {
+        // arrange
+        var manager = engine.Services.GetRequiredService<IElementSelectionHandlerManager>();
+        var selectionRule = new SelectionRule("Language");
+
+        // act
+        var handler = manager.Create(selectionRule).FirstOrDefault();
+        var isRemoved = manager.Remove(selectionRule);
+
+        // assert
+        Assert.IsTrue(isRemoved);
+
+        presenterFactoryMock.Verify(x => x.CreatePresenter(It.IsAny<Action<PresenterConfiguration>>()), Times.Once, "Expected a presenter for the handler to be created when the handler is created.");
+        dataProviderMock.Verify(x => x.GetElements(It.IsAny<Func<IElement, bool>>()), Times.Never, "Expected the creation of the handler to not start getting data until it is initialized.");
+    }
+
+    [TestMethod]
+    public void ElementSelectionHandlerManager_ShouldReturnFalse_WhenRemovingNotExistingHandlers()
+    {
+        // arrange
+        var manager = engine.Services.GetRequiredService<IElementSelectionHandlerManager>();
+        var selectionRule = new SelectionRule("Language");
+
+        // act
+        var isRemoved = manager.Remove(selectionRule);
+
+        // assert
+        Assert.IsFalse(isRemoved);
+    }
+
+    [TestMethod]
     public void ElementSelectionHandler_ShouldGetElementsFromDataProvider_WhenInitialized()
     {
         // arrange

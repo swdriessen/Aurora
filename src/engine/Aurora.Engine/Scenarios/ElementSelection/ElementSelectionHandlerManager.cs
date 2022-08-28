@@ -30,6 +30,22 @@ public class ElementSelectionHandlerManager : IElementSelectionHandlerManager
         return newHandlers;
     }
 
+    public bool Remove(SelectionRule selectionRule)
+    {
+        var identifiers = handlers.Values
+            .Where(handler => handler.SelectionRule.EqualsIdentifier(selectionRule))
+            .Select(handler => handler.UniqueIdentifier);
+
+        var handlersRemoved = false;
+
+        foreach (var identifierKey in identifiers)
+        {
+            handlersRemoved = handlersRemoved || handlers.Remove(identifierKey);
+        }
+
+        return handlersRemoved;
+    }
+
     public bool HandlerExistsForSelectionRule(Guid ruleIdentifier)
     {
         return handlers.Values.Any(handler => handler.SelectionRule.UniqueIdentifier.Equals(ruleIdentifier));

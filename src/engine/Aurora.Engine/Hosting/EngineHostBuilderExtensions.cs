@@ -1,6 +1,4 @@
-﻿using Aurora.Engine.Elements.Abstractions;
-using Aurora.Engine.Elements.Rules;
-using Aurora.Engine.Generation;
+﻿using Aurora.Engine.Generation;
 using Aurora.Engine.Scenarios.ElementSelection;
 using Aurora.Engine.Scenarios.ElementSelection.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
@@ -55,7 +53,15 @@ public static class EngineHostBuilderExtensions
     public static IServiceCollection AddSelectionRuleProcessor(this IServiceCollection services)
     {
         //services.AddTransient<IRuleProcessor<SelectionRule>, SelectionRuleProcessor>();
-        services.AddTransient<IRuleConditionHandler<SelectionRule>, SelectionRuleConditionHandler>();
+
+        services.AddTransient<IRuleConditionHandlerProvider, RuleConditionHandlerProvider>() // can be singleton, lets test it out like this first
+            .AddTransient<ProgressionConditionHandler>(); // for selection rule TODO: create generic version
+
+        // this is the primary (only) condition handler for this rule that is registered
+        // there are others that implement the interface but they are not registered using the interface
+        //services.AddTransient<IRuleConditionHandler<SelectionRule>, SelectionRuleConditionHandler>(); // this is the primary condition handler
+
+
 
         return services;
     }

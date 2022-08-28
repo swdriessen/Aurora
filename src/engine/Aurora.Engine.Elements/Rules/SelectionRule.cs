@@ -36,4 +36,14 @@ public class SelectionRule : ElementRuleBase
     {
         return $"{base.ToString()} ({ElementType})";
     }
+
+    /// <summary>
+    /// Gets a value indicating whether the unique identifiers of the selection rules are equal.
+    /// </summary>
+    /// <param name="other">The selection to compare against the current one.</param>
+    /// <returns>True if the identifiers are the same.</returns>
+    public bool EqualsIdentifier(SelectionRule other)
+    {
+        return Equals(UniqueIdentifier, other.UniqueIdentifier);
+    }
 }

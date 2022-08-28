@@ -150,6 +150,32 @@ public class ProgressionManagerTest
     }
 
     [TestMethod]
+    public void ProgressionManager_ShouldRemoveCreatedHandler_WhenProcessingWithUnsatisfiedConditions()
+    {
+        // arrange
+        manager = engine.Services.GetRequiredService<IProgressionManager>();
+        var handler = engine.Services.GetRequiredService<ProgressionConditionHandler>();
+        var aggregate = ElementAggregate.ForElement(element);
+        var level1 = ElementAggregate.ForElement(UnitTestElements.GetLevelElement(1));
+        var level2 = ElementAggregate.ForElement(UnitTestElements.GetLevelElement(2));
+        rule1.Level = 2; // set requirements of the rule to level 2
+
+        manager.Process(level1);
+        manager.Process(level2);
+        manager.Process(aggregate);
+
+        // act        
+        manager.Remove(level2);
+        manager.Reprocess();
+
+        // assert
+        selectionHandlerManagerMock.Verify(x => x.HandlerExistsForSelectionRule(rule1.UniqueIdentifier), Times.Exactly(2), "Expected the to check if the rule exists before creating it.");
+        selectionHandlerManagerMock.Verify(x => x.Create(rule1), Times.Exactly(1), "Expected the progress manager to process the selection rule only once.");
+        selectionHandlerManagerMock.Verify(x => x.Remove(rule1), Times.Once, "Expected the progress manager to remove the rule at the second attempt.");
+    }
+
+
+    [TestMethod]
     public void ProgressionManager_ShouldHaveZeroProgressionValue_WhenInitialized()
     {
         // arrange + act
@@ -181,5 +207,28 @@ public class ProgressionManagerTest
         // assert
         Assert.AreEqual(expectedProgressionValue, manager.CurrentProgressionValue);
     }
+
+
+    [TestMethod]
+    public void ProgressionManager_ShouldRemoveSelectionHandler_WhenRemoving()
+    {
+        // arrange
+        manager = engine.Services.GetRequiredService<IProgressionManager>();
+        var aggregate = ElementAggregate.ForElement(element);
+        manager.Process(aggregate);
+
+
+        // act
+        manager.Remove(aggregate);
+
+        // assert the adding
+        selectionHandlerManagerMock.Verify(x => x.HandlerExistsForSelectionRule(It.IsAny<Guid>()), Times.Exactly(2), "Expected the to check if the rule exists before creating it and then checking if it exists before removing it.");
+        selectionHandlerManagerMock.Verify(x => x.Create(It.IsAny<SelectionRule>()), Times.Once, "Expected the progress manager to process the selection rule.");
+        selectionHandlerMock.Verify(x => x.Initialize(), Times.Once, "Expected the created selection handler to be initialized.");
+
+        // assert removal
+        selectionHandlerManagerMock.Verify(x => x.Remove(It.IsAny<SelectionRule>()), Times.Once, "Expected");
+    }
+
 }
 

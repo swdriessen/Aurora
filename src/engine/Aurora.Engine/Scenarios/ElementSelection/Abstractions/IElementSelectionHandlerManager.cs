@@ -12,6 +12,13 @@ public interface IElementSelectionHandlerManager
     List<IElementSelectionHandler> Create(SelectionRule selectionRule);
 
     /// <summary>
+    /// Remove the selection handlers for the specified selection rule.
+    /// </summary>
+    /// <param name="selectionRule">The selection rule for which to remove the selection handlers</param>
+    /// <returns>True when the handlers have been removed.</returns>
+    bool Remove(SelectionRule selectionRule);
+
+    /// <summary>
     /// Gets a value indicating whether there are handlers created for the specific selection rule.
     /// </summary>
     /// <param name="ruleIdentifier">The unique identifier of the selection rule.</param>
