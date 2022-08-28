@@ -12,7 +12,16 @@ public static class RulesComponentExtensions
     public static IElement AddRulesComponent(this IElement element)
     {
         element.Components.AddComponent(new RulesComponent());
-
         return element;
+    }
+
+    /// <summary>
+    /// Gets the <see cref="RulesComponent"/> associated with this element.
+    /// </summary>
+    /// <param name="element">The element.</param>
+    /// <returns>The <see cref="RulesComponent"/> if it exists, otherwise throw a <see cref="ElementComponentNotFoundException"/> exception.</returns>
+    public static RulesComponent GetRulesComponent(this IElement element)
+    {
+        return element.GetComponent<RulesComponent>();
     }
 }
