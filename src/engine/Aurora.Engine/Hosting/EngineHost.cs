@@ -1,4 +1,9 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Aurora.Engine.Elements;
+using Aurora.Engine.Elements.Abstractions;
+using Aurora.Engine.Elements.Components.Rules;
+using Aurora.Engine.Elements.Rules;
+using Aurora.Engine.Generation;
+using Microsoft.Extensions.Hosting;
 
 namespace Aurora.Engine.Hosting;
 
@@ -18,6 +23,48 @@ public class EngineHost : IEngineHost
 
     public Task StartAsync(CancellationToken cancellationToken = default)
     {
+        // apply source restrictions (restrict source, type (top level types only (selectable+equipment) to avoid dependency hell, e.g. forget to enable proficiency might break a class), individuals) and load non-restricted content
+
+        // initialize a new character based on the configuration of this host
+        // e.g. include the selected character element, enable options     
+
+        // configure system and setup character information
+
+        // abilities (str/dex/con/wis/int/cha) + (optional=xxx/xxx) disabled by default - enable using options
+
+        // skills (fetch all skills and populate the manager from the DI container)
+        // setup passive skills for all configuration
+
+        // saving throws
+
+        // initiative
+
+        // hit points
+
+        // armor class
+
+        // TODO: get default character identifier from configuration and fetch it from the data provider
+        var characterElement = Element.Compose(element =>
+        {
+            element.ElementType = "Character";
+            element.Identifier = "ID_CHARACTER_DEFAULT";
+
+            element.ConfigureComponent<RulesComponent>(component =>
+            {
+                // include rules such as...
+                // proficiency
+                // abilities
+                // skills
+
+                component.Rules.Add(new IncludeRule("Level", "ID_LEVEL_1"));
+            });
+        });
+
+        var character = ElementAggregate.ForElement(characterElement);
+
+        // process the character 
+        // this allows creation of custom character elements for different campaigns and such        
+
         return host.StartAsync(cancellationToken);
     }
 
