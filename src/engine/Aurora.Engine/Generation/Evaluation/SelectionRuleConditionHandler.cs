@@ -3,7 +3,7 @@ using Aurora.Engine.Elements.Rules;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Aurora.Engine.Generation;
+namespace Aurora.Engine.Generation.Evaluation;
 
 /// <summary>
 /// Initializes a new instance of the <see cref="RuleConditionHandler"/> class which is a generic rule conditional handler that supports executing a collection of handlers.
@@ -129,3 +129,73 @@ public class ProgressionConditionHandler : IRuleConditionHandler<SelectionRule>
         return result;
     }
 }
+
+
+
+
+
+
+
+
+
+
+/*
+/// <summary>
+/// Initializes a new instance of the <see cref="SelectionRuleConditionHandler"/> class.
+/// </summary>
+public sealed class SelectionRuleConditionHandler : IRuleConditionHandler<SelectionRule>
+{
+    private readonly ILogger<SelectionRuleConditionHandler> logger;
+    private readonly ProgressionConditionHandler levelConditionHandler;
+
+    private readonly List<IRuleConditionHandler<SelectionRule>> handlers = new();
+
+    public SelectionRuleConditionHandler(ILogger<SelectionRuleConditionHandler> logger, ProgressionConditionHandler levelConditionHandler)
+    {
+        this.logger = logger;
+        this.levelConditionHandler = levelConditionHandler;
+
+        handlers.Add(this.levelConditionHandler);
+    }
+
+    public bool EvaluateCondition(SelectionRule rule)
+    {
+        var evaluation = true;
+
+        // evaluate level requirements again the progression manager that contains the rule (character / class)
+        //levelConditionHandler.CurrentProgressionValue = 0; // TODO: get the progression value from the correct progression manager
+        logger.LogInformation("evaluating with progression value: {CurrentProgressionValue}", levelConditionHandler.CurrentProgressionValue);
+
+        foreach (var handler in handlers)
+        {
+            evaluation = evaluation && handler.EvaluateCondition(rule);
+
+            if (!evaluation)
+            {
+                logger.LogInformation("break when evaluation has not been satisfied, no need to keep processing");
+                break;
+            }
+        }
+
+        logger.LogInformation("evaluating to {Evaluation}", evaluation);
+        return evaluation;
+    }
+}
+*/
+
+
+
+
+// get progression manager based on the rule.UniqueIdentifier
+// how...
+// IProgressionManager GetProgressionManager(Guid ruleIdentifier);
+
+// also, get the character generation manager to get all the elements from all the progression mananagers
+// how...
+// IEnumerable<IProgressionManager> GetProgressionManagers();
+
+// IProgressionManagerProvider
+// can the char manager be the provider?
+// it has access to them all
+// 
+

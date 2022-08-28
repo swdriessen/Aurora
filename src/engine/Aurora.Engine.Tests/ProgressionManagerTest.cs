@@ -4,6 +4,7 @@ using Aurora.Engine.Elements.Components.Level;
 using Aurora.Engine.Elements.Components.Rules;
 using Aurora.Engine.Elements.Rules;
 using Aurora.Engine.Generation;
+using Aurora.Engine.Generation.Evaluation;
 using Aurora.Engine.Hosting;
 using Aurora.Engine.Scenarios.ElementSelection.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
