@@ -35,16 +35,7 @@ public class ProgressionConditionHandler : IRuleConditionHandler<SelectionRule>
         // TODO: create a evaluation result to include messages on it in order to inform the user about certain prerequisites (non-level?)
         // e.g. when trying to select a feat you don't meet the [Strength 13] prerequisite for
 
-        var result = true;
-
-        if (rule.Level == 0)
-        {
-            result = true;
-        }
-        else
-        {
-            result = rule.Level <= progressionManager.CurrentProgressionValue;
-        }
+        var result = rule.Level <= progressionManager.CurrentProgressionValue;
 
         logger.LogInformation("evaluate to {0}", result);
 
