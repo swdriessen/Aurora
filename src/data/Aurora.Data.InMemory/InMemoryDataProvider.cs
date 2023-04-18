@@ -82,7 +82,7 @@ namespace Aurora.Data.InMemory
         }
 
 
-        public ElementModel? GetElementModel(string identifier)
+        public ElementModel GetElementModel(string identifier)
         {
             return provider.GetElements().First(x => x.Id.Equals(identifier));
         }

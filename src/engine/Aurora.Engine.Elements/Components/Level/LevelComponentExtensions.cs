@@ -10,7 +10,7 @@ public static class LevelComponentExtensions
     /// <summary>
     /// The type of the level element.
     /// </summary>
-    public const string Level = "Level";
+    private const string Level = "Level";
 
     /// <summary>
     /// Gets a value indicating whether this element is a Level element which contains a <see cref="LevelComponent"/>.
@@ -19,7 +19,7 @@ public static class LevelComponentExtensions
     /// <returns>True when the element can be treated as a Level.</returns>
     public static bool IsLevel(this IElement element)
     {
-        return element.ElementType is Level; // && element.TryGetComponent<LevelComponent>(out var _);
+        return element.ElementType is (Level); // && element.TryGetComponent<LevelComponent>(out var _);
     }
 
     /// <summary>

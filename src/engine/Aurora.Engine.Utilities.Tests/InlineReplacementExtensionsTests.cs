@@ -23,10 +23,10 @@ namespace Aurora.Engine.Utilities.Tests
         public void InlineReplacementExtensions_ShouldNotReplaceKeyWhenValueIsNull()
         {
             // arrange
-            var input = "Hello {{key}}!";
+            const string input = "Hello {{key}}!";
 
             // act
-            var output = input.ReplaceInline("key", null);
+            string output = input.ReplaceInline("key", null!);
 
             // assert
             Assert.AreEqual(input, output);
